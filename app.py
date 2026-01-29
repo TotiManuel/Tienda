@@ -15,7 +15,7 @@ def create_app():
     db.init_app(app)
 
     # Registrar blueprints
-    app.register_blueprint(web_bp, url_prefix="/home")
+    app.register_blueprint(web_bp)
     app.register_blueprint(admin_bp, url_prefix="/admin")
     app.register_blueprint(vendedor_bp, url_prefix="/vendedor")
     app.register_blueprint(cliente_bp)
