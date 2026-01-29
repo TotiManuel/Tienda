@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ banner_titulo }}{% endblock %}
+
+{% block content %}
+
+<!-- ====== BANNER PRINCIPAL ====== -->
+<section class="banner" style="background: url('{{ url_for('static', filename='images/banner.jpg') }}') center/cover no-repeat; padding: 4rem 2rem; color: #fff; text-align: center; border-radius: 8px; margin-bottom: 2rem;">
+    <h2>{{ banner_titulo }}</h2>
+    <p>{{ banner_subtitulo }}</p>
+</section>
+
+<!-- ====== PRODUCTOS DESTACADOS ====== -->
+<section class="productos-destacados" style="margin-bottom: 3rem;">
+    <h2>Productos Destacados</h2>
+
+    <div class="cards-container" style="display:flex; flex-wrap:wrap; gap:1rem;">
+        {% for producto in productos %}
+        <div class="card" style="flex:1 1 200px;">
+            <img src="{{ url_for('static', filename=producto.imagen) }}"
+                 alt="{{ producto.nombre }}"
+                 style="width:100%; border-radius:8px;">
+
+            <h3>{{ producto.nombre }}</h3>
+            <p>{{ producto.descripcion }}</p>
+            <p><strong>${{ '%.2f' | format(producto.precio) }}</strong></p>
+
+            {% if producto.stock > 0 %}
+            <form method="POST"
+                  action="{{ url_for('web.agregar_carrito', producto_id=producto.id) }}">
+                <input type="hidden" name="cantidad" value="1">
+                <button type="submit" class="btn">
+                    Agregar al carrito
+                </button>
+            </form>
+            {% else %}
+            <p style="color:red;"><strong>Sin stock</strong></p>
+            {% endif %}
+        </div>
+        {% else %}
+        <p>No hay productos destacados disponibles.</p>
+        {% endfor %}
+    </div>
+</section>
+
+
+<!-- ====== OFERTAS Y PROMOCIONES ====== -->
+<section class="ofertas" style="margin-bottom: 3rem; background-color:#f3f4f6; padding:2rem; border-radius:8px;">
+    <h2>Ofertas Especiales</h2>
+    <ul>
+        {% for oferta in ofertas %}
+        <li>{{ oferta.descripcion }}</li>
+        {% else %}
+        <li>No hay ofertas disponibles.</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<!-- ====== BENEFICIOS DE COMPRAR ====== -->
+<section class="beneficios" style="margin-bottom: 3rem;">
+    <h2>¿Por qué comprar con nosotros?</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:2rem;">
+        {% for beneficio in beneficios %}
+        <div class="card" style="flex:1 1 200px; text-align:center;">
+            <h3>{{ beneficio.titulo }}</h3>
+            <p>{{ beneficio.descripcion }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

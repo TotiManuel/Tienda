@@ -1,0 +1,90 @@
+{% extends "panel_admin.html" %}
+
+{% block content %}
+<h2>Promociones</h2>
+
+<!-- Mensajes flash -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+            <li style="color: {{ 'green' if category == 'success' else 'red' }}">
+                {{ message }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<!-- Agregar promoción -->
+<h3>Agregar promoción</h3>
+<form method="POST" action="{{ url_for('admin.agregar_promocion') }}">
+    <input type="text"
+           name="descripcion"
+           placeholder="Descripción"
+           required>
+
+    <input type="number"
+           name="descuento"
+           placeholder="Descuento (%)"
+           min="1"
+           max="100"
+           step="0.01"
+           required>
+
+    <button type="submit">Agregar</button>
+</form>
+
+<br>
+
+{% if promociones %}
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Descuento (%)</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for p in promociones %}
+    <tr>
+        <td>{{ p.id }}</td>
+
+        <!-- Editar promoción -->
+        <form method="POST"
+              action="{{ url_for('admin.editar_promocion', promo_id=p.id) }}">
+            <td>
+                <input type="text"
+                       name="descripcion"
+                       value="{{ p.descripcion }}"
+                       required>
+            </td>
+            <td>
+                <input type="number"
+                       name="descuento"
+                       value="{{ p.descuento }}"
+                       min="1"
+                       max="100"
+                       step="0.01"
+                       required>
+            </td>
+            <td>
+                <button type="submit">Guardar</button>
+        </form>
+
+        <!-- Eliminar promoción -->
+                <form method="POST"
+                      action="{{ url_for('admin.eliminar_promocion', promo_id=p.id) }}"
+                      style="display:inline"
+                      onsubmit="return confirm('¿Eliminar esta promoción?');">
+                    <button type="submit">Eliminar</button>
+                </form>
+            </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No hay promociones registradas.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section style="max-width:600px; margin:2rem auto;">
+    <h2 style="margin-bottom:0.5rem;">Mi perfil</h2>
+    <p style="color:#666; margin-bottom:1.5rem;">
+        Desde aquí podés ver y modificar los datos de tu cuenta.
+    </p>
+
+    <!-- Mensajes -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert {{ category }}" style="margin-bottom:1rem;">
+              {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Tarjeta de perfil -->
+    <div style="
+        border:1px solid #ddd;
+        border-radius:10px;
+        padding:1.5rem;
+        background:#fafafa;
+    ">
+        <form method="POST">
+            <div style="margin-bottom:1rem;">
+                <label style="display:block; font-weight:bold; margin-bottom:0.3rem;">
+                    Nombre de usuario
+                </label>
+                <input type="text"
+                       name="nombre"
+                       value="{{ usuario.nombre }}"
+                       required
+                       style="width:100%; padding:0.5rem;">
+            </div>
+
+            <div style="margin-bottom:1.2rem;">
+                <label style="display:block; font-weight:bold; margin-bottom:0.3rem;">
+                    Nueva contraseña
+                </label>
+                <input type="password"
+                       name="password"
+                       placeholder="Dejar vacío para no cambiar"
+                       style="width:100%; padding:0.5rem;">
+                <small style="color:#777;">
+                    Solo completá este campo si querés cambiar tu contraseña.
+                </small>
+            </div>
+
+            <button type="submit" class="btn" style="width:100%;">
+                Guardar cambios
+            </button>
+        </form>
+    </div>
+
+    <!-- Acciones -->
+    <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
+        <a href="{{ url_for('cliente.pedidos') }}" class="btn">
+            Ver mis pedidos
+        </a>
+
+        <a href="{{ url_for('web.tienda') }}" class="btn btn-secondary">
+            Volver a la tienda
+        </a>
+    </div>
+</section>
+{% endblock %}

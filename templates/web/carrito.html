@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Carrito{% endblock %}
+{% block content %}
+
+<h2>🛒 Tu Carrito</h2>
+
+{% if carrito and carrito|length > 0 %}
+<table>
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in carrito %}
+        <tr>
+            <td>{{ item.producto.nombre }}</td>
+
+            <td>
+                ${{ "{:,}".format(item.producto.precio|int).replace(",", ".") }}
+            </td>
+
+            <td style="text-align:center;">
+                {{ item.cantidad }}
+            </td>
+
+            <td>
+                ${{ "{:,}".format((item.producto.precio|int * item.cantidad)).replace(",", ".") }}
+            </td>
+
+            <td>
+                <form
+                    action="{{ url_for('web.eliminar_carrito', item_id=item.id) }}"
+                    method="post"
+                    style="display:inline;"
+                >
+                    <button type="submit">➖ Quitar uno</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<hr>
+
+<h3>
+    Total:
+    ${{ "{:,}".format(total|int).replace(",", ".") }}
+</h3>
+
+<form action="{{ url_for('web.pagar') }}" method="post">
+    <button type="submit" style="font-size:18px;">
+        💳 Proceder al Pago
+    </button>
+</form>
+
+{% else %}
+<p>
+    Tu carrito está vacío.
+    <a href="{{ url_for('web.tienda') }}">Ir a la tienda</a>
+</p>
+{% endif %}
+
+{% endblock %}

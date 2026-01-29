@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Ventas realizadas</h2>
+<p>Listado de todas las ventas del sistema.</p>
+
+{% if ventas %}
+    {% for venta in ventas %}
+    <div style="border:1px solid #ccc; padding:1rem; margin-bottom:1.5rem;">
+        <h4>Venta #{{ venta.id }}</h4>
+        <p><strong>Cliente:</strong> {{ venta.usuario.nombre }}</p>
+        <p><strong>Fecha:</strong> {{ venta.fecha.strftime("%d/%m/%Y %H:%M") }}</p>
+        <p><strong>Total:</strong> ${{ "%.2f"|format(venta.total) }}</p>
+
+        <table width="100%" style="border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th align="left">Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in venta.detalles %}
+                <tr>
+                    <td>{{ item.producto.nombre }}</td>
+                    <td align="center">{{ item.cantidad }}</td>
+                    <td align="center">${{ "%.2f"|format(item.precio_unitario) }}</td>
+                    <td align="center">
+                        ${{ "%.2f"|format(item.cantidad * item.precio_unitario) }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+{% else %}
+    <p>No hay ventas registradas.</p>
+{% endif %}
+{% endblock %}

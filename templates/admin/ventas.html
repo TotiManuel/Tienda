@@ -1,0 +1,34 @@
+{% extends "panel_admin.html" %}
+
+{% block content %}
+<h2>Ventas</h2>
+
+{% if ventas %}
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Cliente</th>
+        <th>Total</th>
+        <th>Detalle</th>
+    </tr>
+
+    {% for v in ventas %}
+    <tr>
+        <td>{{ v.id }}</td>
+        <td>{{ v.fecha.strftime("%d/%m/%Y %H:%M") }}</td>
+        <td>{{ v.usuario.nombre }}</td>
+        <td>${{ "%.2f"|format(v.total) }}</td>
+        <td>
+            <a href="{{ url_for('admin.ver_venta', venta_id=v.id) }}">
+                Ver
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No hay ventas registradas.</p>
+{% endif %}
+
+{% endblock %}

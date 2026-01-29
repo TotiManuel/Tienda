@@ -1,0 +1,32 @@
+{% extends "panel_admin.html" %}
+
+{% block content %}
+<h2>Gestión de Stock</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Stock actual</th>
+        <th>Actualizar</th>
+    </tr>
+
+    {% for p in productos %}
+    <tr>
+        <td>{{ p.nombre }}</td>
+        <td>${{ "%.2f"|format(p.precio) }}</td>
+
+        <td>
+            <form method="POST"
+                  action="{{ url_for('admin.actualizar_stock', producto_id=p.id) }}">
+                <input type="number" name="stock" value="{{ p.stock }}" min="0" required>
+        </td>
+
+        <td>
+                <button type="submit">Guardar</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

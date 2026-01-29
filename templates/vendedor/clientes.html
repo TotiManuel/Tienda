@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Clientes{% endblock %}
+
+{% block content %}
+<h2>Clientes</h2>
+
+<input
+    type="text"
+    id="buscadorClientes"
+    placeholder="Buscar cliente..."
+    style="width:100%; padding:8px; margin-bottom:15px;"
+>
+
+<table border="1" width="100%" cellpadding="8" id="tablaClientes">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Pedidos</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.ventas|length }}</td>
+            <td>
+                <a href="{{ url_for('vendedor.pedidos_cliente', usuario_id=cliente.id) }}">
+                    Ver pedidos
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+document.getElementById("buscadorClientes").addEventListener("keyup", function () {
+    const filtro = this.value.toLowerCase();
+    document.querySelectorAll("#tablaClientes tbody tr").forEach(fila => {
+        fila.style.display = fila.innerText.toLowerCase().includes(filtro) ? "" : "none";
+    });
+});
+</script>
+{% endblock %}
