@@ -10,7 +10,7 @@ def get_config(clave, default=None):
 web_bp = Blueprint("web", __name__)
 
 # ================= WEB PÚBLICA =================
-@web_bp.route("/home")
+@web_bp.route("/")
 def home():
     usuario = session.get("usuario")
 
