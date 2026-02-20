@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toti - Inicio</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#007bff">
 
 </head>
 <body>
@@ -18,27 +20,11 @@
         <a href="/clientes">Ir a Clientes</a>
     </div>
 <script>
-let deferredPrompt;
-const installBtn = document.getElementById("installBtn");
-
-window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-
-    // mostrar botón
-    installBtn.style.display = "inline-block";
-});
-
-installBtn.addEventListener("click", async () => {
-    installBtn.style.display = "none";
-
-    deferredPrompt.prompt();
-
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log("Resultado:", outcome);
-
-    deferredPrompt = null;
-});
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/static/sw.js')
+    .then(() => console.log("SW listo"))
+    .catch(err => console.log("Error SW:", err));
+}
 </script>
 </body>
 </html>
