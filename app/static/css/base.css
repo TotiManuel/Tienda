@@ -39,3 +39,19 @@ body {
 .contenido {
     padding: 25px;
 }
+
+#installBtn{
+    padding:12px 25px;
+    margin:10px 0;
+    border:none;
+    border-radius:8px;
+    background:#28a745;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+#installBtn:hover{
+    background:#1e7e34;
+}
