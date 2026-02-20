@@ -2,10 +2,18 @@ from flask import Flask
 from app.database import db
 from app import models
 
-def create_app():
-    app = Flask(__name__)
+from flask import Flask
+from app.database import db
+from app import models
 
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///toti.db"
+def create_app():
+    app = Flask(
+        __name__,
+        template_folder="templates",
+        static_folder="static"
+    )
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     
     app.secret_key = "toti_super_secreto_1234"
