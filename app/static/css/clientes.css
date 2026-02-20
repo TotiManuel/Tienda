@@ -1,0 +1,329 @@
+.clientes-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 10px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+.clientes-stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.clientes-stats .stat {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.buscador {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.form-cliente {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.form-cliente input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    flex: 1 1 200px;
+}
+
+.form-cliente button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    flex: 1 1 100px;
+    transition: background 0.3s;
+}
+
+.form-cliente button:hover {
+    background-color: #45a049;
+}
+
+.lista-morosos, .ranking, .clientes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.moroso, .ranking-item, .card-cliente {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    flex: 1 1 200px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card-cliente {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.cliente-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.estado {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #fff;
+}
+
+.estado.ok { background: #4CAF50; }
+.estado.medio { background: #FF9800; }
+.estado.alto { background: #f44336; }
+
+.acciones {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.acciones .btn {
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: white;
+    transition: 0.3s;
+}
+
+.acciones .btn.ver {
+    background-color: #2196F3;
+}
+
+.acciones .btn.ver:hover {
+    background-color: #1976D2;
+}
+
+.acciones .btn.whatsapp {
+    background-color: #25D366;
+}
+
+.acciones .btn.whatsapp:hover {
+    background-color: #1DA851;
+}
+
+@media (max-width: 768px) {
+    .clientes-stats {
+        flex-direction: column;
+    }
+    .clientes-grid, .lista-morosos, .ranking {
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+.detalle-cliente {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 15px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+.cliente-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cliente-header h2 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.cliente-header .telefono {
+    font-size: 14px;
+    color: #666;
+}
+
+.badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.badge.vip { background-color: #FFD700; color: #000; }
+.badge.alto { background-color: #f44336; }
+.badge.medio { background-color: #FF9800; }
+.badge.bajo { background-color: #4CAF50; }
+
+.deuda-box {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.deuda-box h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+}
+
+.deuda-box p {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.acciones {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.acciones a {
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: white;
+    transition: 0.3s;
+}
+
+.acciones .btn-whatsapp {
+    background-color: #25D366;
+}
+
+.acciones .btn-whatsapp:hover {
+    background-color: #1DA851;
+}
+
+.acciones .btn-secundario {
+    background-color: #2196F3;
+}
+
+.acciones .btn-secundario:hover {
+    background-color: #1976D2;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    flex: 1;
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.stat-box h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.stat-box p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    margin-top: 0;
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.tabla-ventas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabla-ventas th, .tabla-ventas td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.tabla-ventas th {
+    background-color: #f5f5f5;
+}
+
+.tabla-ventas .monto {
+    font-weight: bold;
+    text-align: right;
+}
+
+.lista-pagos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-pagos li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.sin-pagos {
+    color: #888;
+    font-style: italic;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .cliente-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .stats {
+        flex-direction: column;
+    }
+}

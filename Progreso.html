@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa de la Web Toti</title>
+<style>
+/* 🔹 Reset y estilos base */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+h1,h2,h3,h4 { margin: 10px 0; }
+p, ul, li { margin: 5px 0; }
+a { text-decoration: none; color: #fff; }
+hr { border: 1px solid #ccc; margin: 20px 0; }
+
+/* 🔹 Contenedores */
+.container { max-width: 1200px; margin: auto; }
+.section { background-color: #fff; padding: 15px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+
+/* 🔹 Tarjetas y productos */
+.card { border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 15px; background: #fff; }
+.card-content { margin-top: 10px; }
+.card.expanded { border-color: #007bff; }
+
+/* 🔹 Botones */
+.btn, .btn-whatsapp, .btn-secundario {
+    display: inline-block; padding: 5px 10px; border-radius: 5px; font-weight: bold; margin: 5px 5px 5px 0;
+}
+.btn { background-color: #28a745; }
+.btn-whatsapp { background-color: #25D366; }
+.btn-secundario { background-color: #6c757d; }
+
+/* 🔹 Estadísticas */
+.stats { display: flex; gap: 15px; margin-top: 15px; }
+.stat-box { flex: 1; background: #007bff; color: #fff; text-align: center; padding: 10px; border-radius: 8px; }
+
+/* 🔹 Productos y carrito */
+.producto, .producto-form, .clientes-grid .card-cliente { border: 1px solid #ccc; border-radius: 8px; padding: 8px; margin-bottom: 8px; background: #f0f0f0; }
+.producto span { margin-right: 10px; }
+.inline-form input { width: 60px; }
+
+/* 🔹 Tabla */
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+table th, table td { border: 1px solid #ccc; padding: 5px; text-align: left; }
+table th { background-color: #007bff; color: #fff; }
+
+/* 🔹 Badges y estados */
+.badge { padding: 3px 6px; border-radius: 5px; color: #fff; font-size: 0.8em; margin-left: 5px; }
+.badge.vip { background-color: gold; color: #000; }
+.badge.alto { background-color: #dc3545; }
+.badge.medio { background-color: #fd7e14; }
+.badge.bajo { background-color: #28a745; }
+.estado.ok { color: #28a745; font-weight: bold; }
+.estado.medio { color: #fd7e14; font-weight: bold; }
+.estado.alto { color: #dc3545; font-weight: bold; }
+
+/* 🔹 Listados y buscador */
+#buscador { width: 100%; padding: 8px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
+.lista-pagos, .ranking, .clientes-stats { list-style: none; padding: 0; }
+.lista-pagos li, .ranking-item, .moroso { margin-bottom: 5px; }
+
+/* 🔹 Formularios */
+form input, form select, form button { margin: 5px 5px 5px 0; padding: 5px; border-radius: 5px; border: 1px solid #ccc; }
+form button { background-color: #28a745; color: #fff; border: none; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>🌐 Mapa de la Web Toti</h1>
+<p>Listado completo de rutas, funcionalidades y secciones implementadas.</p>
+<hr>
+
+<!-- 1️⃣ Inicio -->
+<div class="section">
+<h2>Inicio <small>/</small></h2>
+<p>Simple página de bienvenida con links a:</p>
+<ul>
+    <li><strong>/ventas</strong> → Ventas</li>
+    <li><strong>/clientes</strong> → Clientes</li>
+</ul>
+</div>
+
+<!-- 2️⃣ Clientes -->
+<div class="section">
+<h2>Clientes <small>/clientes</small></h2>
+<p>Listado de clientes con estadísticas y filtros.</p>
+<ul>
+    <li>Tarjetas de clientes con estado de deuda (OK / MEDIO / ALTO)</li>
+    <li>Botones Historial y WhatsApp</li>
+    <li>Buscador dinámico por nombre</li>
+    <li>Formulario para agregar clientes (/clientes/crear)</li>
+    <li>Sección de Morosos y Ranking de mejores clientes</li>
+</ul>
+</div>
+
+<!-- 2a) Detalle de cliente -->
+<div class="section">
+<h3>Detalle cliente <small>/clientes/&lt;id&gt;</small></h3>
+<ul>
+    <li>Header con nombre, teléfono y badges (VIP, riesgo)</li>
+    <li>Deuda actual</li>
+    <li>Botones: Enviar recordatorio (WhatsApp), Volver</li>
+    <li>Estadísticas: total comprado, cantidad de compras, ticket promedio</li>
+    <li>Historial de compras (tabla de ventas)</li>
+    <li>Pagos:
+        <ul>
+            <li>Listado de pagos realizados</li>
+            <li>Formulario para registrar pago (/clientes/pagar/&lt;id&gt;)</li>
+            <li>Actualización de deuda pendiente</li>
+        </ul>
+    </li>
+</ul>
+</div>
+
+<!-- 3️⃣ Ventas -->
+<div class="section">
+<h2>Ventas <small>/ventas</small></h2>
+<ul>
+    <li>Gestión de productos:
+        <ul>
+            <li>Agregar (/ventas/agregar)</li>
+            <li>Editar (/ventas/editar/&lt;id&gt;)</li>
+            <li>Eliminar (/ventas/eliminar/&lt;id&gt;)</li>
+            <li>Vender producto individual (/ventas/vender/&lt;id&gt;)</li>
+        </ul>
+    </li>
+    <li>Carrito de ventas:
+        <ul>
+            <li>Agregar producto al carrito (/ventas/carrito/agregar/&lt;id&gt;)</li>
+            <li>Quitar producto del carrito (pendiente de implementar backend)</li>
+            <li>Seleccionar cliente y método de pago</li>
+            <li>Confirmar venta (/ventas/carrito/confirmar)</li>
+            <li>Generar ticket PDF (/ventas/generar_ticket_pdf/&lt;id&gt;)</li>
+        </ul>
+    </li>
+    <li>Control de stock avanzado y historial de stock</li>
+    <li>Estadísticas de ventas:
+        <ul>
+            <li>Ventas por día, semana, mes</li>
+            <li>Producto más vendido</li>
+            <li>Margen total</li>
+            <li>Estadísticas por método de pago</li>
+        </ul>
+    </li>
+</ul>
+</div>
+
+<!-- 4️⃣ Formularios -->
+<div class="section">
+<h2>Formularios clave</h2>
+<ul>
+    <li>/clientes/crear → Agregar cliente</li>
+    <li>/clientes/pagar/&lt;id&gt; → Registrar pago y actualizar deuda</li>
+    <li>/ventas/agregar → Agregar producto</li>
+    <li>/ventas/vender/&lt;id&gt; → Vender producto</li>
+    <li>/ventas/editar/&lt;id&gt; → Editar producto</li>
+    <li>/ventas/eliminar/&lt;id&gt; → Eliminar producto</li>
+    <li>/ventas/carrito/agregar/&lt;id&gt; → Agregar producto al carrito</li>
+    <li>/ventas/carrito/quitar/&lt;id&gt; → Quitar producto del carrito (pendiente)</li>
+    <li>/ventas/carrito/confirmar → Confirmar venta</li>
+</ul>
+</div>
+
+<!-- 5️⃣ Pendientes o mejoras ampliado -->
+<div class="section">
+<h2>Pendientes / Mejoras</h2>
+<ul>
+    <h3> Carrito </h3>
+    <li>Validar cantidades máximas y mínimas al agregar productos al carrito.</li>
+
+    <h3> Pagos </h3>
+    <li>Agregar validación de monto en frontend (input > 0, <= deuda).</li>
+    <li>Formato de ticket promedio a 2 decimales y con moneda.</li>
+    <li>Posibilidad de editar o eliminar pagos registrados.</li>
+
+    <h3> Ventas </h3>
+    <li>Validar que no se pueda vender más de lo que hay en stock.</li>
+    <li>Generar PDF de ticket y facturas correctamente, con estilos tipo ticket real.</li>
+    <li>Historial de ventas filtrable por fecha, cliente y método de pago.</li>
+    <li>Marcar ventas como finalizadas y evitar modificaciones posteriores.</li>
+
+    <h3> Productos </h3>
+    <li>Agregar filtros y búsqueda en lista de productos (por nombre, categoría, stock).</li>
+    <li>Implementar promociones o descuentos vinculados a productos.</li>
+    <li>Visualizar claramente productos agotados o con stock bajo.</li>
+
+    <h3> Clientes </h3>
+    <li>Validar emails y teléfonos al crear o editar clientes.</li>
+    <li>Agregar filtros en clientes por deuda, riesgo o VIP.</li>
+    <li>Mostrar alertas de deuda alta o clientes morosos destacados.</li>
+    <li>Historial de compras y pagos exportable a PDF o Excel.</li>
+
+    <h3> UI/UX </h3>
+    <li>Colores consistentes para badges, botones y estados de stock/deuda.</li>
+    <li>Responsive: optimizar visualización en móviles y tablets.</li>
+
+    <h3> Backend / Seguridad </h3>
+    <li>Manejo de errores 404, 405 y otros de manera consistente.</li>
+    <li>Validaciones en backend para todas las rutas críticas.</li>
+    <li>Evitar inconsistencias en base de datos con transacciones atómicas (ventas y pagos).</li>
+    <li>Optimizar consultas a la base de datos para rendimiento con muchos productos/clientes.</li>
+
+    <h3> Extras </h3>
+    <li>Agregar exportación de estadísticas y reportes por día, semana y mes.</li>
+    <li>Implementar roles de usuario (admin, vendedor) para limitar accesos.</li>
+    <li>Agregar notificaciones o alertas (ej: stock bajo, deuda alta).</li>
+</ul>
+</div>
+
+
+</div>
+</body>
+</html>

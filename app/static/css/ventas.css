@@ -1,0 +1,125 @@
+/* 🔹 Reset básico */
+body, html { margin:0; padding:0; font-family: "Segoe UI", Arial, sans-serif; background:#f4f6f9; }
+a { text-decoration: none; color: inherit; }
+
+/* 🔹 Layout general */
+.dashboard {
+    display: flex;
+    height: 100vh;
+}
+.sidebar {
+    width: 220px;
+    background: #007bff;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar h2 { margin-bottom: 30px; }
+.sidebar button {
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    padding: 10px 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.sidebar button:hover { background: rgba(255,255,255,0.1); border-radius: 6px; }
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* 🔹 Tabs */
+.tab {
+    display: none;
+}
+.tab.active {
+    display: block;
+}
+
+/* 🔹 Cards */
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+}
+.card h3 { margin-bottom: 10px; }
+
+/* 🔹 Formularios */
+form input, form select, form button {
+    padding: 6px 10px;
+    margin: 5px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+form button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+form button:hover { background: #0056b3; }
+
+/* 🔹 Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
+th { background: #007bff; color: #fff; }
+tr:hover { background: #f8f9fa; }
+
+/* 🔹 Productos y carrito */
+.producto, .producto-form { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:5px; }
+
+/* 🔹 Estadísticas */
+.stats { display:flex; gap:15px; flex-wrap:wrap; margin-top:20px; }
+.stat-box { flex:1; min-width:120px; background:#007bff; color:white; padding:15px; border-radius:10px; text-align:center; }
+
+/* 🔹 Colores stock */
+.stock-bajo { color: orange; font-weight: bold; }
+.stock-agotado { color: red; font-weight: bold; }
+.stock-suficiente { color: green; font-weight: bold; }
+
+/* 🔹 Responsive */
+@media (max-width: 768px) {
+    .dashboard { flex-direction: column; }
+    .sidebar { width: 100%; display:flex; overflow-x:auto; }
+    .main-content { padding:10px; }
+}
+
+
+
+.producto a.btn-quitar {
+    margin-left: 10px;
+    color: white;
+    background-color: #e74c3c;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.producto a.btn-quitar:hover {
+    background-color: #c0392b;
+}
+.producto a.btn-agregar {
+    margin-left: 10px;
+    color: white;
+    background-color: blue;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.producto a.btn-agregar:hover {
+    background-color: blue;
+}

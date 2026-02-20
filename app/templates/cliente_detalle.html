@@ -1,0 +1,121 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+
+<div class="detalle-cliente">
+
+    <!-- HEADER -->
+    <div class="cliente-header">
+
+        <div>
+            <h2>{{ cliente.nombre }}</h2>
+            <p class="telefono">{{ cliente.telefono }}</p>
+        </div>
+
+        <div class="badges">
+            {% if cliente.vip %}
+            <span class="badge vip">⭐ VIP</span>
+            {% endif %}
+
+            {% if cliente.riesgo == "ALTO" %}
+            <span class="badge alto">ALTO RIESGO</span>
+            {% elif cliente.riesgo == "MEDIO" %}
+            <span class="badge medio">RIESGO MEDIO</span>
+            {% else %}
+            <span class="badge bajo">BAJO RIESGO</span>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+    <!-- DEUDA -->
+    <div class="deuda-box">
+        <h3>Deuda actual</h3>
+        <p>${{ cliente.saldo_deuda }}</p>
+    </div>
+
+
+    <!-- BOTONES -->
+    <div class="acciones">
+
+        <a class="btn-whatsapp" target="_blank"
+           href="https://wa.me/549{{ cliente.telefono }}?text={{ mensaje }}">
+            📲 Enviar recordatorio
+        </a>
+
+        <a href="/clientes" class="btn-secundario">
+            Volver
+        </a>
+
+    </div>
+
+
+    <!-- ESTADISTICAS -->
+    <div class="stats">
+
+        <div class="stat-box">
+            <h3>${{ total_compras }}</h3>
+            <p>Total comprado</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>{{ cantidad }}</h3>
+            <p>Compras</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>${{ ticket_promedio }}</h3>
+            <p>Ticket promedio</p>
+        </div>
+
+    </div>
+
+
+    <!-- HISTORIAL -->
+    <div class="card">
+        <h3>Historial de compras</h3>
+
+        <table class="tabla-ventas">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for v in ventas %}
+                <tr>
+                    <td>{{ v.fecha.strftime("%d/%m/%Y") }}</td>
+                    <td class="monto">${{ v.total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- PAGOS -->
+    <div class="card">
+        <h3>Pagos</h3>
+        <div class="card">
+            <h3>Registrar pago</h3>
+            <form method="POST" action="/clientes/pagar/{{ cliente.id }}">
+                <input type="number" name="monto" placeholder="Monto" step="0.01" required>
+                <button>Agregar pago</button>
+            </form>
+        </div>
+        {% if cliente.pagos %}
+            <ul class="lista-pagos">
+                {% for p in cliente.pagos %}
+                <li>
+                    <span>{{ p.fecha.strftime("%d/%m/%Y") }}</span>
+                    <strong>${{ p.monto }}</strong>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+        <p class="sin-pagos">No hay pagos registrados.</p>
+        {% endif %}
+    </div>
+
+</div>
