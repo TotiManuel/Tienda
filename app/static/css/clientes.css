@@ -1,150 +1,213 @@
-/* 🔹 Reset básico */
-body, html {
-    margin: 0;
-    padding: 0;
+/* 🔹 Reset */
+body {
     font-family: "Segoe UI", Arial, sans-serif;
     background: #f4f6f9;
 }
-a { text-decoration: none; color: inherit; }
 
-/* 🔹 Ajuste para layout con sidebar */
-.main-content {
-    width: 100%;
+/* 🔹 Contenedor principal */
+.clientes-container {
+    max-width: 1200px;
+    margin: auto;
 }
 
-/* 🔹 Tabs */
-.tab {
-    display: none;
-}
-.tab.active {
-    display: block;
-}
-
-/* 🔹 Cards */
-.card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 15px;
+/* 🔹 Títulos */
+.clientes-container h2 {
     margin-bottom: 20px;
-    box-shadow: 0 5px 12px rgba(0,0,0,0.08);
-}
-.card h3 {
-    margin-bottom: 10px;
-    color: #333;
 }
 
-/* 🔹 Formularios */
-form input,
-form select,
-form button {
-    padding: 6px 10px;
-    margin: 5px 0;
-    border-radius: 6px;
+/* 🔹 Estadísticas */
+.clientes-stats {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    flex: 1;
+    min-width: 200px;
+    background: #007bff;
+    color: white;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat h4 {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+/* 🔹 Buscador */
+.buscador {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
     border: 1px solid #ccc;
-    font-size: 14px;
+    margin-bottom: 15px;
 }
 
-form input:focus,
-form select:focus {
+.buscador:focus {
     outline: none;
     border-color: #007bff;
 }
 
-form button {
+/* 🔹 Formulario */
+.form-cliente {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.form-cliente input {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    flex: 1;
+    min-width: 150px;
+}
+
+.form-cliente input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.form-cliente button {
     background: #007bff;
-    color: #fff;
+    color: white;
     border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
     cursor: pointer;
     transition: 0.2s;
 }
-form button:hover {
+
+.form-cliente button:hover {
     background: #0056b3;
 }
 
-/* 🔹 Tablas */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-th, td {
-    padding: 8px;
-    border-bottom: 1px solid #eee;
-    text-align: left;
-}
-th {
-    background: #007bff;
-    color: #fff;
-}
-tr:hover {
-    background: #f8f9fa;
+/* 🔹 Morosos */
+.lista-morosos {
+    margin-bottom: 20px;
 }
 
-/* 🔹 Productos y carrito */
-.producto,
-.producto-form {
+.moroso {
+    background: #ffe6e6;
+    border-left: 5px solid #e74c3c;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    margin-bottom: 5px;
 }
 
-/* 🔹 Estadísticas */
-.stats {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 20px;
+/* 🔹 Ranking */
+.ranking {
+    margin-bottom: 20px;
 }
-.stat-box {
+
+.ranking-item {
+    background: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+/* 🔹 Grid clientes */
+.clientes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+/* 🔹 Card cliente */
+.card-cliente {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: 0.2s;
+}
+
+.card-cliente:hover {
+    transform: translateY(-4px);
+}
+
+/* 🔹 Header cliente */
+.cliente-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 🔹 Estados deuda */
+.estado {
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.estado.ok {
+    background: #e6f9ed;
+    color: #27ae60;
+}
+
+.estado.medio {
+    background: #fff4e6;
+    color: #f39c12;
+}
+
+.estado.alto {
+    background: #ffe6e6;
+    color: #e74c3c;
+}
+
+/* 🔹 Acciones */
+.acciones {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    text-decoration: none;
+    text-align: center;
     flex: 1;
-    min-width: 120px;
+}
+
+.btn.ver {
     background: #007bff;
     color: white;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
 }
 
-/* 🔹 Colores stock */
-.stock-bajo { color: orange; font-weight: bold; }
-.stock-agotado { color: red; font-weight: bold; }
-.stock-suficiente { color: green; font-weight: bold; }
+.btn.ver:hover {
+    background: #0056b3;
+}
 
-/* 🔹 Botones carrito */
-.producto a.btn-quitar {
-    margin-left: 10px;
+.btn.whatsapp {
+    background: #25D366;
     color: white;
-    background-color: #e74c3c;
-    padding: 3px 8px;
-    border-radius: 4px;
 }
-.producto a.btn-quitar:hover {
-    background-color: #c0392b;
-}
-.producto a.btn-agregar {
-    margin-left: 10px;
-    color: white;
-    background-color: #007bff;
-    padding: 3px 8px;
-    border-radius: 4px;
-}
-.producto a.btn-agregar:hover {
-    background-color: #0056b3;
+
+.btn.whatsapp:hover {
+    background: #1ebe5d;
 }
 
 /* 🔹 Responsive */
 @media (max-width: 768px) {
-    .main-content {
-        padding: 10px;
-    }
-
-    .stats {
+    .clientes-stats {
         flex-direction: column;
     }
 
-    .stat-box {
-        width: 100%;
+    .form-cliente {
+        flex-direction: column;
     }
 }
