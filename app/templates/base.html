@@ -5,6 +5,11 @@
     <title>{% block title %}Toti{% endblock %}</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#007bff">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icon-192.png') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     {% block css %}{% endblock %}
 </head>
 
@@ -25,6 +30,12 @@
     <main class="contenido">
         {% block content %}{% endblock %}
     </main>
-
+    <script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/static/sw.js")
+            .then(() => console.log("PWA lista"))
+            .catch(err => console.log("Error PWA:", err));
+    }
+    </script>
 </body>
 </html>
