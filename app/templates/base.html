@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Toti{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- 🔥 MENU -->
+    <nav class="menu">
+        <div class="logo">Toti 🚀</div>
+
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/ventas">Ventas</a></li>
+            <li><a href="/clientes">Clientes</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO -->
+    <main class="contenido">
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

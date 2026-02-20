@@ -1,5 +1,12 @@
-<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+{% extends "base.html" %}
 
+{% block title %}Clientes{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+{% endblock %}
+
+{% block content %}
 <div class="clientes-container">
 
     <h2>👥 Clientes</h2>
@@ -122,3 +129,4 @@ buscador.addEventListener("keyup", function(){
     });
 });
 </script>
+{% endblock %}

@@ -1,5 +1,12 @@
-<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+{% extends "base.html" %}
 
+{% block title %}Detalle cliente{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+{% endblock %}
+
+{% block content %}
 <div class="detalle-cliente">
 
     <!-- HEADER -->
@@ -119,3 +126,4 @@
     </div>
 
 </div>
+{% endblock %}

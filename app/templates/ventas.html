@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Ventas - Toti</title>
+{% extends "base.html" %}
+
+{% block title %}Ventas{% endblock %}
+
+{% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/ventas.css') }}">
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 
 <div class="dashboard">
 
@@ -215,5 +215,4 @@ function openTab(tabId) {
 }
 </script>
 
-</body>
-</html>
+{% endblock %}
