@@ -1,8 +1,6 @@
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.sqlite import JSON
-
-db = SQLAlchemy()
+from api.index import db
 
 class Proveedor(db.Model):
     __tablename__ = "proveedor"

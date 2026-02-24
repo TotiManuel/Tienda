@@ -1,8 +1,7 @@
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.sqlite import JSON
 
-db = SQLAlchemy()
+from api.index import db
 
 class LogActividad(db.Model):
     __tablename__ = "log_actividad"

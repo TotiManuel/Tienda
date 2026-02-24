@@ -1,3 +1,6 @@
+from datetime import datetime
+
+from api.index import db
 
 class Usuario(db.Model):
     __tablename__ = "usuarios"

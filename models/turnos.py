@@ -1,8 +1,7 @@
-from datetime import datetime, time
-from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 from sqlalchemy.dialects.sqlite import JSON
 
-db = SQLAlchemy()
+from api.index import db
 
 class Calendario(db.Model): 
     __tablename__ = "calendario"

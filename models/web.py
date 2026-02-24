@@ -1,4 +1,5 @@
 from datetime import datetime
+from api.index import db
 
 class PaginaWeb(db.Model):
     __tablename__ = "paginas_web"

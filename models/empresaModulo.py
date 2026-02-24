@@ -1,3 +1,7 @@
+from datetime import datetime
+
+from api.index import db
+
 class EmpresaModulo(db.Model):
     __tablename__ = "empresas_modulos"
 
