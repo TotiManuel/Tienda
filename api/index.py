@@ -8,7 +8,7 @@ app = Flask(
 )
 
 # Crear base de datos
-init_db()
+# init_db()
 
 
 @app.route("/")
