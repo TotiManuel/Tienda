@@ -1,7 +1,6 @@
 from datetime import datetime
 from sqlalchemy.dialects.sqlite import JSON
-
-from api.index import db
+from extensions import db
 
 class Cliente(db.Model):
     __tablename__ = "cliente"

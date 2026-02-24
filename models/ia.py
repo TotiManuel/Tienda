@@ -1,5 +1,5 @@
 from datetime import datetime
-from api.index import db
+from extensions import db
 
 
 class ReglaAutomatizacion(db.Model):

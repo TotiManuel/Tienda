@@ -1,6 +1,5 @@
 from datetime import datetime
-
-from api.index import db
+from extensions import db
 
 class ConfiguracionModulo(db.Model):
     __tablename__ = "configuracion_modulos"

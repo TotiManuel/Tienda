@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlalchemy.dialects.sqlite import JSON
-from api.index import db
+from extensions import db
 
 class CategoriaProducto(db.Model):
     __tablename__ = "categoria_producto"

@@ -1,6 +1,5 @@
 from datetime import datetime
-
-from api.index import db
+from extensions import db
 
 class HistorialPlan(db.Model):
     __tablename__ = "historial_planes"

@@ -1,4 +1,5 @@
 from .database import Base, engine, SessionLocal
+from extensions import db
 
 # 🔹 EMPRESAS
 from .empresa import Empresa
@@ -209,7 +210,5 @@ from .extras import (
     FeedbackCliente
 )
 
-
-# 🔥 FUNCIÓN PARA CREAR TODA LA BASE DE DATOS
 def init_db():
-    Base.metadata.create_all(engine)
+    db.create_all()

@@ -1,12 +1,10 @@
 from flask import Flask, render_template
-import sys
-import os
+import sys, os
 
-# 🔹 Agregar raíz del proyecto al PATH (clave en Vercel)
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
 
-# 🔹 Importar modelos
+from extensions import db
 from models import init_db
 
 
@@ -17,7 +15,11 @@ def create_app():
         static_folder="../static"
     )
 
-    # 🔹 Rutas
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    db.init_app(app)
+
     @app.route("/")
     def home():
         return render_template("index.html")
@@ -25,11 +27,9 @@ def create_app():
     return app
 
 
-# 🔹 Crear app para Vercel
 app = create_app()
 
-
-# 🔹 Solo local (no en Vercel)
 if __name__ == "__main__":
-    init_db()  # solo en desarrollo
+    with app.app_context():
+        init_db()
     app.run(debug=True)
