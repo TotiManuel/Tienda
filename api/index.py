@@ -14,7 +14,10 @@ def create_app():
         static_folder="../static"
     )
 
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+    # 🔥 Si no existe DATABASE_URL (local), usar SQLite
+    database_url = os.getenv("DATABASE_URL", "sqlite:///database.db")
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_url
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
@@ -27,3 +30,6 @@ def create_app():
 
 
 app = create_app()
+
+if __name__ == "__main__":
+    app.run(debug=True)
