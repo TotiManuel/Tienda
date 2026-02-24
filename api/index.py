@@ -5,7 +5,6 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
 
 from extensions import db
-from models import init_db
 
 
 def create_app():
@@ -28,8 +27,3 @@ def create_app():
 
 
 app = create_app()
-
-if __name__ == "__main__":
-    with app.app_context():
-        init_db()
-    app.run(debug=True)
