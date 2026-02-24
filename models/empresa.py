@@ -3,7 +3,7 @@ from extensions import db
 
 
 class Empresa(db.Model):
-    __tablename__ = "empresas"
+    __tablename__ = "empresa"
 
     # 🔹 Identificación básica
     id = db.Column(db.Integer, primary_key=True)

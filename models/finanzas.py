@@ -50,7 +50,7 @@ class Transaccion(db.Model):
 
     descripcion = db.Column(db.Text)
 
-    creado_por = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    creado_por = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
     
 class LibroDiario(db.Model):
     __tablename__ = "libro_diario"
@@ -150,7 +150,7 @@ class FlujoCaja(db.Model):
 
     referencia = db.Column(db.String(100))
 
-    creado_por = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    creado_por = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
     
 class Presupuesto(db.Model):
     __tablename__ = "presupuesto"

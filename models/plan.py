@@ -42,7 +42,7 @@ class Suscripcion(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    empresa_id = db.Column(db.Integer, db.ForeignKey("empresas.id"), nullable=False)
+    empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"), nullable=False)
     plan_id = db.Column(db.Integer, db.ForeignKey("planes.id"), nullable=False)
 
     # 🔹 Estado
@@ -73,7 +73,7 @@ class Pago(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    empresa_id = db.Column(db.Integer, db.ForeignKey("empresas.id"))
+    empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"))
     suscripcion_id = db.Column(db.Integer, db.ForeignKey("suscripciones.id"))
 
     monto = db.Column(db.Float)
@@ -96,7 +96,7 @@ class FacturaSaaS(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    empresa_id = db.Column(db.Integer, db.ForeignKey("empresas.id"))
+    empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"))
     suscripcion_id = db.Column(db.Integer, db.ForeignKey("suscripciones.id"))
 
     numero_factura = db.Column(db.String(100), unique=True)
@@ -113,3 +113,4 @@ class FacturaSaaS(db.Model):
     fecha_vencimiento = db.Column(db.DateTime)
 
     url_pdf = db.Column(db.String(300))
+    

@@ -9,7 +9,7 @@ class PaginaWeb(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -183,12 +183,12 @@ class Carrito(db.Model):
 
     cliente_id = db.Column(
         db.Integer,
-        db.ForeignKey("clientes.id")
+        db.ForeignKey("cliente.id")
     )
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -212,7 +212,7 @@ class Pedido(db.Model):
 
     cliente_id = db.Column(
         db.Integer,
-        db.ForeignKey("clientes.id")
+        db.ForeignKey("cliente.id")
     )
 
     estado = db.Column(
@@ -242,7 +242,7 @@ class DetallePedido(db.Model):
 
     producto_id = db.Column(
         db.Integer,
-        db.ForeignKey("productos.id"),
+        db.ForeignKey("producto.id"),
         nullable=False
     )
 
@@ -256,7 +256,7 @@ class MetodoEnvio(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -295,7 +295,7 @@ class Direccion(db.Model):
 
     cliente_id = db.Column(
         db.Integer,
-        db.ForeignKey("clientes.id")
+        db.ForeignKey("cliente.id")
     )
 
     calle = db.Column(db.String(200))

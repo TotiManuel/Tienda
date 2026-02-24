@@ -9,7 +9,7 @@ class ReglaAutomatizacion(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -87,7 +87,7 @@ class SugerenciaIA(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -122,7 +122,7 @@ class Prediccion(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 

@@ -9,7 +9,7 @@ class Empleado(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -118,7 +118,7 @@ class Nomina(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 

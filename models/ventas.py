@@ -9,7 +9,7 @@ class Venta(db.Model):
 
     empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"), nullable=False)
     cliente_id = db.Column(db.Integer, db.ForeignKey("cliente.id"), nullable=False)
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
 
     numero = db.Column(db.String(50), nullable=False)
 
@@ -59,7 +59,7 @@ class Cotizacion(db.Model):
 
     empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"), nullable=False)
     cliente_id = db.Column(db.Integer, db.ForeignKey("cliente.id"), nullable=False)
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
 
     numero = db.Column(db.String(50), nullable=False)
 
@@ -135,7 +135,7 @@ class Devolucion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     venta_id = db.Column(db.Integer, db.ForeignKey("venta.id"), nullable=False)
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
 
     motivo = db.Column(db.Text)
 

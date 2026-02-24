@@ -192,7 +192,7 @@ class MovimientoStock(db.Model):
 
     fecha = db.Column(db.DateTime, default=datetime.utcnow)
 
-    creado_por = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    creado_por = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
     
 class AjusteStock(db.Model):
     __tablename__ = "ajuste_stock"
@@ -205,5 +205,5 @@ class AjusteStock(db.Model):
 
     fecha = db.Column(db.DateTime, default=datetime.utcnow)
 
-    creado_por = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    creado_por = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
     

@@ -1,5 +1,7 @@
 from datetime import datetime
 from extensions import db
+import secrets
+
 
 
 class Integracion(db.Model):
@@ -9,7 +11,7 @@ class Integracion(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -40,9 +42,6 @@ class Integracion(db.Model):
     )
     # conectado, error, pendiente
     
-import secrets
-
-
 class APIKey(db.Model):
     __tablename__ = "api_keys"
 
@@ -50,7 +49,7 @@ class APIKey(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -80,7 +79,7 @@ class Webhook(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -114,7 +113,7 @@ class EventoIntegracion(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 

@@ -9,7 +9,7 @@ class Workflow(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -65,7 +65,7 @@ class NotasInternas(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -94,7 +94,7 @@ class Comentarios(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -126,7 +126,7 @@ class ChatInterno(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -156,7 +156,7 @@ class Encuesta(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -180,13 +180,13 @@ class FeedbackCliente(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
     cliente_id = db.Column(
         db.Integer,
-        db.ForeignKey("clientes.id")
+        db.ForeignKey("cliente.id")
     )
 
     tipo = db.Column(

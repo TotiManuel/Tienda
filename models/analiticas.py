@@ -9,9 +9,9 @@ class Reporte(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
-    )
+    ) 
 
     nombre = db.Column(db.String(150), nullable=False)
     descripcion = db.Column(db.Text)
@@ -52,7 +52,7 @@ class Metrica(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -80,7 +80,7 @@ class Dashboard(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 

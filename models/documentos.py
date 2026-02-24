@@ -17,7 +17,7 @@ class Carpeta(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -48,7 +48,7 @@ class Archivo(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -81,13 +81,13 @@ class Documento(db.Model):
 
     cliente_id = db.Column(
         db.Integer,
-        db.ForeignKey("clientes.id"),
+        db.ForeignKey("cliente.id"),
         nullable=True
     )
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 

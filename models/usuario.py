@@ -6,7 +6,7 @@ class Usuario(db.Model):
 
     # 🔹 Identificación
     id = db.Column(db.Integer, primary_key=True)
-    empresa_id = db.Column(db.Integer, db.ForeignKey("empresas.id"), nullable=False)
+    empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"), nullable=False)
 
     # 🔹 Datos personales
     nombre = db.Column(db.String(120))
@@ -54,7 +54,7 @@ class Rol(db.Model):
     __tablename__ = "roles"
 
     id = db.Column(db.Integer, primary_key=True)
-    empresa_id = db.Column(db.Integer, db.ForeignKey("empresas.id"))
+    empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"))
 
     nombre = db.Column(db.String(100), nullable=False)
     descripcion = db.Column(db.String(200))

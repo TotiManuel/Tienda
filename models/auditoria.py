@@ -8,9 +8,9 @@ class LogActividad(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"), nullable=False)
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=True)
-    modulo_id = db.Column(db.Integer, db.ForeignKey("modulo.id"), nullable=True)
-
+    usuarios_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"), nullable=True)
+    modulo_id = db.Column(db.Integer, db.ForeignKey("modulos.id"), nullable=True)
+ 
     accion = db.Column(db.String(50), nullable=False)
     descripcion = db.Column(db.Text)
 
@@ -39,7 +39,7 @@ class Notificacion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"), nullable=False)
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=False)
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"), nullable=False)
 
     tipo = db.Column(db.String(50), nullable=False)
 
@@ -69,7 +69,7 @@ class HistorialCambios(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"), nullable=False)
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=True)
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"), nullable=True)
 
     entidad = db.Column(db.String(100), nullable=False)
     entidad_id = db.Column(db.Integer, nullable=False)
@@ -93,7 +93,7 @@ class SesionUsuario(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=False)
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"), nullable=False)
 
     token = db.Column(db.String(255), nullable=False)
 
@@ -127,7 +127,7 @@ class ExportacionAuditoria(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"), nullable=False)
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=False)
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"), nullable=False)
 
     tipo_exportacion = db.Column(db.String(100))
     formato = db.Column(db.String(50))

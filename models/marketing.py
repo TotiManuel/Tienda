@@ -9,7 +9,7 @@ class Campana(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -77,7 +77,7 @@ class Segmento(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -97,7 +97,7 @@ class Lead(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -118,7 +118,7 @@ class Lead(db.Model):
 
     cliente_id = db.Column(
         db.Integer,
-        db.ForeignKey("clientes.id")
+        db.ForeignKey("cliente.id")
     )
 
     fecha_creacion = db.Column(
@@ -133,7 +133,7 @@ class Formulario(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 
@@ -158,7 +158,7 @@ class Landing(db.Model):
 
     empresa_id = db.Column(
         db.Integer,
-        db.ForeignKey("empresas.id"),
+        db.ForeignKey("empresa.id"),
         nullable=False
     )
 

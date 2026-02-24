@@ -46,7 +46,7 @@ class Evento(db.Model):
 
     datos_extra = db.Column(JSON)
 
-    creado_por = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    creado_por = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
 
     creado_en = db.Column(db.DateTime, default=datetime.utcnow)
     
@@ -116,7 +116,7 @@ class Turno(db.Model):
 
     recordatorio_enviado = db.Column(db.Boolean, default=False)
 
-    creado_por = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    creado_por = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
 
     creado_en = db.Column(db.DateTime, default=datetime.utcnow)
     

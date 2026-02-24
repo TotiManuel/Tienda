@@ -6,7 +6,7 @@ class ConfiguracionEmpresa(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    empresa_id = db.Column(db.Integer, db.ForeignKey("empresas.id"), nullable=False)
+    empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"), nullable=False)
 
     # 🔹 Clave-valor
     clave = db.Column(db.String(100), nullable=False)

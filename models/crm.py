@@ -89,7 +89,7 @@ class Interaccion(db.Model):
     empresa_id = db.Column(db.Integer, db.ForeignKey("empresa.id"), nullable=False)
 
     cliente_id = db.Column(db.Integer, db.ForeignKey("cliente.id"), nullable=False)
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
 
     tipo = db.Column(db.String(50))
     # llamada, whatsapp, email, visita, etc.
@@ -113,7 +113,7 @@ class TareaCRM(db.Model):
     cliente_id = db.Column(db.Integer, db.ForeignKey("cliente.id"))
     oportunidad_id = db.Column(db.Integer, db.ForeignKey("oportunidad.id"))
 
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
 
     titulo = db.Column(db.String(255))
     descripcion = db.Column(db.Text)
@@ -196,7 +196,7 @@ class Actividad(db.Model):
 
     descripcion = db.Column(db.Text)
 
-    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
 
     cliente_id = db.Column(db.Integer, db.ForeignKey("cliente.id"))
     oportunidad_id = db.Column(db.Integer, db.ForeignKey("oportunidad.id"))
