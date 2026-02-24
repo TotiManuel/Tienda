@@ -1,0 +1,319 @@
+🗄️ MODELOS COMPLETOS DE BASE DE DATOS PARA TOTI (ERP SaaS GENERAL)
+🧠 1. CORE DEL SISTEMA (OBLIGATORIOS)
+
+Estos modelos siempre existen.
+
+🔹 Empresas
+
+Empresa
+
+🔹 Usuarios y seguridad
+
+Usuario
+
+Rol
+
+Permiso
+
+UsuarioRol
+
+RolPermiso
+
+👉 Permite:
+
+Multiusuario
+
+Control de acceso
+
+Escalabilidad
+
+🔹 Planes y pagos
+
+Plan
+
+Suscripción
+
+Pago
+
+Facturación SaaS
+
+👉 Para monetizar.
+
+🔹 Módulos
+
+Modulo
+
+EmpresaModulo
+
+👉 Activar/desactivar funciones.
+
+🔹 Configuración
+
+ConfiguracionEmpresa
+
+PreferenciasUsuario
+
+🔹 Auditoría
+
+LogActividad
+
+Notificación
+
+HistorialCambios
+
+👥 2. CRM Y RELACIONES
+
+Todas las empresas necesitan esto.
+
+Cliente
+
+Contacto
+
+SegmentoCliente
+
+Interacción
+
+TareaCRM
+
+Pipeline
+
+EtapaPipeline
+
+Oportunidad
+
+Actividad
+
+👉 Esto te permite competir con CRM como HubSpot.
+
+💰 3. VENTAS
+
+Fundamental para cualquier negocio.
+
+Venta
+
+DetalleVenta
+
+Cotización
+
+DetalleCotización
+
+MétodoPago
+
+PagoVenta
+
+Devolución
+
+NotaCrédito
+
+🛒 4. COMPRAS Y PROVEEDORES
+
+Proveedor
+
+OrdenCompra
+
+DetalleOrdenCompra
+
+FacturaProveedor
+
+PagoProveedor
+
+📦 5. INVENTARIO Y STOCK
+
+Muy importante.
+
+Producto
+
+CategoríaProducto
+
+VarianteProducto
+
+AtributoProducto
+
+ImagenProducto
+
+Almacén
+
+Ubicación
+
+MovimientoStock
+
+AjusteStock
+
+Lote
+
+Serie
+
+👉 Esto permite:
+
+Comercios
+
+Farmacias
+
+Industria
+
+🏢 6. FINANZAS Y CONTABILIDAD
+
+Esto aumenta mucho el valor del sistema.
+
+CuentaContable
+
+Transacción
+
+LibroDiario
+
+Asiento
+
+Impuesto
+
+CentroCosto
+
+FlujoCaja
+
+Presupuesto
+
+📅 7. TURNOS Y CALENDARIO (SERVICIOS)
+
+Para clínicas, peluquerías, etc.
+
+Calendario
+
+Evento
+
+Turno
+
+Recurso
+
+Disponibilidad
+
+🧾 8. DOCUMENTOS Y ARCHIVOS
+
+Archivo
+
+Carpeta
+
+Documento
+
+FirmaDigital
+
+🌐 9. WEB Y ECOMMERCE (GRAN DIFERENCIAL)
+
+Esto es lo que hace que Toti destaque.
+
+PáginaWeb
+
+Sección
+
+Bloque
+
+Plantilla
+
+Dominio
+
+SEO
+
+Blog
+
+EntradaBlog
+
+Ecommerce:
+
+Carrito
+
+Pedido
+
+DetallePedido
+
+Envío
+
+MétodoEnvío
+
+Dirección
+
+👉 Para competir con Shopify.
+
+👨‍💼 10. RECURSOS HUMANOS
+
+Para empresas grandes.
+
+Empleado
+
+Asistencia
+
+Vacaciones
+
+Nómina
+
+Contrato
+
+Evaluación
+
+📊 11. ANALÍTICAS Y REPORTES
+
+Reporte
+
+Métrica
+
+Dashboard
+
+Widget
+
+🤖 12. IA Y AUTOMATIZACIÓN (futuro)
+
+Esto puede hacerte único.
+
+ReglaAutomatización
+
+Trigger
+
+Acción
+
+SugerenciaIA
+
+Predicción
+
+🔗 13. INTEGRACIONES
+
+Integración
+
+APIKey
+
+Webhook
+
+EventoIntegración
+
+📣 14. MARKETING
+
+Campaña
+
+EmailMarketing
+
+Segmento
+
+Lead
+
+Formulario
+
+Landing
+
+🚀 15. MODELOS EXTRA QUE TE DAN VENTAJA
+
+Estos no son comunes en sistemas chicos:
+
+Workflow
+
+Aprobación
+
+NotasInternas
+
+Comentarios
+
+ChatInterno
+
+Encuesta
+
+FeedbackCliente
+__________________________________________________________________________________________________________
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+__________________________________________________________________________________________________________
+
