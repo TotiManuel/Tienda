@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from models.modulo import EmpresaModulo, Modulo
 from models import init_db, Usuario, Empresa
 from models.permissions import permiso_requerido
 from werkzeug.security import generate_password_hash, check_password_hash
 import sys, os
 from extensions import db
 from utils.setup_empresa import crear_estructura_empresa
+from utils.setup_modulos import crear_modulos_base
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
 def create_app():
@@ -27,6 +29,7 @@ def create_app():
     # 🔥 Crear tablas automáticamente
     with app.app_context():
         init_db()
+        crear_modulos_base()
 
     # ===== Landing =====
     @app.route("/")
@@ -46,6 +49,18 @@ def create_app():
             empresa = Empresa(nombre=empresa_nombre)
             db.session.add(empresa)
             db.session.flush()
+            
+            modulos = Modulo.query.filter_by(activo=True).all()
+
+            for m in modulos:
+                db.session.add(EmpresaModulo(
+                    empresa_id=empresa.id,
+                    modulo_id=m.id,
+                    activo=True,
+                    incluido_en_plan=True
+                ))
+
+            db.session.commit()
 
             # Crear usuario
             usuario = Usuario(
@@ -87,15 +102,20 @@ def create_app():
     @app.route("/empresa")
     @permiso_requerido("home_empresa_ver")
     def empresa_home():
+
         if "usuario_id" not in session:
             return redirect(url_for("login"))
 
         empresa = Empresa.query.get(session["empresa_id"])
+        usuario = Usuario.query.get(session["usuario_id"])
+
+        modulos = usuario.obtener_modulos_disponibles()
 
         return render_template(
             "empresa_home.html",
             empresa_nombre=empresa.nombre if empresa else "",
-            usuario_nombre=session["usuario_nombre"]
+            usuario_nombre=session["usuario_nombre"],
+            modulos=modulos
         )
 
     # ===== Logout =====
@@ -104,6 +124,43 @@ def create_app():
         session.clear()
         return redirect(url_for("home"))
 
+    @app.route("/admin/empresa/<int:empresa_id>/modulos")
+    def admin_modulos_empresa(empresa_id):
+        usuario = Usuario.query.get(session["usuario_id"])
+
+        if not usuario.es_superadmin():
+            return "No autorizado"
+
+        modulos = Modulo.query.all()
+        empresa_modulos = EmpresaModulo.query.filter_by(
+            empresa_id=empresa_id
+        ).all()
+
+        return render_template(
+            "admin_modulos.html",
+            modulos=modulos,
+            empresa_modulos=empresa_modulos
+        )
+    
+    @app.route("/admin/empresa/<int:empresa_id>/modulo/<int:modulo_id>/toggle")
+    def toggle_modulo(empresa_id, modulo_id):
+
+        usuario = Usuario.query.get(session["usuario_id"])
+
+        if not usuario.es_superadmin():
+            return "No autorizado"
+
+        em = EmpresaModulo.query.filter_by(
+            empresa_id=empresa_id,
+            modulo_id=modulo_id
+        ).first()
+
+        if em:
+            em.activo = not em.activo
+            db.session.commit()
+
+        return redirect(request.referrer)
+    
     return app
 app = create_app()
 if __name__ == "__main__":

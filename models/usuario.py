@@ -1,6 +1,6 @@
 from datetime import datetime
 from extensions import db
-
+from models.modulo import Modulo, EmpresaModulo
 
 # ==============================
 # USUARIO
@@ -77,6 +77,27 @@ class Usuario(db.Model):
             if ur.rol.nivel == 100:
                 return True
         return False
+    
+    def obtener_modulos_disponibles(self):
+        
+
+        # 🔥 Superadmin ve todo
+        if self.es_superadmin():
+            return Modulo.query.filter_by(activo=True, visible=True).all()
+
+        # 🔥 Empresas solo sus módulos activos
+        modulos = (
+            db.session.query(Modulo)
+            .join(EmpresaModulo, EmpresaModulo.modulo_id == Modulo.id)
+            .filter(
+                EmpresaModulo.empresa_id == self.empresa_id,
+                EmpresaModulo.activo == True,
+                Modulo.visible == True
+            )
+            .all()
+        )
+
+        return modulos
 
 
 # ==============================

@@ -6,9 +6,11 @@
 <h2>Bienvenido a {{ empresa_nombre }}</h2>
 <p><center>Hola, {{ usuario_nombre }}. Aquí verás tus módulos y estadísticas.</center></p>
 <div class="modules">
-    <div class="card">CRM</div>
-    <div class="card">Ventas</div>
-    <div class="card">Inventario</div>
-    <div class="card">Marketing</div>
+    {% for modulo in modulos %}
+        <a href="/{{ modulo.codigo }}" class="card">
+            <h3>{{ modulo.icono }} {{ modulo.nombre }}</h3>
+            <p>{{ modulo.descripcion }}</p>
+        </a>
+    {% endfor %}
 </div>
 {% endblock %}
