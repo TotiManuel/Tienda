@@ -1,53 +1,11 @@
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Toti</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
 
-<header class="navbar">
-    <h1 class="logo">Toti</h1>
-    <div>
-        <button class="btn">Iniciar sesión</button>
-        <button class="btn btn-primary">Registrarse</button>
-    </div>
-</header>
+{% block title %}Inicio - Toti{% endblock %}
 
+{% block content %}
 <section class="hero">
     <h2>El sistema todo en uno para tu empresa</h2>
-    <p>
-        CRM, ventas, turnos, ecommerce, marketing y automatización en una sola plataforma.
-    </p>
-
-    <button class="btn btn-primary btn-big">Comenzar ahora</button>
+    <p>CRM, ventas, turnos, ecommerce y automatización en una sola plataforma.</p>
+    <a href="{{ url_for('register') }}" class="btn btn-primary btn-big">Comenzar ahora</a>
 </section>
-
-<section class="features">
-    <div class="card">
-        <h3>CRM</h3>
-        <p>Gestiona clientes, oportunidades y ventas.</p>
-    </div>
-
-    <div class="card">
-        <h3>Turnos</h3>
-        <p>Agenda profesional para clínicas y servicios.</p>
-    </div>
-
-    <div class="card">
-        <h3>Ecommerce</h3>
-        <p>Crea tu tienda online sin conocimientos técnicos.</p>
-    </div>
-
-    <div class="card">
-        <h3>Automatización</h3>
-        <p>IA y workflows para escalar tu negocio.</p>
-    </div>
-</section>
-
-<footer>
-    <p>© 2026 Toti</p>
-</footer>
-
-</body>
-</html>
+{% endblock %}

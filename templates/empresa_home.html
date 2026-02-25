@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - {{ empresa_nombre }}{% endblock %}
+
+{% block content %}
+<h2>Bienvenido a {{ empresa_nombre }}</h2>
+<p>Hola, {{ usuario_nombre }}. Aquí verás tus módulos y estadísticas.</p>
+<div class="modules">
+    <div class="card">CRM</div>
+    <div class="card">Ventas</div>
+    <div class="card">Inventario</div>
+    <div class="card">Marketing</div>
+</div>
+{% endblock %}
