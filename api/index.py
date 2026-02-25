@@ -4,6 +4,7 @@ from models.permissions import permiso_requerido
 from werkzeug.security import generate_password_hash, check_password_hash
 import sys, os
 from extensions import db
+from utils.setup_empresa import crear_estructura_empresa
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
@@ -47,7 +48,7 @@ def create_app():
             # Crear empresa
             empresa = Empresa(nombre=empresa_nombre)
             db.session.add(empresa)
-            db.session.commit()
+            db.session.flush()
 
             # Crear usuario
             usuario = Usuario(
@@ -57,7 +58,10 @@ def create_app():
                 empresa_id=empresa.id
             )
             db.session.add(usuario)
-            db.session.commit()
+            db.session.flush()
+
+            # 🔥 Crear estructura base
+            crear_estructura_empresa(empresa, usuario)
 
             return redirect(url_for("login"))
 
@@ -84,7 +88,7 @@ def create_app():
 
     # ===== Dashboard =====
     @app.route("/empresa")
-    @permiso_requerido("ventas_ver")
+    @permiso_requerido("home_empresa_ver")
     def empresa_home():
         if "usuario_id" not in session:
             return redirect(url_for("login"))
