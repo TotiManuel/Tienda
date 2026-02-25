@@ -35,223 +35,157 @@ def crear_modulos_base():
             "icono": "📦",
             "color": "#f59e0b",
         },
+        {
+            "nombre": "Usuarios",
+            "codigo": "usuarios",
+            "descripcion": "Control de usuarios",
+            "categoria": "usuarios",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Seguridad",
+            "codigo": "seguridad",
+            "descripcion": "Control de seguridad",
+            "categoria": "seguridad",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Planes y pagos",
+            "codigo": "planesypagos",
+            "descripcion": "Control de Planes y pagos",
+            "categoria": "Planes y Pagos",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Modulos",
+            "codigo": "modulos",
+            "descripcion": "Control de modulos",
+            "categoria": "modulos",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Configuracion Empresas",
+            "codigo": "configuracionEmpresas",
+            "descripcion": "Control de configuracion de empresas",
+            "categoria": "configuraciones",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Auditoria",
+            "codigo": "auditoria",
+            "descripcion": "Control de auditoria",
+            "categoria": "auditoria",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Compras",
+            "codigo": "compras",
+            "descripcion": "Control de compras",
+            "categoria": "compras",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Finanzas",
+            "codigo": "finanzas",
+            "descripcion": "Control de finanzas",
+            "categoria": "finanzas",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Turnos y Calendarios",
+            "codigo": "TurnosYCalendarios",
+            "descripcion": "Control de turnos y calendarios",
+            "categoria": "operaciones",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Documentos",
+            "codigo": "stock",
+            "descripcion": "Control de stock",
+            "categoria": "operaciones",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Web y Ecommerce",
+            "codigo": "stock",
+            "descripcion": "Control de stock",
+            "categoria": "operaciones",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Recursos Humanos",
+            "codigo": "stock",
+            "descripcion": "Control de stock",
+            "categoria": "operaciones",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Analiticas",
+            "codigo": "stock",
+            "descripcion": "Control de stock",
+            "categoria": "operaciones",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "IA y Automatizacion",
+            "codigo": "stock",
+            "descripcion": "Control de stock",
+            "categoria": "operaciones",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Integraciones",
+            "codigo": "stock",
+            "descripcion": "Control de stock",
+            "categoria": "operaciones",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Marketing",
+            "codigo": "stock",
+            "descripcion": "Control de stock",
+            "categoria": "operaciones",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
+        {
+            "nombre": "Ventajas Competitivas",
+            "codigo": "stock",
+            "descripcion": "Control de stock",
+            "categoria": "operaciones",
+            "icono": "📦",
+            "color": "#f59e0b",
+        },
     ]
 
     for m in modulos:
         if not Modulo.query.filter_by(codigo=m["codigo"]).first():
             db.session.add(Modulo(**m))
-
     db.session.commit()
 
 
 
-'''
-# 🔹 EMPRESAS
-from .empresa import Empresa
-
-# 🔹 USUARIOS Y SEGURIDAD
-from .usuario import (
-    Usuario,
-    Rol,
-    Permiso,
-    UsuarioRol,
-    RolPermiso
-)
 
 
-# 🔹 PLANES Y PAGOS
-from .plan import (
-    Plan,
-    Suscripcion,
-    Pago,
-    FacturaSaaS
-)
 
 
-# 🔹 MÓDULOS
-from .modulo import (
-    Modulo,
-    EmpresaModulo
-)
 
 
-# 🔹 CONFIGURACIÓN
-from .configuracionEmpresa import (
-    ConfiguracionEmpresa,
-    PreferenciaUsuario
-)
 
 
-# 🔹 AUDITORÍA
-from .auditoria import (
-    LogActividad,
-    Notificacion,
-    HistorialCambios
-)
 
-
-# 🔹 CRM
-from .crm import (
-    Cliente,
-    Contacto,
-    SegmentoCliente,
-    Interaccion,
-    TareaCRM,
-    Pipeline,
-    EtapaPipeline,
-    Oportunidad,
-    Actividad
-)
-
-
-# 🔹 VENTAS
-from .ventas import (
-    Venta,
-    DetalleVenta,
-    Cotizacion,
-    DetalleCotizacion,
-    MetodoPago,
-    PagoVenta,
-    Devolucion,
-    NotaCredito
-)
-
-
-# 🔹 COMPRAS
-from .compras import (
-    Proveedor,
-    OrdenCompra,
-    DetalleOrdenCompra,
-    FacturaProveedor,
-    PagoProveedor
-)
-
-
-# 🔹 INVENTARIO
-from .inventario import (
-    Producto,
-    CategoriaProducto,
-    VarianteProducto,
-    AtributoProducto,
-    ImagenProducto,
-    Almacen,
-    Ubicacion,
-    MovimientoStock,
-    AjusteStock,
-    Lote,
-    Serie
-)
-
-
-# 🔹 FINANZAS
-from .finanzas import (
-    CuentaContable,
-    Transaccion,
-    LibroDiario,
-    Asiento,
-    Impuesto,
-    CentroCosto,
-    FlujoCaja,
-    Presupuesto
-)
-
-
-# 🔹 TURNOS Y CALENDARIO
-from .turnos import (
-    Calendario,
-    Evento,
-    Turno,
-    Recurso,
-    Disponibilidad
-)
-
-
-# 🔹 DOCUMENTOS
-from .documentos import (
-    Archivo,
-    Carpeta,
-    Documento,
-    FirmaDigital
-)
-
-
-# 🔹 WEB Y ECOMMERCE
-from .web import (
-    PaginaWeb,
-    Seccion,
-    Bloque,
-    Plantilla,
-    Dominio,
-    SEO,
-    Blog,
-    EntradaBlog,
-    Carrito,
-    Pedido,
-    DetallePedido,
-    Envio,
-    MetodoEnvio,
-    Direccion
-)
-
-
-# 🔹 RECURSOS HUMANOS
-from .empleado import (
-    Empleado,
-    Asistencia,
-    Vacaciones,
-    Nomina,
-    Contrato,
-    Evaluacion
-)
-
-
-# 🔹 ANALÍTICAS
-from .analiticas import (
-    Reporte,
-    Metrica,
-    Dashboard,
-    Widget
-)
-
-
-# 🔹 IA Y AUTOMATIZACIÓN
-from .ia import (
-    ReglaAutomatizacion,
-    Trigger,
-    Accion,
-    SugerenciaIA,
-    Prediccion
-)
-
-
-# 🔹 INTEGRACIONES
-from .integraciones import (
-    Integracion,
-    APIKey,
-    Webhook,
-    EventoIntegracion
-)
-
-
-# 🔹 MARKETING
-from .marketing import (
-    Campana,
-    EmailMarketing,
-    Segmento,
-    Lead,
-    Formulario,
-    Landing
-)
-
-
-# 🔹 VENTAJAS COMPETITIVAS
-from .extras import (
-    Workflow,
-    Aprobacion,
-    NotasInternas,
-    Comentarios,
-    ChatInterno,
-    Encuesta,
-    FeedbackCliente
-)
-'''
