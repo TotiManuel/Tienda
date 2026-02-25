@@ -5,11 +5,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import sys, os
 from extensions import db
 from utils.setup_empresa import crear_estructura_empresa
-
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-
-
 def create_app():
     app = Flask(
         __name__,
@@ -108,10 +105,6 @@ def create_app():
         return redirect(url_for("home"))
 
     return app
-
-
 app = create_app()
-
 if __name__ == "__main__":
-    app.run(debug=True)
-    
+    app.run(debug=True)    
