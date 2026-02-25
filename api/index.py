@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from models import init_db, SessionLocal, Usuario, Empresa
+from models import init_db, Usuario, Empresa
 from werkzeug.security import generate_password_hash, check_password_hash
 import sys, os
 from extensions import db
@@ -7,16 +7,17 @@ from extensions import db
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
 
+
 def create_app():
     app = Flask(
         __name__,
         template_folder="../templates",
         static_folder="../static"
     )
-    
+
     app.secret_key = "supersecretkey"
 
-    # 🔥 Si no existe DATABASE_URL (local), usar SQLite
+    # 🔥 DATABASE (Vercel o local)
     database_url = os.getenv("DATABASE_URL", "sqlite:///database.db")
 
     app.config["SQLALCHEMY_DATABASE_URI"] = database_url
@@ -24,7 +25,11 @@ def create_app():
 
     db.init_app(app)
 
-    # ===== Landing Page =====
+    # 🔥 Crear tablas automáticamente
+    with app.app_context():
+        init_db()
+
+    # ===== Landing =====
     @app.route("/")
     def home():
         return render_template("index.html")
@@ -38,20 +43,20 @@ def create_app():
             password = request.form["password"]
             empresa_nombre = request.form["empresa"]
 
-            db = SessionLocal()
+            # Crear empresa
             empresa = Empresa(nombre=empresa_nombre)
-            db.add(empresa)
-            db.commit()
+            db.session.add(empresa)
+            db.session.commit()
 
+            # Crear usuario
             usuario = Usuario(
                 nombre=nombre,
                 email=email,
                 password=generate_password_hash(password),
                 empresa_id=empresa.id
             )
-            db.add(usuario)
-            db.commit()
-            db.close()
+            db.session.add(usuario)
+            db.session.commit()
 
             return redirect(url_for("login"))
 
@@ -64,34 +69,31 @@ def create_app():
             email = request.form["email"]
             password = request.form["password"]
 
-            db = SessionLocal()
-            usuario = db.query(Usuario).filter_by(email=email).first()
-            db.close()
+            usuario = Usuario.query.filter_by(email=email).first()
 
             if usuario and check_password_hash(usuario.password, password):
                 session["usuario_id"] = usuario.id
                 session["empresa_id"] = usuario.empresa_id
                 session["usuario_nombre"] = usuario.nombre
                 return redirect(url_for("empresa_home"))
-            else:
-                return "Usuario o contraseña incorrecta"
+
+            return "Usuario o contraseña incorrecta"
 
         return render_template("login.html")
 
-    # ===== Dashboard de empresa =====
+    # ===== Dashboard =====
     @app.route("/empresa")
     def empresa_home():
         if "usuario_id" not in session:
             return redirect(url_for("login"))
 
-        nombre_empresa = None
-        db = SessionLocal()
-        empresa = db.query(Empresa).filter_by(id=session["empresa_id"]).first()
-        if empresa:
-            nombre_empresa = empresa.nombre
-        db.close()
+        empresa = Empresa.query.get(session["empresa_id"])
 
-        return render_template("empresa_home.html", empresa_nombre=nombre_empresa, usuario_nombre=session["usuario_nombre"])
+        return render_template(
+            "empresa_home.html",
+            empresa_nombre=empresa.nombre if empresa else "",
+            usuario_nombre=session["usuario_nombre"]
+        )
 
     # ===== Logout =====
     @app.route("/logout")
@@ -99,8 +101,10 @@ def create_app():
         session.clear()
         return redirect(url_for("home"))
 
+    return app
+
+
 app = create_app()
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
