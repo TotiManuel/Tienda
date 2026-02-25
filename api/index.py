@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from models import init_db, Usuario, Empresa
+from models.permissions import permiso_requerido
 from werkzeug.security import generate_password_hash, check_password_hash
 import sys, os
 from extensions import db
@@ -83,6 +84,7 @@ def create_app():
 
     # ===== Dashboard =====
     @app.route("/empresa")
+    @permiso_requerido("ventas_ver")
     def empresa_home():
         if "usuario_id" not in session:
             return redirect(url_for("login"))
@@ -108,3 +110,4 @@ app = create_app()
 
 if __name__ == "__main__":
     app.run(debug=True)
+    

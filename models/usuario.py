@@ -1,6 +1,11 @@
 from datetime import datetime
 from extensions import db
 
+
+# ==============================
+# USUARIO
+# ==============================
+
 class Usuario(db.Model):
     __tablename__ = "usuarios"
 
@@ -48,8 +53,36 @@ class Usuario(db.Model):
     fecha_actualizacion = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     # 🔹 Relaciones
-    roles = db.relationship("UsuarioRol", backref="usuario", lazy=True)
-    
+    roles = db.relationship("UsuarioRol", back_populates="usuario", cascade="all, delete-orphan")
+
+    # ==============================
+    # 🔐 MÉTODOS PROFESIONALES
+    # ==============================
+
+    def obtener_roles(self):
+        return [ur.rol for ur in self.roles]
+
+    def obtener_permisos(self):
+        permisos = set()
+        for ur in self.roles:
+            for rp in ur.rol.permisos:
+                permisos.add(rp.permiso.nombre)
+        return permisos
+
+    def tiene_permiso(self, permiso_nombre):
+        return permiso_nombre in self.obtener_permisos()
+
+    def es_superadmin(self):
+        for ur in self.roles:
+            if ur.rol.nivel == 100:
+                return True
+        return False
+
+
+# ==============================
+# ROL
+# ==============================
+
 class Rol(db.Model):
     __tablename__ = "roles"
 
@@ -59,28 +92,40 @@ class Rol(db.Model):
     nombre = db.Column(db.String(100), nullable=False)
     descripcion = db.Column(db.String(200))
 
-    # 🔹 Jerarquía
-    nivel = db.Column(db.Integer)  # para permisos jerárquicos
+    # 🔹 Jerarquía (más alto = más poder)
+    nivel = db.Column(db.Integer)
 
-    # 🔹 Sistema
     es_sistema = db.Column(db.Boolean, default=False)
 
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
-    
+
+    usuarios = db.relationship("UsuarioRol", back_populates="rol")
+    permisos = db.relationship("RolPermiso", back_populates="rol")
+
+
+# ==============================
+# PERMISO
+# ==============================
+
 class Permiso(db.Model):
     __tablename__ = "permisos"
 
     id = db.Column(db.Integer, primary_key=True)
 
     nombre = db.Column(db.String(150), unique=True, nullable=False)
-    modulo = db.Column(db.String(100))  # ventas, stock, crm
+    modulo = db.Column(db.String(100))
     descripcion = db.Column(db.String(200))
-
-    # 🔹 Tipo de acción
     accion = db.Column(db.String(50))  # ver, crear, editar, eliminar
 
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
-    
+
+    roles = db.relationship("RolPermiso", back_populates="permiso")
+
+
+# ==============================
+# USUARIO - ROL
+# ==============================
+
 class UsuarioRol(db.Model):
     __tablename__ = "usuarios_roles"
 
@@ -89,7 +134,15 @@ class UsuarioRol(db.Model):
     rol_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
 
     fecha_asignacion = db.Column(db.DateTime, default=datetime.utcnow)
-    
+
+    usuario = db.relationship("Usuario", back_populates="roles")
+    rol = db.relationship("Rol", back_populates="usuarios")
+
+
+# ==============================
+# ROL - PERMISO
+# ==============================
+
 class RolPermiso(db.Model):
     __tablename__ = "roles_permisos"
 
@@ -98,3 +151,6 @@ class RolPermiso(db.Model):
     permiso_id = db.Column(db.Integer, db.ForeignKey("permisos.id"))
 
     fecha_asignacion = db.Column(db.DateTime, default=datetime.utcnow)
+
+    rol = db.relationship("Rol", back_populates="permisos")
+    permiso = db.relationship("Permiso", back_populates="roles")
