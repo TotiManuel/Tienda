@@ -9,7 +9,6 @@ import sys, os
 from extensions import db
 from utils.setup_empresa import crear_estructura_empresa
 from utils.setup_modulos import crear_modulos_base
-from utils.setup_superadmin import crear_superadmin_automatico
 from werkzeug.security import generate_password_hash
 from datetime import datetime
 #endregion
