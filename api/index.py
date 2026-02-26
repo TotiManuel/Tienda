@@ -128,13 +128,15 @@ def create_app():
             "empresa_home.html",
             empresa_nombre=empresa.nombre if empresa else "",
             usuario_nombre=session["usuario_nombre"],
-            modulos=modulos
+            modulos=modulos,
+            empresa_id=session["empresa_id"]  # 🔥 clave
         )
     #endregion
     #region Admin
         
     @app.route("/admin/empresa/<int:empresa_id>/modulos")
     def admin_modulos_empresa(empresa_id):
+
         usuario = Usuario.query.get(session["usuario_id"])
 
         if not usuario.es_superadmin():
@@ -149,7 +151,7 @@ def create_app():
             "admin_modulos.html",
             modulos=modulos,
             empresa_modulos=empresa_modulos,
-            empresa_id = empresa_id
+            empresa_id=empresa_id
         )
     
     @app.route("/admin/empresa/<int:empresa_id>/modulo/<int:modulo_id>/toggle")
