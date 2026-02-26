@@ -2,7 +2,7 @@
 from flask import Flask, render_template
 from models import init_db
 import sys, os
-from extensions import db
+from Prueba.extensions import db
 #endregion
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
