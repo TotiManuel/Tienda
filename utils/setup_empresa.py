@@ -8,6 +8,12 @@ def crear_estructura_empresa(empresa, usuario):
     """
 
     # =========================
+    # 🔐 0. Evitar asignar roles al superadmin
+    # =========================
+    if getattr(usuario, "es_superadmin", False):
+        return
+
+    # =========================
     # 1. Crear permisos base
     # =========================
     permisos_base = [
@@ -33,7 +39,7 @@ def crear_estructura_empresa(empresa, usuario):
     db.session.flush()
 
     # =========================
-    # 2. Crear rol Admin
+    # 2. Crear rol Admin de empresa
     # =========================
     rol_admin = Rol(
         empresa_id=empresa.id,
