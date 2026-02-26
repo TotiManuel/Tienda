@@ -132,6 +132,7 @@ def create_app():
         )
     #endregion
     #region Admin
+        
     @app.route("/admin/empresa/<int:empresa_id>/modulos")
     def admin_modulos_empresa(empresa_id):
         usuario = Usuario.query.get(session["usuario_id"])
