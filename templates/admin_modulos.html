@@ -19,12 +19,7 @@
     <tbody>
         {% for modulo in modulos %}
 
-            {% set activo = false %}
-            {% for em in empresa_modulos %}
-                {% if em.modulo_id == modulo.id %}
-                    {% set activo = em.activo %}
-                {% endif %}
-            {% endfor %}
+            {% set activo = estados.get(modulo.id, False) %}
 
             <tr>
                 <td>
@@ -55,7 +50,7 @@
 
                 <td>
                     <a href="{{ url_for('toggle_modulo',
-                        empresa_id=request.view_args.empresa_id,
+                        empresa_id=empresa_id,
                         modulo_id=modulo.id) }}">
 
                         {% if activo %}

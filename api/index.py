@@ -156,14 +156,18 @@ def create_app():
             return "No autorizado"
 
         modulos = Modulo.query.all()
+
         empresa_modulos = EmpresaModulo.query.filter_by(
             empresa_id=empresa_id
         ).all()
 
+        # 🔥 Diccionario rápido
+        estados = {em.modulo_id: em.activo for em in empresa_modulos}
+
         return render_template(
             "admin_modulos.html",
             modulos=modulos,
-            empresa_modulos=empresa_modulos,
+            estados=estados,
             empresa_id=empresa_id
         )
     
