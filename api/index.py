@@ -148,7 +148,8 @@ def create_app():
         return render_template(
             "admin_modulos.html",
             modulos=modulos,
-            empresa_modulos=empresa_modulos
+            empresa_modulos=empresa_modulos,
+            empresa_id = empresa_id
         )
     
     @app.route("/admin/empresa/<int:empresa_id>/modulo/<int:modulo_id>/toggle")

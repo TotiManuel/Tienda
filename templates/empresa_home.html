@@ -7,10 +7,17 @@
 <p><center>Hola, {{ usuario_nombre }}. Aquí verás tus módulos y estadísticas.</center></p>
 <div class="modules">
     {% for modulo in modulos %}
-        <a href="/{{ modulo.codigo }}" class="card">
+
+        {% if modulo.codigo == "admin_modulos" %}
+            <a href="{{ url_for('admin_modulos_empresa', empresa_id=empresa_id) }}" class="card">
+        {% else %}
+            <a href="/{{ modulo.codigo }}" class="card">
+        {% endif %}
+
             <h3>{{ modulo.icono }} {{ modulo.nombre }}</h3>
             <p>{{ modulo.descripcion }}</p>
         </a>
+
     {% endfor %}
 </div>
 {% endblock %}

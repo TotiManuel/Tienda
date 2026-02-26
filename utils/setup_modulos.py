@@ -61,7 +61,7 @@ def crear_modulos_base():
         },
         {
             "nombre": "Modulos",
-            "codigo": "/admin/empresa/{empresa_id}/modulos",
+            "codigo": "admin_modulos",
             "descripcion": "Control de modulos",
             "categoria": "modulos",
             "icono": "📦",
