@@ -72,40 +72,4 @@
     </tbody>
 </table>
 
-
-<h2>Administrar módulos</h2>
-
-<div class="modules">
-
-{% for modulo in modulos %}
-
-    {% set activo = false %}
-
-    {% for em in empresa_modulos %}
-        {% if em.modulo_id == modulo.id and em.activo %}
-            {% set activo = true %}
-        {% endif %}
-    {% endfor %}
-
-    <div class="card">
-        <h3>{{ modulo.icono }} {{ modulo.nombre }}</h3>
-        <p>{{ modulo.descripcion }}</p>
-
-        {% if activo %}
-            <a class="btn btn-primary"
-               href="{{ url_for('toggle_modulo', empresa_id=empresa_id, modulo_id=modulo.id) }}">
-                Desactivar
-            </a>
-        {% else %}
-            <a class="btn"
-               href="{{ url_for('toggle_modulo', empresa_id=empresa_id, modulo_id=modulo.id) }}">
-                Activar
-            </a>
-        {% endif %}
-    </div>
-
-{% endfor %}
-
-</div>
-
 {% endblock %}
