@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Empresas{% endblock %}
+
+{% block content %}
+<h2>Seleccionar empresa</h2>
+
+<div class="modules">
+    {% for empresa in empresas %}
+        <a href="{{ url_for('admin_modulos_empresa', empresa_id=empresa.id) }}" class="card">
+            <h3>{{ empresa.nombre }}</h3>
+            <p>Administrar módulos</p>
+        </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

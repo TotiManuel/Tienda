@@ -133,7 +133,21 @@ def create_app():
         )
     #endregion
     #region Admin
-        
+    @app.route("/admin/empresas")
+    def admin_empresas():
+
+        usuario = Usuario.query.get(session["usuario_id"])
+
+        if not usuario.es_superadmin():
+            return "No autorizado"
+
+        empresas = Empresa.query.all()
+
+        return render_template(
+            "admin_empresas.html",
+            empresas=empresas
+        )
+    
     @app.route("/admin/empresa/<int:empresa_id>/modulos")
     def admin_modulos_empresa(empresa_id):
 

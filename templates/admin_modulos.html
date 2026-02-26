@@ -73,63 +73,39 @@
 </table>
 
 
+<h2>Administrar módulos</h2>
 
-<style>
-.modulo-card {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-}
-
-.activo {
-    background-color: #e6fffa;
-}
-
-.inactivo {
-    background-color: #fff5f5;
-}
-</style>
+<div class="modules">
 
 {% for modulo in modulos %}
 
     {% set activo = false %}
+
     {% for em in empresa_modulos %}
-        {% if em.modulo_id == modulo.id %}
-            {% set activo = em.activo %}
+        {% if em.modulo_id == modulo.id and em.activo %}
+            {% set activo = true %}
         {% endif %}
     {% endfor %}
 
-    <div class="modulo-card {% if activo %}activo{% else %}inactivo{% endif %}">
-
+    <div class="card">
         <h3>{{ modulo.icono }} {{ modulo.nombre }}</h3>
-
         <p>{{ modulo.descripcion }}</p>
 
-        <p><strong>Categoría:</strong> {{ modulo.categoria }}</p>
-
-        <p>
-            <strong>Estado:</strong>
-            {% if activo %}
-                Activo
-            {% else %}
-                Inactivo
-            {% endif %}
-        </p>
-
-        <a href="{{ url_for('toggle_modulo',
-            empresa_id=request.view_args.empresa_id,
-            modulo_id=modulo.id) }}">
-
-            {% if activo %}
-                🔴 Desactivar
-            {% else %}
-                🟢 Activar
-            {% endif %}
-        </a>
-
+        {% if activo %}
+            <a class="btn btn-primary"
+               href="{{ url_for('toggle_modulo', empresa_id=empresa_id, modulo_id=modulo.id) }}">
+                Desactivar
+            </a>
+        {% else %}
+            <a class="btn"
+               href="{{ url_for('toggle_modulo', empresa_id=empresa_id, modulo_id=modulo.id) }}">
+                Activar
+            </a>
+        {% endif %}
     </div>
 
 {% endfor %}
+
+</div>
 
 {% endblock %}
