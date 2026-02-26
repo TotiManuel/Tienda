@@ -10,7 +10,7 @@
     {% for modulo in modulos %}
 
         {% if modulo.codigo == "admin_modulos" %}
-            <a href="{{ url_for('admin_modulos_empresa', empresa_id=empresa_id) }}" class="card">
+            <a href="{{ url_for('admin_empresas') }}" class="card">
         {% else %}
             <a href="/{{ modulo.codigo }}" class="card">
         {% endif %}

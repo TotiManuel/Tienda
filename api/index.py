@@ -180,9 +180,18 @@ def create_app():
             modulo_id=modulo_id
         ).first()
 
-        if em:
+        # 🔥 Si no existe, crearlo
+        if not em:
+            em = EmpresaModulo(
+                empresa_id=empresa_id,
+                modulo_id=modulo_id,
+                activo=True
+            )
+            db.session.add(em)
+        else:
             em.activo = not em.activo
-            db.session.commit()
+
+        db.session.commit()
 
         return redirect(request.referrer)
     #endregion
