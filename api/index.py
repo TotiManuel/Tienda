@@ -40,40 +40,46 @@ def create_app():
     @app.route("/register", methods=["GET", "POST"])
     def register():
         if request.method == "POST":
+
+            # 🔹 Usuario
             nombre = request.form["nombre"]
             email = request.form["email"]
             password = request.form["password"]
-            empresa_nombre = request.form["empresa"]
 
-            # Crear empresa
-            empresa = Empresa(nombre=empresa_nombre)
+            # 🔹 Empresa
+            empresa_nombre = request.form["empresa"]
+            nombre_legal = request.form.get("nombre_legal")
+            cuit_rut = request.form.get("cuit_rut")
+            tipo_empresa = request.form.get("tipo_empresa")
+            industria = request.form.get("industria")
+
+            # 🔥 Crear empresa completa
+            empresa = Empresa(
+                nombre=empresa_nombre,
+                nombre_legal=nombre_legal,
+                cuit_rut=cuit_rut,
+                tipo_empresa=tipo_empresa,
+                industria=industria
+            )
+
             db.session.add(empresa)
             db.session.flush()
-            
-            modulos = Modulo.query.filter_by(activo=True).all()
 
-            for m in modulos:
-                db.session.add(EmpresaModulo(
-                    empresa_id=empresa.id,
-                    modulo_id=m.id,
-                    activo=True,
-                    incluido_en_plan=True
-                ))
-
-            db.session.commit()
-
-            # Crear usuario
+            # 🔹 Crear usuario
             usuario = Usuario(
                 nombre=nombre,
                 email=email,
                 password=generate_password_hash(password),
                 empresa_id=empresa.id
             )
+
             db.session.add(usuario)
             db.session.flush()
 
-            # 🔥 Crear estructura base
+            # 🔥 Crear estructura base SaaS
             crear_estructura_empresa(empresa, usuario)
+
+            db.session.commit()
 
             return redirect(url_for("login"))
 

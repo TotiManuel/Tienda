@@ -4,7 +4,7 @@ from extensions import db
 
 class Empresa(db.Model):
     __tablename__ = "empresa"
-
+ 
     # 🔹 Identificación básica
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(150), nullable=False)
