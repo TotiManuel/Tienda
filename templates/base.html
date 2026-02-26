@@ -8,16 +8,6 @@
 <body>
     <header>
         <h1><a href="{{ url_for('home') }}">Toti</a></h1>
-        <nav>
-            {% if session.usuario_id %}
-                <span>Hola, {{ session.usuario_nombre }}</span>
-                <a href="{{ url_for('empresa_home') }}">Dashboard</a>
-                <a href="{{ url_for('logout') }}">Salir</a>
-            {% else %}
-                <a href="{{ url_for('login') }}">Login</a>
-                <a href="{{ url_for('register') }}">Registrarse</a>
-            {% endif %}
-        </nav>
     </header>
 
     <main>
