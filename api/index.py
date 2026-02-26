@@ -135,7 +135,6 @@ def create_app():
     #region Admin
     @app.route("/admin/empresas")
     def admin_empresas():
-
         usuario = Usuario.query.get(session["usuario_id"])
 
         if not usuario.es_superadmin():
