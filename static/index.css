@@ -1,31 +1,76 @@
+/* ================= RESET SUAVE ================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ================= GLOBAL ================= */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+main {
+    min-height: 80vh;
+}
+
 /* ================= HERO ================= */
 
 .hero {
-    min-height: 85vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 100px 20px;
-    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    padding: 120px 20px;
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
     color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* efecto glow suave */
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+    top: -200px;
+    right: -200px;
+    filter: blur(80px);
 }
 
 .hero-content {
-    max-width: 800px;
+    max-width: 850px;
+    position: relative;
+    z-index: 2;
 }
 
 .hero h2 {
-    font-size: 48px;
+    font-size: 52px;
     font-weight: 700;
-    margin-bottom: 20px;
-    line-height: 1.2;
+    margin-bottom: 25px;
+    line-height: 1.15;
+    letter-spacing: -1px;
 }
 
 .hero p {
     font-size: 20px;
-    margin-bottom: 40px;
-    opacity: 0.9;
+    margin-bottom: 45px;
+    opacity: 0.95;
+    line-height: 1.6;
 }
 
 /* ================= BOTONES ================= */
@@ -38,22 +83,28 @@
 }
 
 .btn {
-    padding: 14px 28px;
-    border-radius: 10px;
+    padding: 14px 30px;
+    border-radius: 12px;
     text-decoration: none;
     font-weight: 600;
-    transition: 0.3s ease;
+    transition: all 0.25s ease;
     cursor: pointer;
+    display: inline-block;
+}
+
+.btn-big {
+    font-size: 18px;
 }
 
 .btn-primary {
     background: white;
     color: #2563eb;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .btn-primary:hover {
-    background: #f1f5f9;
-    transform: translateY(-3px);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
 }
 
 .btn-secondary {
@@ -65,63 +116,59 @@
 .btn-secondary:hover {
     background: white;
     color: #2563eb;
-    transform: translateY(-3px);
-}
-
-.btn-big {
-    font-size: 18px;
+    transform: translateY(-4px);
 }
 
 /* ================= FEATURES ================= */
 
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    padding: 80px 40px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 100px 40px;
     background: #f8fafc;
 }
 
 .feature-card {
     background: white;
-    padding: 30px;
-    border-radius: 16px;
+    padding: 35px 30px;
+    border-radius: 20px;
     text-align: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    transition: 0.3s ease;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #f1f5f9;
 }
 
 .feature-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
 }
 
 .feature-card h3 {
     margin-bottom: 15px;
-    font-size: 20px;
-    color: #1e293b;
+    font-size: 21px;
+    font-weight: 600;
+    color: #0f172a;
 }
 
 .feature-card p {
     color: #64748b;
     font-size: 15px;
+    line-height: 1.6;
 }
 
-/* ================= GLOBAL ================= */
+/* ================= RESPONSIVE ================= */
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f8fafc;
-    color: #1e293b;
-}
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 36px;
+    }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-}
+    .hero p {
+        font-size: 17px;
+    }
 
-main {
-    min-height: 80vh;
+    .features {
+        padding: 60px 20px;
+    }
 }
