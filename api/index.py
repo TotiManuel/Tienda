@@ -1,3 +1,4 @@
+#region Imports
 from flask import Flask, render_template, request, redirect, url_for, session
 from models.modulo import EmpresaModulo, Modulo
 from models import init_db, Usuario, Empresa
@@ -7,15 +8,17 @@ import sys, os
 from extensions import db
 from utils.setup_empresa import crear_estructura_empresa
 from utils.setup_modulos import crear_modulos_base
+#endregion
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
+#region app
 def create_app():
     app = Flask(
         __name__,
         template_folder="../templates",
         static_folder="../static"
     )
-
+    #region Database
     app.secret_key = "supersecretkey"
 
     # 🔥 DATABASE (Vercel o local)
@@ -30,13 +33,13 @@ def create_app():
     with app.app_context():
         init_db()
         crear_modulos_base()
-
-    # ===== Landing =====
+    #endregion
+    #region Landing
     @app.route("/")
     def home():
         return render_template("index.html")
-
-    # ===== Registro =====
+    #endregion
+    #region Registro
     @app.route("/register", methods=["GET", "POST"])
     def register():
         if request.method == "POST":
@@ -85,7 +88,6 @@ def create_app():
 
         return render_template("register.html")
 
-    # ===== Login =====
     @app.route("/login", methods=["GET", "POST"])
     def login():
         if request.method == "POST":
@@ -103,8 +105,13 @@ def create_app():
             return "Usuario o contraseña incorrecta"
 
         return render_template("login.html")
-
-    # ===== Dashboard =====
+        # ===== Logout =====
+    @app.route("/logout")
+    def logout():
+        session.clear()
+        return redirect(url_for("home"))
+    #endregion
+    #region Dashboard 
     @app.route("/empresa")
     @permiso_requerido("home_empresa_ver")
     def empresa_home():
@@ -123,13 +130,8 @@ def create_app():
             usuario_nombre=session["usuario_nombre"],
             modulos=modulos
         )
-
-    # ===== Logout =====
-    @app.route("/logout")
-    def logout():
-        session.clear()
-        return redirect(url_for("home"))
-
+    #endregion
+    #region Admin
     @app.route("/admin/empresa/<int:empresa_id>/modulos")
     def admin_modulos_empresa(empresa_id):
         usuario = Usuario.query.get(session["usuario_id"])
@@ -166,8 +168,9 @@ def create_app():
             db.session.commit()
 
         return redirect(request.referrer)
-    
+    #endregion
     return app
+#endregion
 app = create_app()
 if __name__ == "__main__":
     app.run(debug=True)    

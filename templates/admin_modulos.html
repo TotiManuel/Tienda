@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Módulos de la Empresa{% endblock %}
+
+{% block content %}
+
+<h2>Gestión de Módulos</h2>
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Premium</th>
+            <th>Estado</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for modulo in modulos %}
+
+            {% set activo = false %}
+            {% for em in empresa_modulos %}
+                {% if em.modulo_id == modulo.id %}
+                    {% set activo = em.activo %}
+                {% endif %}
+            {% endfor %}
+
+            <tr>
+                <td>
+                    {{ modulo.icono }} {{ modulo.nombre }}
+                </td>
+
+                <td>{{ modulo.categoria }}</td>
+
+                <td>
+                    {% if modulo.es_premium %}
+                        🔒 Sí
+                    {% else %}
+                        ✔ No
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if activo %}
+                        <span style="color: green; font-weight: bold;">
+                            Activo
+                        </span>
+                    {% else %}
+                        <span style="color: red;">
+                            Inactivo
+                        </span>
+                    {% endif %}
+                </td>
+
+                <td>
+                    <a href="{{ url_for('toggle_modulo',
+                        empresa_id=request.view_args.empresa_id,
+                        modulo_id=modulo.id) }}">
+
+                        {% if activo %}
+                            Desactivar
+                        {% else %}
+                            Activar
+                        {% endif %}
+
+                    </a>
+                </td>
+
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+<style>
+.modulo-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.activo {
+    background-color: #e6fffa;
+}
+
+.inactivo {
+    background-color: #fff5f5;
+}
+</style>
+
+{% for modulo in modulos %}
+
+    {% set activo = false %}
+    {% for em in empresa_modulos %}
+        {% if em.modulo_id == modulo.id %}
+            {% set activo = em.activo %}
+        {% endif %}
+    {% endfor %}
+
+    <div class="modulo-card {% if activo %}activo{% else %}inactivo{% endif %}">
+
+        <h3>{{ modulo.icono }} {{ modulo.nombre }}</h3>
+
+        <p>{{ modulo.descripcion }}</p>
+
+        <p><strong>Categoría:</strong> {{ modulo.categoria }}</p>
+
+        <p>
+            <strong>Estado:</strong>
+            {% if activo %}
+                Activo
+            {% else %}
+                Inactivo
+            {% endif %}
+        </p>
+
+        <a href="{{ url_for('toggle_modulo',
+            empresa_id=request.view_args.empresa_id,
+            modulo_id=modulo.id) }}">
+
+            {% if activo %}
+                🔴 Desactivar
+            {% else %}
+                🟢 Activar
+            {% endif %}
+        </a>
+
+    </div>
+
+{% endfor %}
+
+{% endblock %}
