@@ -1,5 +1,6 @@
 #region Imports
 from flask import Flask, render_template, request, redirect, url_for, session
+from models.usuario import Rol, UsuarioRol
 from models.modulo import EmpresaModulo, Modulo
 from models import init_db, Usuario, Empresa
 from models.permissions import permiso_requerido
@@ -8,11 +9,78 @@ import sys, os
 from extensions import db
 from utils.setup_empresa import crear_estructura_empresa
 from utils.setup_modulos import crear_modulos_base
+from utils.setup_superadmin import crear_superadmin_automatico
+from werkzeug.security import generate_password_hash
+from datetime import datetime
 #endregion
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
 #region app
 def create_app():
+
+    def crear_superadmin_automatico():
+
+        # 🔹 1. Verificar si ya existe un rol nivel 100
+        rol_superadmin = Rol.query.filter_by(nivel=100).first()
+
+        if not rol_superadmin:
+            rol_superadmin = Rol(
+                nombre="SuperAdmin",
+                descripcion="Acceso total al sistema",
+                nivel=100
+            )
+            db.session.add(rol_superadmin)
+            db.session.commit()
+
+        # 🔹 2. Verificar si ya existe un usuario con ese rol
+        existe = (
+            db.session.query(Usuario)
+            .join(UsuarioRol)
+            .join(Rol)
+            .filter(Rol.nivel == 100)
+            .first()
+        )
+
+        if existe:
+            return  # 🔥 Ya hay superadmin, no hacemos nada
+
+        # 🔹 3. Crear empresa sistema si no existe
+        empresa_sistema = Empresa.query.filter_by(nombre="Sistema").first()
+
+        if not empresa_sistema:
+            empresa_sistema = Empresa(
+                nombre="Sistema",
+                activa=True,
+                fecha_creacion=datetime.utcnow()
+            )
+            db.session.add(empresa_sistema)
+            db.session.commit()
+
+        # 🔹 4. Crear usuario superadmin
+        admin = Usuario(
+            empresa_id=empresa_sistema.id,
+            nombre="Super",
+            apellido="Admin",
+            email="admin@tusistema.com",
+            password=generate_password_hash("Admin123!"),
+            verificado=True,
+            activo=True,
+            fecha_creacion=datetime.utcnow()
+        )
+
+        db.session.add(admin)
+        db.session.commit()
+
+        # 🔹 5. Asignar rol
+        usuario_rol = UsuarioRol(
+            usuario_id=admin.id,
+            rol_id=rol_superadmin.id
+        )
+
+        db.session.add(usuario_rol)
+        db.session.commit()
+
+        print("🔥 Superadmin creado automáticamente")
     app = Flask(
         __name__,
         template_folder="../templates",
@@ -33,6 +101,7 @@ def create_app():
     with app.app_context():
         init_db()
         crear_modulos_base()
+        crear_superadmin_automatico()
     #endregion
     #region Landing
     @app.route("/")

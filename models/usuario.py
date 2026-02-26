@@ -79,8 +79,6 @@ class Usuario(db.Model):
         return False
     
     def obtener_modulos_disponibles(self):
-        
-
         # 🔥 Superadmin ve todo
         if self.es_superadmin():
             return Modulo.query.filter_by(activo=True, visible=True).all()
@@ -98,7 +96,6 @@ class Usuario(db.Model):
         )
 
         return modulos
-
 
 # ==============================
 # ROL
