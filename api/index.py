@@ -84,14 +84,7 @@ def create_app():
             if usuario and check_password_hash(usuario.password, password):
                 
                 login_user(usuario)
-
-                # 🧠 Guardar sesión
-                session["usuario_id"] = usuario.id
-                session["usuario_nombre"] = usuario.nombre
-                session["empresa"] = usuario.empresa
-
-                if usuario.rol == 'admin':
-                    return render_template('/dashboard.html')
+                return render_template('/dashboard.html')
         return render_template('login_register.html')
     @app.route("/register", methods=['GET', 'POST'])
     def register():
