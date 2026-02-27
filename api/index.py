@@ -35,10 +35,24 @@ def create_app():
     @app.route("/")
     def home():
         return render_template("index.html")
-    #endregion
+    
+    @app.route("/funciones")
+    def funciones():
+        return render_template("index.html")
+
+    @app.route("/precios")
+    def precios():
+        return render_template("index.html")
+
+    @app.route("/contacto")
+    def contacto():
+        return render_template("index.html")
+    
     @app.route("/login_register")
     def login_register():
         return render_template("login_register.html")
+    #endregion
+    
     
     @app.route("/login", methods=['GET', 'POST'])
     def login():
