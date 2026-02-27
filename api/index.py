@@ -1,7 +1,7 @@
 #region Imports
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask import request, render_template,session
-from flask_login import login_required, logout_user
+from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash
 from models.decoradores import permiso_requerido
 from models.usuario import Usuario
@@ -9,8 +9,10 @@ from models import init_db
 import sys, os
 from extensions import db, login_manager
 #endregion
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
+
 #region app
 def create_app():
     app = Flask(
@@ -80,15 +82,17 @@ def create_app():
 
             # 🔐 Validar usuario y contraseña
             if usuario and check_password_hash(usuario.password, password):
+                
+                login_user(usuario)
 
                 # 🧠 Guardar sesión
                 session["usuario_id"] = usuario.id
                 session["usuario_nombre"] = usuario.nombre
                 session["empresa"] = usuario.empresa
+
                 if usuario.rol == 'admin':
                     return render_template('/dashboard.html')
         return render_template('login_register.html')
-    
     @app.route("/register", methods=['GET', 'POST'])
     def register():
         if request.method == 'POST':
