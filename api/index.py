@@ -36,10 +36,12 @@ def create_app():
     def home():
         return render_template("index.html")
     #endregion
-
+    @app.route("/login_register")
+    def login_register():
+        return render_template("login_register.html")
+    
     @app.route("/login", methods=['GET', 'POST'])
     def login():
-
         if request.method == 'POST':
 
             email = request.form.get("email")
