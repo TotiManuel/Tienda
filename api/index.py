@@ -77,10 +77,6 @@ def create_app():
                 session["empresa"] = usuario.empresa
 
                 return render_template('/index.html')
-
-            else:
-                flash("Email o contraseña incorrectos")
-
         return render_template('login_register.html')
     
     @app.route("/register", methods=['GET', 'POST'])
@@ -91,7 +87,7 @@ def create_app():
             email = request.form['email']
             password = request.form['password']
             empresa = request.form['empresa']
-            rol = request.form['rol']
+            rol = request.form.get("rol")
             usuario = Usuario(nombre=nombre, apellido=apellido, email=email, password=password, empresa=empresa, rol=rol)
             db.session.add(usuario)
             db.session.commit()
