@@ -9,16 +9,29 @@
 <body>
     <header class="navbar">
         <div class="container nav-content">
+
             <h1 class="logo">
                 <a href="{{ url_for('home') }}">Toti</a>
             </h1>
 
             <nav class="nav-links">
-                <a href="#">Funciones</a>
-                <a href="#">Precios</a>
-                <a href="#">Contacto</a>
-                <a href="#" class="btn btn-primary btn-small">Ingresar</a>
+
+                <a href="{{ url_for('funciones') }}">Funciones</a>
+                <a href="{{ url_for('precios') }}">Precios</a>
+                <a href="{{ url_for('contacto') }}">Contacto</a>
+
+                {% if "usuario_id" in session %}
+                    <a href="{{ url_for('empresa_home') }}" class="btn btn-primary btn-small">
+                        Dashboard
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="btn btn-primary btn-small">
+                        Ingresar
+                    </a>
+                {% endif %}
+
             </nav>
+
         </div>
     </header>
 
