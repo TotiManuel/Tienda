@@ -3,9 +3,113 @@
 {% block title %}Dashboard - Toti{% endblock %}
 
 {% block content %}
-<section class="hero">
-    <h2>El sistema todo en uno para tu empresa</h2>
-    <p>CRM, ventas, turnos, ecommerce y automatización en una sola plataforma.</p>
-    <a class="btn btn-primary btn-big">Comenzar ahora</a>
-</section>
+
+<style>
+.dashboard-container {
+    padding: 40px;
+}
+
+.dashboard-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.modulos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.modulo-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.modulo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.modulo-icono {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.modulo-nombre {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.modulo-descripcion {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.modulo-categoria {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.modulo-color-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+}
+</style>
+
+<div class="dashboard-container">
+
+    <div class="dashboard-title">
+        Módulos disponibles
+    </div>
+
+    <div class="modulos-grid">
+        {% for modulo in modulos %}
+
+            <a href="#" class="modulo-card">
+
+                <div class="modulo-color-bar" style="background: {{ modulo.color }};"></div>
+
+                <div>
+                    <div class="modulo-icono">
+                        {{ modulo.icono }}
+                    </div>
+
+                    <div class="modulo-nombre">
+                        {{ modulo.nombre }}
+                    </div>
+
+                    <div class="modulo-descripcion">
+                        {{ modulo.descripcion }}
+                    </div>
+                </div>
+
+                <div class="modulo-categoria">
+                    {{ modulo.categoria }}
+                </div>
+
+            </a>
+
+        {% endfor %}
+    </div>
+
+</div>
+
 {% endblock %}

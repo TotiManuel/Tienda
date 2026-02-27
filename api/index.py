@@ -4,6 +4,8 @@ from flask import request, render_template,session
 from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash
 from models.decoradores import permiso_requerido
+from models.modulo import Modulo
+from utils.setup_modulos import crear_modulos_base
 from models.usuario import Usuario
 from models import init_db
 import sys, os
@@ -40,32 +42,30 @@ def create_app():
             admin.set_password('41323167')
             db.session.add(admin)
             db.session.commit()
+        crear_modulos_base()
     #endregion
     #region Landing
     @login_manager.user_loader
     def load_user(user_id):
         return Usuario.query.get(int(user_id))
-    
     @app.route("/")
     def home():
         return render_template("index.html")
-    
     @app.route("/funciones")
     def funciones():
         return render_template("index.html")
-
     @app.route("/precios")
     def precios():
         return render_template("index.html")
-
     @app.route("/contacto")
     def contacto():
         return render_template("index.html")
-    
     @app.route("/dashboard")
     @permiso_requerido('ver_dashboard')
+    @login_required
     def dashboard():
-        return render_template("dashboard.html")
+        modulos = Modulo.query.all()
+        return render_template("dashboard.html", modulos=modulos)
     
     @app.route("/login_register")
     def login_register():
