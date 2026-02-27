@@ -21,12 +21,12 @@
                 <a href="{{ url_for('home') }}">Contacto</a>
 
                 {% if "usuario_id" in session %}
-                    <a href="{{ url_for('home') }}" class="btn btn-primary btn-small">
-                        Dashboard
-                    </a>
-                {% else %}
                     <a href="{{ url_for('login_register') }}" class="btn btn-primary btn-small">
                         Ingresar
+                    </a>    
+                {% else %}
+                    <a href="{{ url_for('home') }}" class="btn btn-primary btn-small">
+                        Dashboard
                     </a>
                 {% endif %}
 
