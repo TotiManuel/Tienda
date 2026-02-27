@@ -114,3 +114,11 @@ def create_app():
 app = create_app()
 if __name__ == "__main__":
     app.run(debug=True)    
+    
+#region permisosHTML
+'''
+                <!--{% if usuario.tiene_permiso("gestionar_usuarios") %}
+                        <a href="/usuarios">Usuarios</a>
+                    {% endif %} -->
+'''
+#endregion

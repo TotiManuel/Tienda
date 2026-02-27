@@ -20,10 +20,6 @@
                 <a href="{{ url_for('home') }}">Precios</a>
                 <a href="{{ url_for('home') }}">Contacto</a>
 
-                <!--{% if usuario.tiene_permiso("gestionar_usuarios") %}
-                        <a href="/usuarios">Usuarios</a>
-                    {% endif %} -->
-
                 {% if "usuario_id" in session %}
                     <a href="{{ url_for('login_register') }}" class="btn btn-primary btn-small">
                         Salir
