@@ -1,12 +1,13 @@
 #region Imports
-from flask import Flask, render_template, request
+from flask import Flask, flash, redirect, render_template, request, url_for
 from flask import request, render_template,session
+from flask_login import login_required, logout_user
 from werkzeug.security import check_password_hash
 from models.decoradores import permiso_requerido
 from models.usuario import Usuario
 from models import init_db
 import sys, os
-from extensions import db
+from extensions import db, login_manager
 #endregion
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
@@ -27,6 +28,7 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
+    login_manager.init_app(app)
     
     with app.app_context():
         init_db()
@@ -37,6 +39,10 @@ def create_app():
             db.session.commit()
     #endregion
     #region Landing
+    @login_manager.user_loader
+    def load_user(user_id):
+        return Usuario.query.get(int(user_id))
+    
     @app.route("/")
     def home():
         return render_template("index.html")
@@ -96,6 +102,13 @@ def create_app():
             db.session.add(usuario)
             db.session.commit()
         return render_template('login_register.html')
+    @app.route("/logout")
+    @login_required
+    def logout():
+        logout_user()
+        flash("Sesión cerrada correctamente")
+        return render_template('login_register.html')
+    
     return app
 #endregion
 app = create_app()
