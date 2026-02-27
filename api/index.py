@@ -28,14 +28,12 @@ def create_app():
     db.init_app(app)
     
     with app.app_context():
+        init_db()
         if not Usuario.query.filter_by(rol='admin').first():
             admin = Usuario(nombre='Julian', apellido='Mandaio', email='manuel.mandaio@gmail.com', empresa='Toti', rol='admin')
             admin.set_password('41323167')
             db.session.add(admin)
             db.session.commit()
-    # 🔥 Crear tablas automáticamente
-    with app.app_context():
-        init_db()
     #endregion
     #region Landing
     @app.route("/")
