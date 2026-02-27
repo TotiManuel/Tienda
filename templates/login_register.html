@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}login - Toti{% endblock %}
+
+{% block content %}
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+        margin: 0;
+        padding: 0;
+    }
+
+    .auth-container{
+        display: flex;
+        min-height: 100vh;
+    }
+
+    /* LOGIN */
+    .login{
+        flex: 1;
+        background: white;
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #ddd;
+    }
+
+    /* REGISTER */
+    .register{
+        flex: 1;
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    h2{
+        margin-bottom: 20px;
+        color: #2563eb;
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+    }
+
+    input{
+        margin-bottom: 15px;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    input:focus{
+        outline: none;
+        border: 1px solid #2563eb;
+    }
+
+    button{
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover{
+        background: #1d4ed8;
+    }
+
+    .radios{
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+    }
+
+    .radio-item{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width: 900px){
+        .auth-container{
+            flex-direction: column;
+        }
+        .login{
+            border-right: none;
+            border-bottom: 1px solid #ddd;
+        }
+    }
+</style>
+
+<div class="auth-container">
+
+    <!-- LOGIN -->
+    <div class="login">
+        <h2>Iniciar sesión</h2>
+
+        <form method="POST" action="/login">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="register">
+        <h2>Crear cuenta</h2>
+
+        <form method="POST" action="/register">
+
+            <div class="radios">
+                <label class="radio-item">
+                    <input type="radio" name="tipo" value="empleado" checked>
+                    Empleado
+                </label>
+
+                <label class="radio-item">
+                    <input type="radio" name="tipo" value="empresa">
+                    Empresa
+                </label>
+            </div>
+
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="text" name="apellido" placeholder="Apellido" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <input type="text" name="empresa" placeholder="Nombre de la empresa">
+
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

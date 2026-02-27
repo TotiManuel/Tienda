@@ -1,5 +1,8 @@
 #region Imports
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from flask import request, render_template, redirect, url_for, session, flash
+from werkzeug.security import check_password_hash
+from models.usuario import Usuario
 from models import init_db
 import sys, os
 from extensions import db
@@ -33,6 +36,45 @@ def create_app():
     def home():
         return render_template("index.html")
     #endregion
+
+    @app.route("/login", methods=['GET', 'POST'])
+    def login():
+
+        if request.method == 'POST':
+
+            email = request.form.get("email")
+            password = request.form.get("password")
+
+            # 🔎 Buscar usuario
+            usuario = Usuario.query.filter_by(email=email).first()
+
+            # 🔐 Validar usuario y contraseña
+            if usuario and check_password_hash(usuario.password, password):
+
+                # 🧠 Guardar sesión
+                session["usuario_id"] = usuario.id
+                session["usuario_nombre"] = usuario.nombre
+                session["empresa"] = usuario.empresa
+
+                return render_template('/index.html')
+
+            else:
+                flash("Email o contraseña incorrectos")
+
+        return render_template('login_register.html')
+    
+    @app.route("/register", methods=['GET', 'POST'])
+    def register():
+        if request.method == 'POST':
+            nombre = request.form['nombre']
+            apellido = request.form['apellido']
+            email = request.form['email']
+            password = request.form['password']
+            empresa = request.form['empresa']
+            usuario = Usuario(nombre=nombre, apellido=apellido, email=email, password=password, empresa=empresa)
+            db.session.add(usuario)
+            db.session.commit()
+        return render_template('login_register.html')
     return app
 #endregion
 app = create_app()
