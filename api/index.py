@@ -1,7 +1,8 @@
 #region Imports
 from flask import Flask, render_template, request
-from flask import request, render_template, redirect, url_for, session, flash
+from flask import request, render_template,session
 from werkzeug.security import check_password_hash
+from models.decoradores import permiso_requerido
 from models.usuario import Usuario
 from models import init_db
 import sys, os
@@ -52,12 +53,15 @@ def create_app():
     def contacto():
         return render_template("index.html")
     
+    @app.route("/dashboard")
+    @permiso_requerido('ver_dashboard')
+    def dashboard():
+        return render_template("dashboard.html")
+    
     @app.route("/login_register")
     def login_register():
         return render_template("login_register.html")
     #endregion
-    
-    
     @app.route("/login", methods=['GET', 'POST'])
     def login():
         if request.method == 'POST':
@@ -75,8 +79,8 @@ def create_app():
                 session["usuario_id"] = usuario.id
                 session["usuario_nombre"] = usuario.nombre
                 session["empresa"] = usuario.empresa
-
-                return render_template('/index.html')
+                if usuario.rol == 'admin':
+                    return render_template('/dashboard.html')
         return render_template('login_register.html')
     
     @app.route("/register", methods=['GET', 'POST'])

@@ -1,6 +1,7 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash
 from extensions import db
+from permisos import PERMISOS
 
 class Usuario(db.Model):
     __tablename__ = "usuarios"
@@ -18,3 +19,7 @@ class Usuario(db.Model):
     
     def set_password(self, password):
         self.password=generate_password_hash(password)
+    
+    def tiene_permiso(self, permiso):
+        permisos_rol = PERMISOS.get(self.rol, [])
+        return permiso in permisos_rol
