@@ -26,7 +26,13 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
-
+    
+    with app.app_context():
+        if not Usuario.query.filter_by(rol='admin').first():
+            admin = Usuario(nombre='Julian', apellido='Mandaio', email='manuel.mandaio@gmail.com', empresa='Toti', rol='admin')
+            admin.set_password('41323167')
+            db.session.add(admin)
+            db.session.commit()
     # 🔥 Crear tablas automáticamente
     with app.app_context():
         init_db()
@@ -87,7 +93,8 @@ def create_app():
             email = request.form['email']
             password = request.form['password']
             empresa = request.form['empresa']
-            usuario = Usuario(nombre=nombre, apellido=apellido, email=email, password=password, empresa=empresa)
+            rol = request.form['rol']
+            usuario = Usuario(nombre=nombre, apellido=apellido, email=email, password=password, empresa=empresa, rol=rol)
             db.session.add(usuario)
             db.session.commit()
         return render_template('login_register.html')
