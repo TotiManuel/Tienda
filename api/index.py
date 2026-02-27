@@ -31,6 +31,7 @@ def create_app():
 
     db.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = "login_register"
     
     with app.app_context():
         init_db()
@@ -84,7 +85,7 @@ def create_app():
             if usuario and check_password_hash(usuario.password, password):
                 
                 login_user(usuario)
-                return render_template('/dashboard.html')
+                return redirect(url_for("dashboard"))
         return render_template('login_register.html')
     @app.route("/register", methods=['GET', 'POST'])
     def register():
