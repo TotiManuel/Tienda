@@ -74,18 +74,14 @@ def create_app():
     @app.route("/login", methods=['GET', 'POST'])
     def login():
         if request.method == 'POST':
-
             email = request.form.get("email")
             password = request.form.get("password")
-
-            # 🔎 Buscar usuario
             usuario = Usuario.query.filter_by(email=email).first()
-
-            # 🔐 Validar usuario y contraseña
             if usuario and check_password_hash(usuario.password, password):
-                
                 login_user(usuario)
                 return redirect(url_for("dashboard"))
+            else:
+                flash("Email o contraseña incorrectos")
         return render_template('login_register.html')
     @app.route("/register", methods=['GET', 'POST'])
     def register():
@@ -96,17 +92,33 @@ def create_app():
             password = request.form['password']
             empresa = request.form['empresa']
             rol = request.form.get("rol")
-            usuario = Usuario(nombre=nombre, apellido=apellido, email=email, password=password, empresa=empresa, rol=rol)
+            if Usuario.query.filter_by(email=email).first():
+                flash("El email ya existe")
+                return redirect(url_for("login_register"))
+
+            usuario = Usuario(
+                nombre=nombre,
+                apellido=apellido,
+                email=email,
+                empresa=empresa,
+                rol=rol
+            )
+
+            # 🔐 HASH obligatorio
+            usuario.set_password(password)
+
             db.session.add(usuario)
             db.session.commit()
+
+            return redirect(url_for("login_register"))  # 🔥 redirigir
         return render_template('login_register.html')
     @app.route("/logout")
     @login_required
     def logout():
         logout_user()
         flash("Sesión cerrada correctamente")
-        return render_template('login_register.html')
-    
+        return redirect(url_for("login_register"))
+
     return app
 #endregion
 app = create_app()
