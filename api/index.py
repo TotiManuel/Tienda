@@ -6,6 +6,7 @@ from models.decoradores import permiso_requerido, superadmin_required
 from models.modulo import Modulo
 from models.usuario import Usuario
 from models import init_db
+from models.venta import Venta
 from utils.setup_modulos import crear_modulos_base
 import sys, os
 from extensions import db, login_manager
@@ -128,7 +129,95 @@ def create_app():
         producto = Producto.query.get_or_404(id)
         db.session.delete(producto)
         db.session.commit()
-        return redirect(url_for("superadmin_inventario"))    
+        return redirect(url_for("superadmin_inventario"))
+    
+    # SUPERADMIN VENTAS GLOBAL
+
+    @app.route("/superadmin/ventas")
+    @login_required
+    @superadmin_required
+    def superadmin_ventas():
+
+        empresa_id = request.args.get("empresa", type=int)
+        empresas = Usuario.query.filter_by(rol="empresa").all()
+
+        query = Venta.query
+
+        if empresa_id:
+            query = query.filter_by(empresa_id=empresa_id)
+
+        ventas = query.order_by(Venta.fecha.desc()).all()
+
+        return render_template(
+            "superadmin_ventas.html",
+            ventas=ventas,
+            empresas=empresas
+        )
+
+
+    @app.route("/superadmin/venta/crear", methods=["POST"])
+    @login_required
+    @superadmin_required
+    def superadmin_crear_venta():
+
+        empresa_id = int(request.form["empresa_id"])
+
+        nueva = Venta(
+            total=float(request.form.get("total", 0)),
+            metodo_pago=request.form.get("metodo_pago"),
+            cliente=request.form.get("cliente"),
+            empresa_id=empresa_id,
+            usuario_id=current_user.id
+        )
+
+        db.session.add(nueva)
+        db.session.commit()
+
+        return redirect(url_for("superadmin_ventas"))
+
+
+    @app.route("/superadmin/venta/editar/<int:id>")
+    @login_required
+    @superadmin_required
+    def superadmin_editar_venta(id):
+
+        venta = Venta.query.get_or_404(id)
+        empresas = Usuario.query.filter_by(rol="empresa").all()
+
+        return render_template(
+            "superadmin_editar_venta.html",
+            venta=venta,
+            empresas=empresas
+        )
+
+
+    @app.route("/superadmin/venta/actualizar/<int:id>", methods=["POST"])
+    @login_required
+    @superadmin_required
+    def superadmin_actualizar_venta(id):
+
+        venta = Venta.query.get_or_404(id)
+
+        venta.total = float(request.form.get("total", 0))
+        venta.metodo_pago = request.form.get("metodo_pago")
+        venta.cliente = request.form.get("cliente")
+        venta.empresa_id = int(request.form["empresa_id"])
+
+        db.session.commit()
+
+        return redirect(url_for("superadmin_ventas"))
+
+
+    @app.route("/superadmin/venta/eliminar/<int:id>")
+    @login_required
+    @superadmin_required
+    def superadmin_eliminar_venta(id):
+
+        venta = Venta.query.get_or_404(id)
+        db.session.delete(venta)
+        db.session.commit()
+
+        return redirect(url_for("superadmin_ventas"))
     #endregion
     #region Empresa
     @app.route("/empresa/inventario")
