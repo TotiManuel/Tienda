@@ -115,7 +115,7 @@ tr:hover{
             <tbody>
             {% for p in productos %}
                 <tr>
-                    <td><span class="badge">{{ p.empresa.empresa }}</span></td>
+                    <td><span class="badge">{{ p.empresa.nombre }}</span></td>
                     <td>{{ p.nombre }}</td>
                     <td>{{ p.codigo }}</td>
                     <td>{{ p.stock }}</td>
@@ -146,7 +146,7 @@ tr:hover{
             <select name="empresa_id" required>
                 <option value="">Empresa</option>
                 {% for e in empresas %}
-                    <option value="{{ e.id }}">{{ e.nombre }}</option>
+                    <option value="{{ e.id }}">{{ e.empresa }}</option>
                 {% endfor %}
             </select><br><br>
 
