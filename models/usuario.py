@@ -17,7 +17,11 @@ class Usuario(db.Model, UserMixin):
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
     fecha_actualizacion = db.Column(db.DateTime, onupdate=datetime.utcnow)
     empresa = db.Column(db.String(120))
-    productos = db.relationship("Producto", backref="empresa", lazy=True)
+    productos = db.relationship(
+        "Producto",
+        back_populates="empresa",
+        cascade="all, delete"
+    )
     
     def set_password(self, password):
         self.password=generate_password_hash(password)
@@ -25,5 +29,3 @@ class Usuario(db.Model, UserMixin):
     def tiene_permiso(self, permiso):
         permisos_rol = PERMISOS.get(self.rol, [])
         return permiso in permisos_rol
-    
-
