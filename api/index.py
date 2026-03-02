@@ -92,6 +92,35 @@ def create_app():
         db.session.add(nuevo)
         db.session.commit()
         return redirect(url_for("superadmin_inventario"))
+    @app.route("/superadmin/producto/editar/<int:id>")
+    @login_required
+    @superadmin_required
+    def superadmin_editar_producto(id):
+
+        producto = Producto.query.get_or_404(id)
+        empresas = Usuario.query.filter_by(rol="empresa").all()
+
+        return render_template(
+            "superadmin_editar_producto.html",
+            producto=producto,
+            empresas=empresas
+        )
+    @app.route("/superadmin/producto/actualizar/<int:id>", methods=["POST"])
+    @login_required
+    @superadmin_required
+    def superadmin_actualizar_producto(id):
+
+        producto = Producto.query.get_or_404(id)
+
+        producto.nombre = request.form["nombre"]
+        producto.codigo = request.form.get("codigo")
+        producto.stock = int(request.form.get("stock", 0))
+        producto.precio = float(request.form.get("precio", 0))
+        producto.empresa_id = int(request.form["empresa_id"])
+
+        db.session.commit()
+
+        return redirect(url_for("superadmin_inventario"))
     @app.route("/superadmin/producto/eliminar/<int:id>")
     @login_required
     @superadmin_required
