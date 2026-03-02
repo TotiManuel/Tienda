@@ -10,8 +10,8 @@ from models.usuario import Usuario
 from models import init_db
 import sys, os
 from extensions import db, login_manager
-from flask_login import login_required, current_user
-from models.inventario import Producto, Empresa
+from flask_login import current_user
+from models.inventario import Producto
 #endregion
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
