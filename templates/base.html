@@ -26,8 +26,8 @@
                         {% if current_user.tiene_permiso("ver_inventario_global") %}
                             <a href="{{ url_for('superadmin_inventario') }}">Inventario Global</a>
                         {% endif %}
-                        {% if current_user.tiene_permiso("ver_ventas") %}
-                            <a href="#">Ventas</a>
+                        {% if current_user.tiene_permiso("ver_ventas_global") %}
+                            <a href="{{ url_for('superadmin_ventas ') }}">Inventario Global</a>
                         {% endif %}
                         {% if current_user.tiene_permiso("ver_clientes") %}
                             <a href="#">Clientes</a>

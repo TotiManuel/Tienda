@@ -5,6 +5,7 @@ PERMISOS = {
         "crear_producto_global",
         "eliminar_producto_global",
         "editar_producto_global",
+        "ver_ventas_global",
         "gestionar_empresas",
         "gestionar_usuarios",
         "ver_reportes",
