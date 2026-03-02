@@ -126,6 +126,60 @@ def create_app():
         return redirect(url_for("superadmin_inventario"))    
     #endregion
     #region Empresa
+    @app.route("/empresa/inventario")
+    @login_required
+    def empresa_inventario():
+
+        # 🔥 seguridad: solo rol empresa
+        if current_user.rol != "empresa":
+            abort(403)
+
+        productos = Producto.query.filter_by(
+            empresa_id=current_user.id
+        ).all()
+
+        return render_template(
+            "empresa_inventario.html",
+            productos=productos
+        )
+    @app.route("/empresa/producto/crear", methods=["POST"])
+    @login_required
+    def empresa_crear_producto():
+
+        if current_user.rol != "empresa":
+            abort(403)
+
+        nuevo = Producto(
+            nombre=request.form["nombre"],
+            codigo=request.form.get("codigo"),
+            stock=int(request.form.get("stock", 0)),
+            precio=float(request.form.get("precio", 0)),
+
+            # 🔥 SIEMPRE la empresa actual
+            empresa_id=current_user.id,
+            usuario_id=current_user.id
+        )
+
+        db.session.add(nuevo)
+        db.session.commit()
+
+        return redirect(url_for("empresa_inventario"))
+    @app.route("/empresa/producto/eliminar/<int:id>")
+    @login_required
+    def empresa_eliminar_producto(id):
+
+        if current_user.rol != "empresa":
+            abort(403)
+
+        producto = Producto.query.filter_by(
+            id=id,
+            empresa_id=current_user.id  # 🔥 seguridad
+        ).first_or_404()
+
+        db.session.delete(producto)
+        db.session.commit()
+
+        return redirect(url_for("empresa_inventario"))
     #endregion
     #region Empleado
     #region Login

@@ -9,6 +9,7 @@
 <body>
     <header class="navbar">
         <div class="container nav-content">
+
             {% if current_user.is_authenticated %}
                 <h1 class="logo">
                     <a href="{{ url_for('dashboard') }}">Toti</a>
@@ -18,12 +19,50 @@
                     <a href="{{ url_for('home') }}">Toti</a>
                 </h1>
             {% endif %}
-            
+
             <nav class="nav-links">
 
-                <a href="{{ url_for('superadmin_inventario') }}">Inventario</a>
+                {% if current_user.is_authenticated %}
+
+                    <!-- 🔥 INVENTARIO -->
+                    {% if current_user.tiene_permiso("ver_inventario") %}
+                        <a href="{{ url_for('empresa_inventario') }}">Inventario</a>
+                    {% endif %}
+
+                    {% if current_user.tiene_permiso("ver_inventario_global") %}
+                        <a href="{{ url_for('superadmin_inventario') }}">Inventario Global</a>
+                    {% endif %}
+
+                    <!-- 🔥 VENTAS -->
+                    {% if current_user.tiene_permiso("ver_ventas") %}
+                        <a href="#">Ventas</a>
+                    {% endif %}
+
+                    <!-- 🔥 CLIENTES -->
+                    {% if current_user.tiene_permiso("ver_clientes") %}
+                        <a href="#">Clientes</a>
+                    {% endif %}
+
+                    <!-- 🔥 REPORTES -->
+                    {% if current_user.tiene_permiso("ver_reportes") %}
+                        <a href="#">Reportes</a>
+                    {% endif %}
+
+                    <!-- 🔥 ADMIN -->
+                    {% if current_user.tiene_permiso("gestionar_usuarios") %}
+                        <a href="#">Usuarios</a>
+                    {% endif %}
+
+                    {% if current_user.tiene_permiso("gestionar_empresas") %}
+                        <a href="#">Empresas</a>
+                    {% endif %}
+
+                {% endif %}
+
+                <!-- 🌍 GENERAL -->
                 <a href="{{ url_for('home') }}">Precios</a>
                 <a href="{{ url_for('home') }}">Contacto</a>
+
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('logout') }}" class="btn btn-primary btn-small">
                         Salir
@@ -35,7 +74,6 @@
                 {% endif %}
 
             </nav>
-
         </div>
     </header>
 
