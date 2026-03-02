@@ -10,7 +10,8 @@ from models.usuario import Usuario
 from models import init_db
 import sys, os
 from extensions import db, login_manager
-from models.inventario import Producto, Categoria
+from flask_login import login_required, current_user
+from models.inventario import Producto, Empresa
 #endregion
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -70,12 +71,6 @@ def create_app():
         return render_template("dashboard.html", modulos=modulos)
     #endregion
     #region SuperAdmin
-    from flask import render_template, request, redirect, url_for
-    from flask_login import login_required, current_user
-    from extensions import db
-    from models.inventario import Producto, Empresa
-
-
     @app.route("/superadmin/inventario")
     @permiso_requerido('ver_inventario_admin')
     @login_required
