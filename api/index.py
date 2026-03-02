@@ -72,21 +72,19 @@ def create_app():
     #endregion
     #region SuperAdmin
     @app.route("/superadmin/inventario")
-    @superadmin_required
     @login_required
+    @superadmin_required
     def superadmin_inventario():
 
-        if current_user.rol != "superadmin":
-            abort(403)
-
-        empresa_id = request.args.get("empresa")
+        empresa_id = request.args.get("empresa", type=int)
 
         empresas = Usuario.query.filter_by(rol="empresa").all()
 
         query = Producto.query
 
+        # 🔥 CORRECCIÓN: filtrar por empresa_id (no usuario_id)
         if empresa_id:
-            query = query.filter_by(usuario_id=empresa_id)
+            query = query.filter_by(empresa_id=empresa_id)
 
         productos = query.all()
 
@@ -95,21 +93,20 @@ def create_app():
             productos=productos,
             empresas=empresas
         )
-    
     @app.route("/superadmin/producto/crear", methods=["POST"])
-    @superadmin_required
     @login_required
+    @superadmin_required
     def superadmin_crear_producto():
 
-        if current_user.rol != "superadmin":
-            abort(403)
+        empresa_id = int(request.form["empresa_id"])
 
         nuevo = Producto(
             nombre=request.form["nombre"],
-            codigo=request.form["codigo"],
-            stock=request.form["stock"],
-            precio=request.form["precio"],
-            usuario_id=request.form["empresa_id"]
+            codigo=request.form.get("codigo"),
+            stock=int(request.form.get("stock", 0)),
+            precio=float(request.form.get("precio", 0)),
+            empresa_id=empresa_id,          # 🔥 CORRECCIÓN
+            usuario_id=current_user.id      # opcional: quién lo creó
         )
 
         db.session.add(nuevo)
@@ -117,18 +114,16 @@ def create_app():
 
         return redirect(url_for("superadmin_inventario"))
     @app.route("/superadmin/producto/eliminar/<int:id>")
-    @superadmin_required
     @login_required
+    @superadmin_required
     def superadmin_eliminar_producto(id):
 
-        if current_user.rol != "superadmin":
-            abort(403)
+        producto = Producto.query.get_or_404(id)
 
-        p = Producto.query.get_or_404(id)
-        db.session.delete(p)
+        db.session.delete(producto)
         db.session.commit()
 
-        return redirect(url_for("superadmin_inventario"))
+        return redirect(url_for("superadmin_inventario"))    
     #endregion
     #region Empresa
     #endregion
