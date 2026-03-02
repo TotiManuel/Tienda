@@ -12,7 +12,7 @@ class Venta(db.Model):
 
     fecha = db.Column(db.DateTime, default=datetime.utcnow)
 
-    empresa_id = db.Column(db.Integer, db.ForeignKey("usuario.id"))
+    empresa_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
     empresa = db.relationship("Usuario", backref="ventas")
 
     usuario_id = db.Column(db.Integer)  # quien registró la venta
