@@ -92,7 +92,7 @@ tr:hover{
         <select name="empresa" onchange="this.form.submit()">
             <option value="">Todas las empresas</option>
             {% for e in empresas %}
-                <option value="{{ e.id }}">{{ e.nombre }}</option>
+                <option value="{{ e.id }}">{{ e.empresa }}</option>
             {% endfor %}
         </select>
     </form>
