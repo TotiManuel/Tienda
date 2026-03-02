@@ -159,6 +159,24 @@ def create_app():
         db.session.add(nuevo)
         db.session.commit()
         return redirect(url_for("empresa_inventario"))
+    @app.route("/empresa/producto/actualizar/<int:id>", methods=["POST"])
+    @login_required
+    def empresa_actualizar_producto(id):
+
+        producto = Producto.query.get_or_404(id)
+
+        # Seguridad: solo puede editar sus propios productos
+        if producto.empresa_id != current_user.id:
+            abort(403)
+
+        producto.nombre = request.form["nombre"]
+        producto.codigo = request.form["codigo"]
+        producto.stock = request.form["stock"]
+        producto.precio = request.form["precio"]
+
+        db.session.commit()
+
+        return redirect(url_for("empresa_inventario"))
     @app.route("/empresa/producto/eliminar/<int:id>")
     @login_required
     def empresa_eliminar_producto(id):

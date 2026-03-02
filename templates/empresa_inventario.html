@@ -81,6 +81,17 @@ tr:hover{
                     <td>{{ p.stock }}</td>
                     <td>${{ p.precio }}</td>
                     <td>
+                        <button class="btn" style="padding:6px 10px;"
+                            onclick="openEditModal(
+                                '{{ p.id }}',
+                                '{{ p.nombre }}',
+                                '{{ p.codigo }}',
+                                '{{ p.stock }}',
+                                '{{ p.precio }}'
+                            )">
+                            ✏️
+                        </button>
+
                         <a href="{{ url_for('empresa_eliminar_producto', id=p.id) }}">
                             ❌
                         </a>
@@ -89,6 +100,21 @@ tr:hover{
             {% endfor %}
             </tbody>
         </table>
+    </div>
+</div>
+<div class="modal" id="modalEdit">
+    <div class="modal-content">
+        <h3>Editar producto</h3>
+
+        <form method="POST" id="formEditEmpresa">
+
+            <input name="nombre" id="edit_nombre" required><br><br>
+            <input name="codigo" id="edit_codigo"><br><br>
+            <input name="stock" type="number" id="edit_stock"><br><br>
+            <input name="precio" type="number" id="edit_precio"><br><br>
+
+            <button class="btn">Guardar cambios</button>
+        </form>
     </div>
 </div>
 <div class="modal" id="modal">
@@ -110,6 +136,27 @@ function openModal(){
 window.onclick = function(e){
     if(e.target.id=="modal"){
         document.getElementById("modal").style.display="none";
+    }
+}
+</script>
+<script>
+function openEditModal(id, nombre, codigo, stock, precio){
+
+    document.getElementById("modalEdit").style.display = "flex";
+
+    document.getElementById("edit_nombre").value = nombre;
+    document.getElementById("edit_codigo").value = codigo;
+    document.getElementById("edit_stock").value = stock;
+    document.getElementById("edit_precio").value = precio;
+
+    document.getElementById("formEditEmpresa").action =
+        "/empresa/producto/actualizar/" + id;
+}
+
+window.onclick = function(e){
+    if(e.target.id=="modal" || e.target.id=="modalEdit"){
+        document.getElementById("modal").style.display="none";
+        document.getElementById("modalEdit").style.display="none";
     }
 }
 </script>
