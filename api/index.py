@@ -1,9 +1,9 @@
 #region Imports
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, abort, flash, redirect, render_template, request, url_for
 from flask import request, render_template,session
 from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash
-from models.decoradores import permiso_requerido
+from models.decoradores import permiso_requerido, superadmin_required
 from models.modulo import Modulo
 from utils.setup_modulos import crear_modulos_base
 from models.usuario import Usuario
@@ -72,7 +72,7 @@ def create_app():
     #endregion
     #region SuperAdmin
     @app.route("/superadmin/inventario")
-    @permiso_requerido('ver_inventario_admin')
+    @superadmin_required
     @login_required
     def superadmin_inventario():
         empresa_id = request.args.get("empresa")
@@ -93,7 +93,7 @@ def create_app():
         )
     
     @app.route("/superadmin/producto/crear", methods=["POST"])
-    @permiso_requerido('crear_producto')
+    @superadmin_required
     @login_required
     def superadmin_crear_producto():
 
@@ -113,7 +113,7 @@ def create_app():
 
         return redirect(url_for("superadmin_inventario"))
     @app.route("/superadmin/producto/eliminar/<int:id>")
-    @permiso_requerido('eliminar_producto_admin')
+    @superadmin_required
     @login_required
     def superadmin_eliminar_producto(id):
 
@@ -123,9 +123,9 @@ def create_app():
 
         return redirect(url_for("superadmin_inventario"))
     #endregion
-    #region Admin
+    #region Empresa
     #endregion
-    #region usuario
+    #region Empleado
     #region Login
     @app.route("/login_register")
     def login_register():

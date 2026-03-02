@@ -1,5 +1,6 @@
 from functools import wraps
-from flask import session, redirect, url_for
+from flask import abort, session, redirect, url_for
+from flask_login import current_user
 from models.usuario import Usuario
 
 def permiso_requerido(permiso):
@@ -20,3 +21,11 @@ def permiso_requerido(permiso):
 
         return funcion
     return decorador
+
+def superadmin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not current_user.rol == "superadmin":
+            abort(403)
+        return f(*args, **kwargs)
+    return decorated_function
