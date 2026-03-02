@@ -39,9 +39,9 @@ def create_app():
     with app.app_context():
         init_db()
         if not Usuario.query.filter_by(rol='superadmin').first():
-            admin = Usuario(nombre='Julian', apellido='Mandaio', email='manuel.mandaio@gmail.com', empresa='Toti', rol='superadmin')
-            admin.set_password('41323167')
-            db.session.add(admin)
+            superadmin = Usuario(nombre='Julian', apellido='Mandaio', email='manuel.mandaio@gmail.com', empresa='Toti', rol='superadmin')
+            superadmin.set_password('41323167')
+            db.session.add(superadmin)
             db.session.commit()
         crear_modulos_base()
     #endregion
@@ -62,45 +62,6 @@ def create_app():
     def contacto():
         return render_template("index.html")
 
-    @app.route("/inventario")
-    @permiso_requerido('ver_inventario')
-    @login_required
-    def inventario():
-        productos = Producto.query.all()
-        return render_template("inventario.html", productos=productos)
-
-
-    # CREAR PRODUCTO
-    @app.route("/producto/crear", methods=["POST"])
-    @login_required
-    def crear_producto():
-
-        nombre = request.form["nombre"]
-        codigo = request.form["codigo"]
-        stock = request.form["stock"]
-        precio = request.form["precio"]
-
-        nuevo = Producto(
-            nombre=nombre,
-            codigo=codigo,
-            stock=stock,
-            precio=precio
-        )
-
-        db.session.add(nuevo)
-        db.session.commit()
-
-        return redirect(url_for("inventario"))
-
-
-    # ELIMINAR
-    @app.route("/producto/eliminar/<int:id>")
-    @login_required
-    def eliminar_producto(id):
-        p = Producto.query.get_or_404(id)
-        db.session.delete(p)
-        db.session.commit()
-        return redirect(url_for("inventario"))
     @app.route("/dashboard")
     @permiso_requerido('ver_dashboard')
     @login_required
@@ -108,6 +69,68 @@ def create_app():
         modulos = Modulo.query.all()
         return render_template("dashboard.html", modulos=modulos)
     #endregion
+    #region SuperAdmin
+    from flask import render_template, request, redirect, url_for
+    from flask_login import login_required, current_user
+    from extensions import db
+    from models.inventario import Producto, Empresa
+
+
+    @app.route("/superadmin/inventario")
+    @permiso_requerido('ver_inventario_admin')
+    @login_required
+    def superadmin_inventario():
+        empresa_id = request.args.get("empresa")
+
+        if empresa_id:
+            productos = Producto.query.filter_by(
+                empresa_id=empresa_id
+            ).all()
+        else:
+            productos = Producto.query.all()
+
+        empresas = Empresa.query.all()
+
+        return render_template(
+            "superadmin_inventario.html",
+            productos=productos,
+            empresas=empresas
+        )
+    
+    @app.route("/superadmin/producto/crear", methods=["POST"])
+    @permiso_requerido('crear_producto')
+    @login_required
+    def superadmin_crear_producto():
+
+        if not current_user.es_superadmin:
+            return "No autorizado", 403
+
+        nuevo = Producto(
+            empresa_id=request.form["empresa_id"],
+            nombre=request.form["nombre"],
+            codigo=request.form["codigo"],
+            stock=request.form["stock"],
+            precio=request.form["precio"]
+        )
+
+        db.session.add(nuevo)
+        db.session.commit()
+
+        return redirect(url_for("superadmin_inventario"))
+    @app.route("/superadmin/producto/eliminar/<int:id>")
+    @permiso_requerido('eliminar_producto_admin')
+    @login_required
+    def superadmin_eliminar_producto(id):
+
+        p = Producto.query.get_or_404(id)
+        db.session.delete(p)
+        db.session.commit()
+
+        return redirect(url_for("superadmin_inventario"))
+    #endregion
+    #region Admin
+    #endregion
+    #region usuario
     #region Login
     @app.route("/login_register")
     def login_register():

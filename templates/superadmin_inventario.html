@@ -1,22 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}Inventario - Toti{% endblock %}
+{% block title %}Superadmin - Inventario Global{% endblock %}
 
 {% block content %}
 
 <style>
-.container-inv{
+.container-sa{
     padding:30px;
 }
 
-.header-inv{
+.header-sa{
     display:flex;
     justify-content:space-between;
+    align-items:center;
     margin-bottom:20px;
 }
 
 .btn{
-    background:#2563eb;
+    background:#111827;
     color:white;
     padding:10px 16px;
     border:none;
@@ -25,7 +26,7 @@
 }
 
 .btn:hover{
-    background:#1e40af;
+    background:#000;
 }
 
 .table-box{
@@ -53,6 +54,14 @@ tr:hover{
     background:#f9fafb;
 }
 
+.badge{
+    padding:4px 8px;
+    border-radius:6px;
+    font-size:12px;
+    background:#2563eb;
+    color:white;
+}
+
 .modal{
     position:fixed;
     inset:0;
@@ -71,17 +80,30 @@ tr:hover{
 </style>
 
 
-<div class="container-inv">
+<div class="container-sa">
 
-    <div class="header-inv">
-        <h2>Inventario</h2>
+    <div class="header-sa">
+        <h2>Inventario Global (Superadmin)</h2>
         <button class="btn" onclick="openModal()">+ Producto</button>
     </div>
+
+    <!-- Filtro empresa -->
+    <form method="GET">
+        <select name="empresa" onchange="this.form.submit()">
+            <option value="">Todas las empresas</option>
+            {% for e in empresas %}
+                <option value="{{ e.id }}">{{ e.nombre }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <br>
 
     <div class="table-box">
         <table>
             <thead>
                 <tr>
+                    <th>Empresa</th>
                     <th>Producto</th>
                     <th>Código</th>
                     <th>Stock</th>
@@ -93,12 +115,13 @@ tr:hover{
             <tbody>
             {% for p in productos %}
                 <tr>
+                    <td><span class="badge">{{ p.empresa.nombre }}</span></td>
                     <td>{{ p.nombre }}</td>
                     <td>{{ p.codigo }}</td>
                     <td>{{ p.stock }}</td>
                     <td>${{ p.precio }}</td>
                     <td>
-                        <a href="{{ url_for('eliminar_producto', id=p.id) }}">
+                        <a href="{{ url_for('superadmin_eliminar_producto', id=p.id) }}">
                             ❌
                         </a>
                     </td>
@@ -118,7 +141,14 @@ tr:hover{
 
         <h3>Nuevo producto</h3>
 
-        <form method="POST" action="{{ url_for('crear_producto') }}">
+        <form method="POST" action="{{ url_for('superadmin_crear_producto') }}">
+
+            <select name="empresa_id" required>
+                <option value="">Empresa</option>
+                {% for e in empresas %}
+                    <option value="{{ e.id }}">{{ e.nombre }}</option>
+                {% endfor %}
+            </select><br><br>
 
             <input name="nombre" placeholder="Nombre" required><br><br>
             <input name="codigo" placeholder="Código"><br><br>
@@ -131,7 +161,6 @@ tr:hover{
 
     </div>
 </div>
-
 
 <script>
 function openModal(){

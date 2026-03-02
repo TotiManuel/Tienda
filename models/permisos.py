@@ -1,7 +1,9 @@
 PERMISOS = {
     "superadmin": [
         "ver_dashboard",
-        "ver_inventario",
+        "ver_inventario_admin",
+        "eliminar_producto_admin",
+        "crear_producto",
         "gestionar_usuarios",
         "gestionar_empresas",
         "ver_reportes",
