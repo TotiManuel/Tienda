@@ -1,32 +1,20 @@
-/* ================= RESET ================= */
-
 * {
     box-sizing: border-box;
 }
-
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #f7f7f7;
     color: #1e293b;
 }
-
-/* ================= LAYOUT GLOBAL ================= */
-
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 20px;
 }
-
 main {
     min-height: 80vh;
 }
-
-/* ================= NAVBAR ================= */
-
-/* ================= NAVBAR ================= */
-
 .navbar {
     background: #ffffff;
     border-bottom: 1px solid #e5e7eb;
@@ -34,20 +22,15 @@ main {
     top: 0;
     z-index: 1000;
 }
-
 .nav-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 70px;
 }
-
-/* LOGO */
-
 .logo {
     margin: 0;
 }
-
 .logo a {
     text-decoration: none;
     font-size: 22px;
@@ -55,15 +38,11 @@ main {
     color: #2563eb;
     letter-spacing: -0.5px;
 }
-
-/* NAV LINKS */
-
 .nav-links {
     display: flex;
     align-items: center;
     gap: 30px;
 }
-
 .nav-links a {
     text-decoration: none;
     color: #475569;
@@ -72,9 +51,6 @@ main {
     transition: 0.2s ease;
     position: relative;
 }
-
-/* Hover elegante con línea inferior */
-
 .nav-links a:not(.btn)::after {
     content: "";
     position: absolute;
@@ -85,55 +61,40 @@ main {
     background: #2563eb;
     transition: 0.25s ease;
 }
-
 .nav-links a:not(.btn):hover {
     color: #2563eb;
 }
-
 .nav-links a:not(.btn):hover::after {
     width: 100%;
 }
-
-/* BOTÓN INGRESAR */
-
 .btn-small {
     padding: 8px 18px;
     font-size: 14px;
     border-radius: 6px;
 }
-
 .btn-primary {
     background: #2563eb;
     color: white;
 }
-
 .btn-primary:hover {
     background: #1d4ed8;
     color:white;
 }
-
-/* ================= HERO ================= */
-
 .hero {
     padding: 100px 20px;
     text-align: center;
     background: white;
 }
-
 .hero h2 {
     font-size: 40px;
     margin-bottom: 15px;
 }
-
 .hero p {
     font-size: 18px;
     color: #64748b;
     max-width: 650px;
     margin: 0 auto 30px;
 }
-
-/* ================= BOTONES ================= */
-
 .btn {
     display: inline-block;
     padding: 12px 25px;
@@ -143,46 +104,35 @@ main {
     cursor: pointer;
     transition: 0.2s ease;
 }
-
 .btn-primary {
     background: #2563eb;
     color: white;
 }
-
 .btn-primary:hover {
     background: #1d4ed8;
 }
-
-/* ================= FEATURES ================= */
-
 .features {
     padding: 60px 20px;
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
-
 .feature-card {
     background: white;
     padding: 25px;
     border-radius: 10px;
     border: 1px solid #e5e7eb;
 }
-
 .feature-card h3 {
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 18px;
 }
-
 .feature-card p {
     margin: 0;
     color: #64748b;
     font-size: 14px;
 }
-
-/* ================= FOOTER ================= */
-
 footer {
     background: white;
     border-top: 1px solid #e5e7eb;
@@ -191,14 +141,10 @@ footer {
     color: #64748b;
     font-size: 14px;
 }
-
-/* ================= RESPONSIVE ================= */
-
 @media (max-width: 768px) {
     .hero h2 {
         font-size: 30px;
     }
-
     .hero p {
         font-size: 16px;
     }

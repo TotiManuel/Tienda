@@ -1,22 +1,18 @@
 #region Imports
 from flask import Flask, abort, flash, redirect, render_template, request, url_for
-from flask import request, render_template,session
-from flask_login import login_required, login_user, logout_user
+from flask_login import login_required, login_user, logout_user, current_user
 from werkzeug.security import check_password_hash
 from models.decoradores import permiso_requerido, superadmin_required
 from models.modulo import Modulo
-from utils.setup_modulos import crear_modulos_base
 from models.usuario import Usuario
 from models import init_db
+from utils.setup_modulos import crear_modulos_base
 import sys, os
 from extensions import db, login_manager
-from flask_login import current_user
 from models.inventario import Producto
 #endregion
-
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-
 #region app
 def create_app():
     app = Flask(
@@ -26,17 +22,12 @@ def create_app():
     )
     #region Database
     app.secret_key = "supersecretkey"
-
-    # 🔥 DATABASE (Vercel o local)
     database_url = os.getenv("DATABASE_URL", "sqlite:///database.db")
-
     app.config["SQLALCHEMY_DATABASE_URI"] = database_url
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = "login_register"
-    
     with app.app_context():
         init_db()
         if not Usuario.query.filter_by(rol='superadmin').first():
@@ -62,7 +53,6 @@ def create_app():
     @app.route("/contacto")
     def contacto():
         return render_template("index.html")
-
     @app.route("/dashboard")
     @permiso_requerido('ver_dashboard')
     @login_required
@@ -75,19 +65,12 @@ def create_app():
     @login_required
     @superadmin_required
     def superadmin_inventario():
-
         empresa_id = request.args.get("empresa", type=int)
-
         empresas = Usuario.query.filter_by(rol="empresa").all()
-
         query = Producto.query
-
-        # 🔥 CORRECCIÓN: filtrar por empresa_id (no usuario_id)
         if empresa_id:
             query = query.filter_by(empresa_id=empresa_id)
-
         productos = query.all()
-
         return render_template(
             "superadmin_inventario.html",
             productos=productos,
@@ -97,9 +80,7 @@ def create_app():
     @login_required
     @superadmin_required
     def superadmin_crear_producto():
-
         empresa_id = int(request.form["empresa_id"])
-
         nuevo = Producto(
             nombre=request.form["nombre"],
             codigo=request.form.get("codigo"),
@@ -108,36 +89,27 @@ def create_app():
             empresa_id=empresa_id,          # 🔥 CORRECCIÓN
             usuario_id=current_user.id      # opcional: quién lo creó
         )
-
         db.session.add(nuevo)
         db.session.commit()
-
         return redirect(url_for("superadmin_inventario"))
     @app.route("/superadmin/producto/eliminar/<int:id>")
     @login_required
     @superadmin_required
     def superadmin_eliminar_producto(id):
-
         producto = Producto.query.get_or_404(id)
-
         db.session.delete(producto)
         db.session.commit()
-
         return redirect(url_for("superadmin_inventario"))    
     #endregion
     #region Empresa
     @app.route("/empresa/inventario")
     @login_required
     def empresa_inventario():
-
-        # 🔥 seguridad: solo rol empresa
         if current_user.rol != "empresa":
             abort(403)
-
         productos = Producto.query.filter_by(
             empresa_id=current_user.id
         ).all()
-
         return render_template(
             "empresa_inventario.html",
             productos=productos
@@ -145,43 +117,34 @@ def create_app():
     @app.route("/empresa/producto/crear", methods=["POST"])
     @login_required
     def empresa_crear_producto():
-
         if current_user.rol != "empresa":
             abort(403)
-
         nuevo = Producto(
             nombre=request.form["nombre"],
             codigo=request.form.get("codigo"),
             stock=int(request.form.get("stock", 0)),
             precio=float(request.form.get("precio", 0)),
-
-            # 🔥 SIEMPRE la empresa actual
             empresa_id=current_user.id,
             usuario_id=current_user.id
         )
-
         db.session.add(nuevo)
         db.session.commit()
-
         return redirect(url_for("empresa_inventario"))
     @app.route("/empresa/producto/eliminar/<int:id>")
     @login_required
     def empresa_eliminar_producto(id):
-
         if current_user.rol != "empresa":
             abort(403)
-
         producto = Producto.query.filter_by(
             id=id,
             empresa_id=current_user.id  # 🔥 seguridad
         ).first_or_404()
-
         db.session.delete(producto)
         db.session.commit()
-
         return redirect(url_for("empresa_inventario"))
     #endregion
     #region Empleado
+    #endregion
     #region Login
     @app.route("/login_register")
     def login_register():
@@ -218,13 +181,9 @@ def create_app():
                 empresa=empresa,
                 rol=rol
             )
-
-            # 🔐 HASH obligatorio
             usuario.set_password(password)
-
             db.session.add(usuario)
             db.session.commit()
-
             return redirect(url_for("login_register"))  # 🔥 redirigir
         return render_template('login_register.html')
     @app.route("/logout")
@@ -239,11 +198,3 @@ def create_app():
 app = create_app()
 if __name__ == "__main__":
     app.run(debug=True)    
-    
-#region permisosHTML
-'''
-                <!--{% if usuario.tiene_permiso("gestionar_usuarios") %}
-                        <a href="/usuarios">Usuarios</a>
-                    {% endif %} -->
-'''
-#endregion

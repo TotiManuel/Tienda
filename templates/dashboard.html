@@ -1,26 +1,20 @@
 {% extends "base.html" %}
-
 {% block title %}Dashboard - Toti{% endblock %}
-
 {% block content %}
-
 <style>
 .dashboard-container {
     padding: 40px;
 }
-
 .dashboard-title {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 30px;
 }
-
 .modulos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 25px;
 }
-
 .modulo-card {
     background: white;
     border-radius: 16px;
@@ -35,36 +29,30 @@
     position: relative;
     overflow: hidden;
 }
-
 .modulo-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
 }
-
 .modulo-icono {
     font-size: 40px;
     margin-bottom: 15px;
 }
-
 .modulo-nombre {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 8px;
 }
-
 .modulo-descripcion {
     font-size: 14px;
     color: #666;
     margin-bottom: 15px;
 }
-
 .modulo-categoria {
     font-size: 12px;
     font-weight: bold;
     text-transform: uppercase;
     opacity: 0.7;
 }
-
 .modulo-color-bar {
     position: absolute;
     top: 0;
@@ -73,43 +61,30 @@
     height: 5px;
 }
 </style>
-
 <div class="dashboard-container">
-
     <div class="dashboard-title">
         Módulos disponibles
     </div>
-
     <div class="modulos-grid">
         {% for modulo in modulos %}
-
             <a href="modulo.nombre" class="modulo-card">
-
                 <div class="modulo-color-bar" style="background: {{ modulo.color }};"></div>
-
                 <div>
                     <div class="modulo-icono">
                         {{ modulo.icono }}
                     </div>
-
                     <div class="modulo-nombre">
                         {{ modulo.nombre }}
                     </div>
-
                     <div class="modulo-descripcion">
                         {{ modulo.descripcion }}
                     </div>
                 </div>
-
                 <div class="modulo-categoria">
                     {{ modulo.categoria }}
                 </div>
-
             </a>
-
         {% endfor %}
     </div>
-
 </div>
-
 {% endblock %}

@@ -3,7 +3,6 @@ from werkzeug.security import generate_password_hash
 from extensions import db
 from models.permisos import PERMISOS
 from flask_login import UserMixin
-
 class Usuario(db.Model, UserMixin):
     __tablename__ = "usuarios"
     id = db.Column(db.Integer, primary_key=True)
@@ -23,11 +22,8 @@ class Usuario(db.Model, UserMixin):
         back_populates="empresa",
         cascade="all, delete"
     )
-    
     def set_password(self, password):
         self.password=generate_password_hash(password)
-    
     def tiene_permiso(self, permiso):
         permisos_rol = PERMISOS.get(self.rol, [])
         return permiso in permisos_rol
-    

@@ -1,95 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Toti{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-</head>
-<body>
-    <header class="navbar">
-        <div class="container nav-content">
-
-            {% if current_user.is_authenticated %}
-                <h1 class="logo">
-                    <a href="{{ url_for('dashboard') }}">Toti</a>
-                </h1>
-            {% else %}
-                <h1 class="logo">
-                    <a href="{{ url_for('home') }}">Toti</a>
-                </h1>
-            {% endif %}
-
-            <nav class="nav-links">
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Toti{% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    </head>
+    <body>
+        <header class="navbar">
+            <div class="container nav-content">
                 {% if current_user.is_authenticated %}
-
-                    <!-- 🔥 INVENTARIO -->
-                    {% if current_user.tiene_permiso("ver_inventario") %}
-                        <a href="{{ url_for('empresa_inventario') }}">Inventario</a>
-                    {% endif %}
-
-                    {% if current_user.tiene_permiso("ver_inventario_global") %}
-                        <a href="{{ url_for('superadmin_inventario') }}">Inventario Global</a>
-                    {% endif %}
-
-                    <!-- 🔥 VENTAS -->
-                    {% if current_user.tiene_permiso("ver_ventas") %}
-                        <a href="#">Ventas</a>
-                    {% endif %}
-
-                    <!-- 🔥 CLIENTES -->
-                    {% if current_user.tiene_permiso("ver_clientes") %}
-                        <a href="#">Clientes</a>
-                    {% endif %}
-
-                    <!-- 🔥 REPORTES -->
-                    {% if current_user.tiene_permiso("ver_reportes") %}
-                        <a href="#">Reportes</a>
-                    {% endif %}
-
-                    <!-- 🔥 ADMIN -->
-                    {% if current_user.tiene_permiso("gestionar_usuarios") %}
-                        <a href="#">Usuarios</a>
-                    {% endif %}
-
-                    {% if current_user.tiene_permiso("gestionar_empresas") %}
-                        <a href="#">Empresas</a>
-                    {% endif %}
-
-                {% endif %}
-
-                <!-- 🌍 GENERAL -->
-                <a href="{{ url_for('home') }}">Precios</a>
-                <a href="{{ url_for('home') }}">Contacto</a>
-
-                {% if current_user.is_authenticated %}
-                    <a href="{{ url_for('logout') }}" class="btn btn-primary btn-small">
-                        Salir
-                    </a>
+                    <h1 class="logo">
+                        <a href="{{ url_for('dashboard') }}">Toti</a>
+                    </h1>
                 {% else %}
-                    <a href="{{ url_for('login_register') }}" class="btn btn-primary btn-small">
-                        Ingresar
-                    </a>
+                    <h1 class="logo">
+                        <a href="{{ url_for('home') }}">Toti</a>
+                    </h1>
                 {% endif %}
-
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-
-    <footer class="footer">
-        <div class="container footer-content">
-            <p>© 2026 Toti. Todos los derechos reservados.</p>
-            <div class="footer-links">
-                <a href="#">Privacidad</a>
-                <a href="#">Términos</a>
+                <nav class="nav-links">
+                    {% if current_user.is_authenticated %}
+                        {% if current_user.tiene_permiso("ver_inventario") %}
+                            <a href="{{ url_for('empresa_inventario') }}">Inventario</a>
+                        {% endif %}
+                        {% if current_user.tiene_permiso("ver_inventario_global") %}
+                            <a href="{{ url_for('superadmin_inventario') }}">Inventario Global</a>
+                        {% endif %}
+                        {% if current_user.tiene_permiso("ver_ventas") %}
+                            <a href="#">Ventas</a>
+                        {% endif %}
+                        {% if current_user.tiene_permiso("ver_clientes") %}
+                            <a href="#">Clientes</a>
+                        {% endif %}
+                        {% if current_user.tiene_permiso("ver_reportes") %}
+                            <a href="#">Reportes</a>
+                        {% endif %}
+                        {% if current_user.tiene_permiso("gestionar_usuarios") %}
+                            <a href="#">Usuarios</a>
+                        {% endif %}
+                        {% if current_user.tiene_permiso("gestionar_empresas") %}
+                            <a href="#">Empresas</a>
+                        {% endif %}
+                    {% endif %}
+                    <a href="{{ url_for('home') }}">Precios</a>
+                    <a href="{{ url_for('home') }}">Contacto</a>
+                    {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('logout') }}" class="btn btn-primary btn-small">
+                            Salir
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('login_register') }}" class="btn btn-primary btn-small">
+                            Ingresar
+                        </a>
+                    {% endif %}
+                </nav>
             </div>
-        </div>
-    </footer>
-
-</body>
+        </header>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        <footer class="footer">
+            <div class="container footer-content">
+                <p>© 2026 Toti. Todos los derechos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Privacidad</a>
+                    <a href="#">Términos</a>
+                </div>
+            </div>
+        </footer>
+    </body>
 </html>

@@ -1,21 +1,16 @@
 {% extends "base.html" %}
-
 {% block title %}Inventario{% endblock %}
-
 {% block content %}
-
 <style>
 .container-emp{
     padding:30px;
 }
-
 .header-emp{
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-bottom:20px;
 }
-
 .btn{
     background:#2563eb;
     color:white;
@@ -24,36 +19,29 @@
     border-radius:8px;
     cursor:pointer;
 }
-
 .btn:hover{
     background:#1e40af;
 }
-
 .table-box{
     background:white;
     border-radius:12px;
     box-shadow:0 4px 12px rgba(0,0,0,0.06);
     overflow:hidden;
 }
-
 table{
     width:100%;
     border-collapse:collapse;
 }
-
 th,td{
     padding:14px;
     border-bottom:1px solid #eee;
 }
-
 th{
     background:#f3f4f6;
 }
-
 tr:hover{
     background:#f9fafb;
 }
-
 .modal{
     position:fixed;
     inset:0;
@@ -62,7 +50,6 @@ tr:hover{
     justify-content:center;
     align-items:center;
 }
-
 .modal-content{
     background:white;
     padding:25px;
@@ -70,15 +57,11 @@ tr:hover{
     width:350px;
 }
 </style>
-
-
 <div class="container-emp">
-
     <div class="header-emp">
         <h2>Mi Inventario</h2>
         <button class="btn" onclick="openModal()">+ Producto</button>
     </div>
-
     <div class="table-box">
         <table>
             <thead>
@@ -90,7 +73,6 @@ tr:hover{
                     <th></th>
                 </tr>
             </thead>
-
             <tbody>
             {% for p in productos %}
                 <tr>
@@ -106,43 +88,29 @@ tr:hover{
                 </tr>
             {% endfor %}
             </tbody>
-
         </table>
     </div>
-
 </div>
-
-
-<!-- MODAL -->
 <div class="modal" id="modal">
     <div class="modal-content">
-
         <h3>Nuevo producto</h3>
-
         <form method="POST" action="{{ url_for('empresa_crear_producto') }}">
-
             <input name="nombre" placeholder="Nombre" required><br><br>
             <input name="codigo" placeholder="Código"><br><br>
             <input name="stock" type="number" placeholder="Stock"><br><br>
             <input name="precio" type="number" placeholder="Precio"><br><br>
-
             <button class="btn">Guardar</button>
-
         </form>
-
     </div>
 </div>
-
 <script>
 function openModal(){
     document.getElementById("modal").style.display="flex";
 }
-
 window.onclick = function(e){
     if(e.target.id=="modal"){
         document.getElementById("modal").style.display="none";
     }
 }
 </script>
-
 {% endblock %}
