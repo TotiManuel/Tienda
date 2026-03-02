@@ -71,10 +71,10 @@ def create_app():
         return render_template("dashboard.html", modulos=modulos)
     #endregion
     #region SuperAdmin
-    @app.route("/inventario")
+    @app.route("/superadmin/inventario")
     @login_required
     @superadmin_required
-    def inventario():
+    def superadmin_inventario():
 
         empresa_id = request.args.get("empresa", type=int)
 
@@ -89,7 +89,7 @@ def create_app():
         productos = query.all()
 
         return render_template(
-            "inventario.html",
+            "superadmin_inventario.html",
             productos=productos,
             empresas=empresas
         )
