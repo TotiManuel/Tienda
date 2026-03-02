@@ -10,6 +10,7 @@ from models.usuario import Usuario
 from models import init_db
 import sys, os
 from extensions import db, login_manager
+from models.inventario import Producto, Categoria
 #endregion
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -60,6 +61,46 @@ def create_app():
     @app.route("/contacto")
     def contacto():
         return render_template("index.html")
+
+    @app.route("/inventario")
+    @permiso_requerido('ver_inventario')
+    @login_required
+    def inventario():
+        productos = Producto.query.all()
+        return render_template("inventario.html", productos=productos)
+
+
+    # CREAR PRODUCTO
+    @app.route("/producto/crear", methods=["POST"])
+    @login_required
+    def crear_producto():
+
+        nombre = request.form["nombre"]
+        codigo = request.form["codigo"]
+        stock = request.form["stock"]
+        precio = request.form["precio"]
+
+        nuevo = Producto(
+            nombre=nombre,
+            codigo=codigo,
+            stock=stock,
+            precio=precio
+        )
+
+        db.session.add(nuevo)
+        db.session.commit()
+
+        return redirect(url_for("inventario"))
+
+
+    # ELIMINAR
+    @app.route("/producto/eliminar/<int:id>")
+    @login_required
+    def eliminar_producto(id):
+        p = Producto.query.get_or_404(id)
+        db.session.delete(p)
+        db.session.commit()
+        return redirect(url_for("inventario"))
     @app.route("/dashboard")
     @permiso_requerido('ver_dashboard')
     @login_required
