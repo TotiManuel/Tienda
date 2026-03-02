@@ -4,14 +4,11 @@ from flask import request, render_template,session
 from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash
 from models.decoradores import permiso_requerido
-from models.inventario import *
 from models.modulo import Modulo
 from utils.setup_modulos import crear_modulos_base
 from models.usuario import Usuario
 from models import init_db
 import sys, os
-from flask_login import current_user
-from sqlalchemy import func
 from extensions import db, login_manager
 #endregion
 
@@ -54,7 +51,9 @@ def create_app():
     @app.route("/")
     def home():
         return render_template("index.html")
-
+    @app.route("/funciones")
+    def funciones():
+        return render_template("index.html")
     @app.route("/precios")
     def precios():
         return render_template("index.html")
