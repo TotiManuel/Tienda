@@ -38,8 +38,8 @@ def create_app():
     
     with app.app_context():
         init_db()
-        if not Usuario.query.filter_by(rol='admin').first():
-            admin = Usuario(nombre='Julian', apellido='Mandaio', email='manuel.mandaio@gmail.com', empresa='Toti', rol='admin')
+        if not Usuario.query.filter_by(rol='superadmin').first():
+            admin = Usuario(nombre='Julian', apellido='Mandaio', email='manuel.mandaio@gmail.com', empresa='Toti', rol='superadmin')
             admin.set_password('41323167')
             db.session.add(admin)
             db.session.commit()
