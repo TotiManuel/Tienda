@@ -17,6 +17,7 @@ class Usuario(db.Model, UserMixin):
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
     fecha_actualizacion = db.Column(db.DateTime, onupdate=datetime.utcnow)
     empresa = db.Column(db.String(120))
+    productos = db.relationship("Producto", backref="empresa", lazy=True)
     
     def set_password(self, password):
         self.password=generate_password_hash(password)

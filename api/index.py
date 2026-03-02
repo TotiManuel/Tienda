@@ -75,16 +75,20 @@ def create_app():
     @superadmin_required
     @login_required
     def superadmin_inventario():
+
+        if current_user.rol != "superadmin":
+            abort(403)
+
         empresa_id = request.args.get("empresa")
 
-        if empresa_id:
-            productos = Producto.query.filter_by(
-                empresa_id=empresa_id
-            ).all()
-        else:
-            productos = Producto.query.all()
+        empresas = Usuario.query.filter_by(rol="empresa").all()
 
-        empresas = Empresa.query.all()
+        query = Producto.query
+
+        if empresa_id:
+            query = query.filter_by(usuario_id=empresa_id)
+
+        productos = query.all()
 
         return render_template(
             "superadmin_inventario.html",
@@ -97,15 +101,15 @@ def create_app():
     @login_required
     def superadmin_crear_producto():
 
-        if not current_user.es_superadmin:
-            return "No autorizado", 403
+        if current_user.rol != "superadmin":
+            abort(403)
 
         nuevo = Producto(
-            empresa_id=request.form["empresa_id"],
             nombre=request.form["nombre"],
             codigo=request.form["codigo"],
             stock=request.form["stock"],
-            precio=request.form["precio"]
+            precio=request.form["precio"],
+            usuario_id=request.form["empresa_id"]
         )
 
         db.session.add(nuevo)
@@ -116,6 +120,9 @@ def create_app():
     @superadmin_required
     @login_required
     def superadmin_eliminar_producto(id):
+
+        if current_user.rol != "superadmin":
+            abort(403)
 
         p = Producto.query.get_or_404(id)
         db.session.delete(p)

@@ -26,5 +26,6 @@ class Producto(db.Model):
     codigo = db.Column(db.String(100))
     stock = db.Column(db.Integer, default=0)
     precio = db.Column(db.Float, default=0)
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
 
     creado_en = db.Column(db.DateTime, default=datetime.utcnow)
