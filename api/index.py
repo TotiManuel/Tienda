@@ -4,6 +4,7 @@ from flask import request, render_template,session
 from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash
 from models.decoradores import permiso_requerido
+from models.inventario import Producto
 from models.modulo import Modulo
 from utils.setup_modulos import crear_modulos_base
 from models.usuario import Usuario
@@ -51,9 +52,12 @@ def create_app():
     @app.route("/")
     def home():
         return render_template("index.html")
-    @app.route("/funciones")
-    def funciones():
-        return render_template("index.html")
+    @app.route("/inventario")
+    @permiso_requerido('ver_inventario')
+    @login_required
+    def inventario():
+        producto = Producto.query.all()
+        return render_template("inventario.html", producto=producto)
     @app.route("/precios")
     def precios():
         return render_template("index.html")
@@ -66,11 +70,11 @@ def create_app():
     def dashboard():
         modulos = Modulo.query.all()
         return render_template("dashboard.html", modulos=modulos)
-    
+    #endregion
+    #region Login
     @app.route("/login_register")
     def login_register():
         return render_template("login_register.html")
-    #endregion
     @app.route("/login", methods=['GET', 'POST'])
     def login():
         if request.method == 'POST':
@@ -118,7 +122,7 @@ def create_app():
         logout_user()
         flash("Sesión cerrada correctamente")
         return redirect(url_for("login_register"))
-
+    #endregion
     return app
 #endregion
 app = create_app()
