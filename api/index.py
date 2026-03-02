@@ -112,7 +112,7 @@ def create_app():
         db.session.add(nuevo)
         db.session.commit()
 
-        return redirect(url_for("inventario"))
+        return redirect(url_for("superadmin_inventario"))
     @app.route("/superadmin/producto/eliminar/<int:id>")
     @login_required
     @superadmin_required
@@ -123,7 +123,7 @@ def create_app():
         db.session.delete(producto)
         db.session.commit()
 
-        return redirect(url_for("inventario"))    
+        return redirect(url_for("superadmin_inventario"))    
     #endregion
     #region Empresa
     #endregion
