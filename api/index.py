@@ -89,7 +89,7 @@ def create_app():
         productos = query.all()
 
         return render_template(
-            "superadmin_inventario.html",
+            "inventario.html",
             productos=productos,
             empresas=empresas
         )
@@ -112,7 +112,7 @@ def create_app():
         db.session.add(nuevo)
         db.session.commit()
 
-        return redirect(url_for("superadmin_inventario"))
+        return redirect(url_for("inventario"))
     @app.route("/superadmin/producto/eliminar/<int:id>")
     @login_required
     @superadmin_required
@@ -123,7 +123,7 @@ def create_app():
         db.session.delete(producto)
         db.session.commit()
 
-        return redirect(url_for("superadmin_inventario"))    
+        return redirect(url_for("inventario"))    
     #endregion
     #region Empresa
     #endregion
