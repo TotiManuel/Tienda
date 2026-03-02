@@ -1,6 +1,7 @@
 from datetime import datetime
 from sqlalchemy.dialects.sqlite import JSON
 from extensions import db
+from sqlalchemy import func
 
 class CategoriaProducto(db.Model):
     __tablename__ = "categoria_producto"
@@ -57,6 +58,18 @@ class Producto(db.Model):
     atributos_extra = db.Column(JSON)
 
     creado_en = db.Column(db.DateTime, default=datetime.utcnow)
+
+    @property
+    def stock_actual(self):
+        from models import MovimientoStock
+
+        total = db.session.query(
+            func.coalesce(func.sum(MovimientoStock.cantidad), 0)
+        ).filter(
+            MovimientoStock.producto_id == self.id
+        ).scalar()
+
+        return total
     
 class VarianteProducto(db.Model):
     __tablename__ = "variante_producto"

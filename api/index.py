@@ -4,12 +4,14 @@ from flask import request, render_template,session
 from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash
 from models.decoradores import permiso_requerido
-from models.inventario import Producto
+from models.inventario import *
 from models.modulo import Modulo
 from utils.setup_modulos import crear_modulos_base
 from models.usuario import Usuario
 from models import init_db
 import sys, os
+from flask_login import current_user
+from sqlalchemy import func
 from extensions import db, login_manager
 #endregion
 
@@ -56,8 +58,14 @@ def create_app():
     @permiso_requerido('ver_inventario')
     @login_required
     def inventario():
-        producto = Producto.query.all()
-        return render_template("inventario.html", producto=producto)
+
+        productos = (
+            Producto.query
+            .filter_by(empresa_id=current_user.empresa_id, activo=True)
+            .all()
+        )
+
+        return render_template("inventario.html", productos=productos)
     @app.route("/precios")
     def precios():
         return render_template("index.html")
