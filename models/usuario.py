@@ -19,6 +19,7 @@ class Usuario(db.Model, UserMixin):
     empresa = db.Column(db.String(120))
     productos = db.relationship(
         "Producto",
+        foreign_keys="Producto.empresa_id",
         back_populates="empresa",
         cascade="all, delete"
     )
@@ -29,3 +30,4 @@ class Usuario(db.Model, UserMixin):
     def tiene_permiso(self, permiso):
         permisos_rol = PERMISOS.get(self.rol, [])
         return permiso in permisos_rol
+    
