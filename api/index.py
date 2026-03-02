@@ -54,18 +54,7 @@ def create_app():
     @app.route("/")
     def home():
         return render_template("index.html")
-    @app.route("/inventario")
-    @permiso_requerido('ver_inventario')
-    @login_required
-    def inventario():
 
-        productos = (
-            Producto.query
-            .filter_by(empresa_id=current_user.empresa_id, activo=True)
-            .all()
-        )
-
-        return render_template("inventario.html", productos=productos)
     @app.route("/precios")
     def precios():
         return render_template("index.html")
