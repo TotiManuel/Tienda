@@ -10,10 +10,6 @@ def home():
 def dashboard():
     return render_template("index.html")
 
-@main.route("/colecciones")
-def colecciones():
-    return render_template("index.html")
-
 @main.route("/prendas")
 def prendas():
     return render_template("index.html")
