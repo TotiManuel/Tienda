@@ -8,12 +8,12 @@ def home():
 
 @main.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    return render_template("index.html")
 
 @main.route("/colecciones")
 def colecciones():
-    return render_template("colecciones.html")
+    return render_template("index.html")
 
 @main.route("/prendas")
 def prendas():
-    return render_template("prendas.html")
+    return render_template("index.html")
