@@ -1,6 +1,1 @@
 Flask
-Flask-SQLAlchemy
-sqlalchemy
-gunicorn
-psycopg2-binary
-Flask_login
