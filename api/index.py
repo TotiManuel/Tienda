@@ -8,6 +8,7 @@ sys.path.append(BASE_DIR)
 
 from routes.main import main  # importar blueprint
 from routes.colecciones import colecciones
+from routes.prendas import prendas
 app = Flask(
     __name__,
     template_folder=os.path.join(BASE_DIR, "templates"),
@@ -17,3 +18,4 @@ app = Flask(
 # ✅ Registrar blueprint
 app.register_blueprint(main)
 app.register_blueprint(colecciones)
+app.register_blueprint(prendas)
