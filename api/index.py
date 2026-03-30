@@ -23,18 +23,17 @@ def create_app():
     @app.route("/")
     def home():
         return render_template("index.html")
-    @app.route("/funciones")
-    def funciones():
-        return render_template("index.html")
-    @app.route("/precios")
-    def precios():
-        return render_template("index.html")
-    @app.route("/contacto")
-    def contacto():
-        return render_template("index.html")
     @app.route("/dashboard")
     def dashboard():
-        return render_template("dashboard.html")
+        return render_template("index.html")
+
+    @app.route("/colecciones")
+    def colecciones():
+        return render_template("index.html")
+
+    @app.route("/prendas")
+    def prendas():
+        return render_template("index.html")
     #endregion
     return app
 #endregion

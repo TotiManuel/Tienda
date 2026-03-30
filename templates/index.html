@@ -1,35 +1,111 @@
 {% extends "base.html" %}
 {% block title %}Inicio - Toti{% endblock %}
+
 {% block content %}
+
+<style>
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h2 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    max-width: 600px;
+    margin: auto;
+    color: #555;
+}
+
+/* CARDS */
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 40px;
+}
+
+/* CARD */
+.feature-card {
+    background: #000;
+    color: #fff;
+    padding: 30px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+/* HOVER */
+.feature-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* TITULO */
+.feature-card h3 {
+    margin-bottom: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+
 <section class="hero">
     <div class="hero-content">
-        <h2>El sistema todo en uno para tu empresa</h2>
-        <p>
-            Gestioná clientes, ventas, turnos y tu tienda online desde un solo lugar.
-            Automatizá procesos y hacé crecer tu negocio sin complicaciones.
-        </p>
-        <div class="hero-buttons">
-            <a href="{{ url_for('login_register') }}" class="btn btn-primary btn-big">Comenzar ahora</a>
-            <a href="#" class="btn btn-secondary btn-big">Ver funcionalidades</a>
-        </div>
+        <h2>Panel de control</h2>
+        <p>Gestioná tu tienda de forma simple y rápida.</p>
     </div>
 </section>
+
 <section class="features">
-    <div class="feature-card">
-        <h3>CRM Inteligente</h3>
-        <p>Organizá clientes, historial y seguimientos de manera simple.</p>
+
+    <div class="feature-card" onclick="window.location.href='{{ url_for('dashboard') }}'">
+        <h3>Dashboard</h3>
+        <p>Visualizá estadísticas y control general de tu negocio.</p>
     </div>
-    <div class="feature-card">
-        <h3>Ventas y Facturación</h3>
-        <p>Controlá productos, stock y ventas con reportes automáticos.</p>
+
+    <div class="feature-card" onclick="window.location.href='{{ url_for('colecciones') }}'">
+        <h3>Colecciones</h3>
+        <p>Organizá tus prendas en colecciones atractivas.</p>
     </div>
-    <div class="feature-card">
-        <h3>Turnos Online</h3>
-        <p>Permití que tus clientes reserven directamente desde WhatsApp.</p>
+
+    <div class="feature-card" onclick="window.location.href='{{ url_for('prendas') }}'">
+        <h3>Prendas</h3>
+        <p>Gestioná productos, stock y detalles de cada prenda.</p>
     </div>
-    <div class="feature-card">
-        <h3>Ecommerce</h3>
-        <p>Vendé tus productos online con carrito integrado.</p>
+
+    <div class="feature-card" onclick="window.location.href='#'">
+        <h3>Ventas</h3>
+        <p>Controlá las ventas realizadas y su historial.</p>
     </div>
+
+    <div class="feature-card" onclick="window.location.href='#'">
+        <h3>Clientes</h3>
+        <p>Administrá tus clientes y su información.</p>
+    </div>
+
+    <div class="feature-card" onclick="window.location.href='#'">
+        <h3>Reportes</h3>
+        <p>Obtené análisis y estadísticas de tu negocio.</p>
+    </div>
+
 </section>
+
 {% endblock %}
