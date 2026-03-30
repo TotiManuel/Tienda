@@ -4,4 +4,4 @@ colecciones = Blueprint("colecciones", __name__)
 
 @colecciones.route("/colecciones")
 def home():
-    return render_template("index.html")
+    return render_template("colecciones.html")
