@@ -1,29 +1,27 @@
 import os
-from flask import Flask
-from config import Config
-from extensions import db
-from routes.main import main
+from flask import Flask, render_template
 
-def create_app():
-    base_dir = os.path.abspath(os.path.dirname(__file__))
+# Obtener ruta base del proyecto
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-    app = Flask(
-        __name__,
-        template_folder=os.path.join(base_dir, "templates"),
-        static_folder=os.path.join(base_dir, "static")
-    )
+app = Flask(
+    __name__,
+    template_folder=os.path.join(BASE_DIR, "templates"),
+    static_folder=os.path.join(BASE_DIR, "static")
+)
 
-    app.config.from_object(Config)
+@app.route("/")
+def home():
+    return render_template("index.html")
 
-    # Inicializar DB
-    db.init_app(app)
+@app.route("/dashboard")
+def dashboard():
+    return render_template("index.html")
 
-    # Registrar blueprints
-    app.register_blueprint(main)
+@app.route("/colecciones")
+def colecciones():
+    return render_template("index.html")
 
-    return app
-
-app = create_app()
-
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route("/prendas")
+def prendas():
+    return render_template("index.html")
