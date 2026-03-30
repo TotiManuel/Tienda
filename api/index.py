@@ -9,7 +9,7 @@ app = Flask(
     template_folder=os.path.join(BASE_DIR, "templates"),
     static_folder=os.path.join(BASE_DIR, "static")
 )
-
+ 
 @app.route("/")
 def home():
     return render_template("index.html")
