@@ -1,10 +1,18 @@
+import os
 from flask import Flask
 from config import Config
 from extensions import db
 from routes.main import main
 
 def create_app():
-    app = Flask(__name__)
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+
+    app = Flask(
+        __name__,
+        template_folder=os.path.join(base_dir, "templates"),
+        static_folder=os.path.join(base_dir, "static")
+    )
+
     app.config.from_object(Config)
 
     # Inicializar DB
