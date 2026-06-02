@@ -23,9 +23,10 @@
 {% for p in productos %}
 
 <div class="card">
+    
 
     {% if p.imagen %}
-        <img src="/static/uploads/{{ p.imagen }}">
+        <img src="{{ p.imagen }}">
     {% endif %}
 
     <h2>{{ p.nombre }}</h2>

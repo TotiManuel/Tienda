@@ -4,13 +4,11 @@ from flask import (
     request,
     redirect,
     session,
-    url_for,
     flash
 )
 
 import sqlite3
 import os
-from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
@@ -23,27 +21,25 @@ app.secret_key = os.environ.get(
     "clave_super_secreta"
 )
 
-UPLOAD_FOLDER = "static/uploads"
-
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-
 ADMIN_USER = "admin"
 ADMIN_PASSWORD = "admin123"
 
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+DATABASE = "database.db"
 
 # =========================
 # DATABASE
 # =========================
 
-DATABASE = "database.db"
-
 def conectar():
+
     conn = sqlite3.connect(DATABASE)
+
     conn.row_factory = sqlite3.Row
+
     return conn
 
 def crear_tablas():
+
     conn = conectar()
 
     conn.execute("""
@@ -57,6 +53,7 @@ def crear_tablas():
     """)
 
     conn.commit()
+
     conn.close()
 
 crear_tablas()
@@ -141,7 +138,7 @@ def quitar(index):
     return redirect("/carrito")
 
 # =========================
-# LOGIN
+# LOGIN ADMIN
 # =========================
 
 @app.route("/panel-privado", methods=["GET", "POST"])
@@ -166,7 +163,7 @@ def login():
     return render_template("login.html")
 
 # =========================
-# ADMIN
+# PANEL ADMIN
 # =========================
 
 @app.route("/admin")
@@ -199,26 +196,10 @@ def crear():
     if not session.get("admin"):
         return redirect("/")
 
-    nombre = request.form["nombre"].strip()
+    nombre = request.form["nombre"]
     precio = request.form["precio"]
-    coleccion = request.form["coleccion"].strip()
-
-    archivo = request.files["imagen"]
-
-    nombre_imagen = ""
-
-    if archivo and archivo.filename != "":
-
-        nombre_imagen = secure_filename(
-            archivo.filename
-        )
-
-        ruta = os.path.join(
-            app.config["UPLOAD_FOLDER"],
-            nombre_imagen
-        )
-
-        archivo.save(ruta)
+    coleccion = request.form["coleccion"]
+    imagen = request.form["imagen"]
 
     conn = conectar()
 
@@ -230,10 +211,11 @@ def crear():
         nombre,
         precio,
         coleccion,
-        nombre_imagen
+        imagen
     ))
 
     conn.commit()
+
     conn.close()
 
     flash("Producto creado")
@@ -258,7 +240,9 @@ def editar(id):
     ).fetchone()
 
     if not producto:
+
         conn.close()
+
         return redirect("/admin")
 
     if request.method == "POST":
@@ -266,21 +250,25 @@ def editar(id):
         nombre = request.form["nombre"]
         precio = request.form["precio"]
         coleccion = request.form["coleccion"]
+        imagen = request.form["imagen"]
 
         conn.execute("""
             UPDATE productos
             SET nombre = ?,
                 precio = ?,
-                coleccion = ?
+                coleccion = ?,
+                imagen = ?
             WHERE id = ?
         """, (
             nombre,
             precio,
             coleccion,
+            imagen,
             id
         ))
 
         conn.commit()
+
         conn.close()
 
         flash("Producto actualizado")
@@ -312,6 +300,7 @@ def eliminar(id):
     )
 
     conn.commit()
+
     conn.close()
 
     flash("Producto eliminado")
