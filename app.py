@@ -59,12 +59,35 @@ def catalogo():
         productos=productos
     )
     
-@app.route("/detalle_producto")
-def detalle_producto():
+@app.route("/producto/<int:id>")
+def detalle_producto(id):
+
+    producto = next(
+        (
+            p for p in productos
+            if p["id"] == id
+        ),
+        None
+    )
+
+    if not producto:
+        return redirect("/")
+
+    # imágenes extra temporales
+    producto["imagenes_extra"] = [
+        producto["imagen"],
+        producto["imagen"],
+        producto["imagen"]
+    ]
+
+    producto["descripcion"] = (
+        "Prenda premium minimalista "
+        "con diseño urbano."
+    )
 
     return render_template(
         "detalle_producto.html",
-        productos=productos
+        producto=producto
     )
 
 # ====================================
