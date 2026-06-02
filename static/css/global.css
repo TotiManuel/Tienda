@@ -269,3 +269,413 @@ hr {
     }
 
 }
+/* =========================
+   PRODUCTO DETALLE
+========================= */
+
+.producto{
+    max-width:1100px;
+    margin:40px auto;
+    padding:0 25px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:start;
+}
+
+/* =========================
+   GALERIA
+========================= */
+
+.galeria{
+    position:sticky;
+    top:30px;
+}
+
+.principal{
+    background:black;
+    border-radius:14px;
+    overflow:hidden;
+    position:relative;
+}
+
+/* Luz animada */
+
+.principal::before{
+    content:"";
+    position:absolute;
+    top:-100%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.15),
+        transparent
+    );
+    transform:rotate(25deg);
+    transition:.6s;
+    pointer-events:none;
+}
+
+.principal:hover::before{
+    top:100%;
+}
+
+/* Imagen principal */
+
+.principal img{
+    width:100%;
+    height:620px;
+    object-fit:cover;
+    display:block;
+}
+
+/* Miniaturas */
+
+.miniaturas{
+    display:flex;
+    gap:12px;
+    margin-top:15px;
+    flex-wrap:wrap;
+}
+
+.miniaturas img{
+    width:82px;
+    height:100px;
+    object-fit:cover;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+    border:1px solid #e5e5e5;
+}
+
+.miniaturas img:hover{
+    transform:scale(1.05);
+    border-color:black;
+}
+
+/* =========================
+   INFO
+========================= */
+
+.info{
+    padding-top:10px;
+}
+
+.coleccion{
+    font-size:13px;
+    color:#777;
+    letter-spacing:1px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+}
+
+.info h2{
+    margin:0;
+    font-size:42px;
+    font-weight:700;
+    line-height:1.1;
+}
+
+/* Precio */
+
+.precio{
+    font-size:34px;
+    font-weight:600;
+    margin:20px 0;
+}
+
+/* Descripción */
+
+.descripcion{
+    color:#555;
+    line-height:1.8;
+    font-size:15px;
+    margin-bottom:35px;
+}
+
+/* =========================
+   TALLES
+========================= */
+
+.talles{
+    display:flex;
+    gap:10px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.talles button{
+    width:48px;
+    height:48px;
+    border:none;
+    background:black;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.talles button:hover{
+    transform:translateY(-3px);
+    background:#1d1d1d;
+}
+
+/* =========================
+   BOTON
+========================= */
+
+.btn{
+    display:inline-block;
+    padding:14px 24px;
+    background:black;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#1d1d1d;
+    transform:translateY(-2px);
+}
+
+/* =========================
+   EXTRA
+========================= */
+
+.extra{
+    margin-top:40px;
+    padding-top:25px;
+    border-top:1px solid #e5e5e5;
+}
+
+.extra p{
+    color:#666;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .producto{
+        grid-template-columns:1fr;
+        gap:30px;
+        padding:20px;
+    }
+
+    .galeria{
+        position:relative;
+        top:0;
+    }
+
+    .principal img{
+        height:450px;
+    }
+
+    .info h2{
+        font-size:34px;
+    }
+
+    .precio{
+        font-size:28px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .principal img{
+        height:360px;
+    }
+
+    .miniaturas{
+        justify-content:center;
+    }
+
+    .miniaturas img{
+        width:70px;
+        height:85px;
+    }
+
+    .info h2{
+        font-size:28px;
+    }
+
+}
+/* =========================
+   CARRITO
+========================= */
+
+.carrito-container{
+    max-width:900px;
+    margin:40px auto;
+    padding:0 20px;
+}
+
+/* Topo */
+
+.carrito-topo{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.carrito-topo h1{
+    margin:0;
+    font-size:38px;
+    font-weight:700;
+}
+
+.carrito-topo p{
+    color:#777;
+    margin-top:10px;
+    font-size:14px;
+}
+
+/* Lista */
+
+.carrito-productos{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+/* Card */
+
+.carrito-card{
+    background:black;
+    color:white;
+    border-radius:12px;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+    transition:transform .4s ease,
+               box-shadow .4s ease;
+}
+
+/* Hover */
+
+.carrito-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 40px rgba(0,0,0,.18);
+}
+
+/* Luz */
+
+.carrito-card::before{
+    content:"";
+    position:absolute;
+    top:-100%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.15),
+        transparent
+    );
+    transform:rotate(25deg);
+    transition:.6s;
+}
+
+.carrito-card:hover::before{
+    top:100%;
+}
+
+/* Info */
+
+.carrito-info h2{
+    margin:0 0 8px;
+    font-size:20px;
+}
+
+.precio{
+    margin:0;
+    color:#bdbdbd;
+    font-size:15px;
+}
+
+/* Botón quitar */
+
+.btn-quitar{
+    background:white;
+    color:black;
+    text-decoration:none;
+    padding:10px 16px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
+    z-index:2;
+}
+
+.btn-quitar:hover{
+    background:#ddd;
+}
+
+/* Footer */
+
+.carrito-footer{
+    margin-top:35px;
+    text-align:center;
+}
+
+/* Total */
+
+.total{
+    font-size:34px;
+    margin-bottom:20px;
+}
+
+/* Volver */
+
+.btn-volver{
+    display:inline-block;
+    background:black;
+    color:white;
+    text-decoration:none;
+    padding:13px 22px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-volver:hover{
+    background:#1d1d1d;
+    transform:translateY(-2px);
+}
+
+/* Responsive */
+
+@media(max-width:700px){
+
+    .carrito-card{
+        flex-direction:column;
+        gap:18px;
+        text-align:center;
+    }
+
+    .carrito-topo h1{
+        font-size:30px;
+    }
+
+    .total{
+        font-size:28px;
+    }
+
+}

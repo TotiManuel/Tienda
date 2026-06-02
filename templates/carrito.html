@@ -1,25 +1,59 @@
 {% extends 'base.html' %}
+
 {% block titulo %}
 MORTAL
 {% endblock %}
+
 {% block contenido %}
-{% for p in productos %}
 
-<div>
+<div class="carrito-container">
 
-    <h2>{{ p.nombre }}</h2>
+    <div class="carrito-topo">
 
-    <p>$ {{ p.precio }}</p>
+        <h1>Tu carrito</h1>
 
-    <a href="/quitar/{{ loop.index0 }}">
-        Quitar
-    </a>
+        <p>Productos agregados</p>
+
+    </div>
+
+    <div class="carrito-productos">
+
+        {% for p in productos %}
+
+        <div class="carrito-card">
+
+            <div class="carrito-info">
+
+                <h2>{{ p.nombre }}</h2>
+
+                <p class="precio">
+                    $ {{ p.precio }}
+                </p>
+
+            </div>
+
+            <a class="btn-quitar" href="/quitar/{{ loop.index0 }}">
+                Quitar
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="carrito-footer">
+
+        <h2 class="total">
+            Total: $ {{ total }}
+        </h2>
+
+        <a class="btn-volver" href="/">
+            Volver a la tienda
+        </a>
+
+    </div>
 
 </div>
 
-{% endfor %}
-
-<h2>Total: $ {{ total }}</h2>
-
-<a href="/">Volver</a>
 {% endblock %}
