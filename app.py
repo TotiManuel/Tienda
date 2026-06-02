@@ -58,6 +58,14 @@ def catalogo():
         "catalogo.html",
         productos=productos
     )
+    
+@app.route("/detalle_producto")
+def detalle_producto():
+
+    return render_template(
+        "detalle_producto.html",
+        productos=productos
+    )
 
 # ====================================
 # CARRITO
