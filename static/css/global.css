@@ -1,153 +1,265 @@
-        /* Reset */
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: #ffffff;
-            color: #000;
-        }
+/* Reset */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #ffffff;
+    color: #000;
+}
 
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 35px;
-            border-bottom: 1px solid #e5e5e5;
-            background: white;
-        }
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 35px;
+    border-bottom: 1px solid #e5e5e5;
+    background: white;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 22px;
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
+header h1 {
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
 
-        nav a {
-            margin-left: 18px;
-            text-decoration: none;
-            color: black;
-            font-size: 14px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
+nav a {
+    margin-left: 18px;
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s;
+}
 
-        nav a:hover {
-            opacity: 0.7;
-        }
+nav a:hover {
+    opacity: 0.7;
+}
 
-        /* Productos */
-        .productos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 20px;
-            padding: 30px;
-            max-width: 1100px;
-            margin: auto;
-        }
+/* Contenedor */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px;
+}
 
-        /* Card */
-        .card {
-            background: black;
-            color: white;
-            padding: 14px;
-            border-radius: 10px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
+/* Topo */
+.topo {
+    margin-bottom: 30px;
+}
 
-        /* Hover */
-        .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
+.topo h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
 
-        /* Luz animada */
-        .card::before {
-            content: "";
-            position: absolute;
-            top: -100%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                120deg,
-                transparent,
-                rgba(255,255,255,0.2),
-                transparent
-            );
-            transform: rotate(25deg);
-            transition: 0.6s;
-        }
+.topo p {
+    color: #777;
+    margin-bottom: 20px;
+}
 
-        .card:hover::before {
-            top: 100%;
-        }
+/* Filtros */
+.filtros {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
 
-        /* Imagen */
-        .card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 6px;
-            margin-bottom: 12px;
-        }
+.filtros a {
+    text-decoration: none;
+    color: black;
+    border: 1px solid #ddd;
+    padding: 9px 15px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: 0.3s;
+}
 
-        /* Textos */
-        .card h2 {
-            margin: 6px 0;
-            font-size: 16px;
-            font-weight: 600;
-        }
+.filtros a:hover {
+    background: black;
+    color: white;
+}
 
-        .card p {
-            margin: 4px 0 10px;
-            color: #bdbdbd;
-            font-size: 13px;
-        }
+/* Productos */
+.productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 20px;
+    padding: 30px;
+    max-width: 1100px;
+    margin: auto;
+}
 
-        .card h3 {
-            margin: 0 0 14px;
-            font-size: 18px;
-            font-weight: 500;
-        }
+/* Card */
+.card {
+    background: black;
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
 
-        /* Botón */
-        .card a {
-            display: inline-block;
-            padding: 9px 16px;
-            background: white;
-            color: black;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 13px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
+/* Hover */
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
 
-        .card a:hover {
-            background: #dddddd;
-        }
+/* Luz animada */
+.card::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.2),
+        transparent
+    );
+    transform: rotate(25deg);
+    transition: 0.6s;
+}
 
-        /* Responsive */
-        @media (max-width: 700px) {
+.card:hover::before {
+    top: 100%;
+}
 
-            header {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
+/* Imagen */
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
 
-            .productos {
-                grid-template-columns: repeat(2, 1fr);
-                padding: 15px;
-                gap: 15px;
-            }
+/* Textos */
+.card h2 {
+    margin: 6px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
 
-            .card img {
-                height: 180px;
-            }
+.card p {
+    margin: 4px 0 10px;
+    color: #bdbdbd;
+    font-size: 13px;
+}
 
-        }
+.card h3 {
+    margin: 0 0 14px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Botón */
+.card a,
+button,
+.btn {
+    display: inline-block;
+    padding: 9px 16px;
+    background: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.card a:hover,
+button:hover,
+.btn:hover {
+    background: #dddddd;
+}
+
+/* Formularios */
+form {
+    max-width: 500px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 14px;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+    font-family: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: black;
+}
+
+/* Admin */
+.admin-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+/* Carrito */
+.total {
+    margin-top: 30px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* Login */
+.login-box {
+    max-width: 400px;
+    margin: 70px auto;
+    padding: 30px;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+}
+
+/* Separador */
+hr {
+    border: none;
+    border-top: 1px solid #e5e5e5;
+    margin: 30px 0;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .productos {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .card img {
+        height: 180px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+}
