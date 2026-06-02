@@ -3,18 +3,12 @@ from flask import (
     render_template,
     request,
     redirect,
-    session,
-    flash
+    session
 )
 
-import sqlite3
 import os
 
 app = Flask(__name__)
-
-# =========================
-# CONFIG
-# =========================
 
 app.secret_key = os.environ.get(
     "SECRET_KEY",
@@ -24,64 +18,42 @@ app.secret_key = os.environ.get(
 ADMIN_USER = "admin"
 ADMIN_PASSWORD = "admin123"
 
-DATABASE = "database.db"
+# ====================================
+# BASE TEMPORAL EN MEMORIA
+# ====================================
 
-# =========================
-# DATABASE
-# =========================
+productos = [
+    {
+        "id": 1,
+        "nombre": "Remera Oversize",
+        "precio": 15000,
+        "coleccion": "Invierno",
+        "imagen": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"
+    },
+    {
+        "id": 2,
+        "nombre": "Buzo Negro",
+        "precio": 28000,
+        "coleccion": "Urban",
+        "imagen": "https://images.unsplash.com/photo-1503341504253-dff4815485f1"
+    }
+]
 
-def conectar():
-
-    conn = sqlite3.connect(DATABASE)
-
-    conn.row_factory = sqlite3.Row
-
-    return conn
-
-def crear_tablas():
-
-    conn = conectar()
-
-    conn.execute("""
-    CREATE TABLE IF NOT EXISTS productos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre TEXT NOT NULL,
-        precio REAL NOT NULL,
-        coleccion TEXT NOT NULL,
-        imagen TEXT
-    )
-    """)
-
-    conn.commit()
-
-    conn.close()
-
-crear_tablas()
-
-# =========================
+# ====================================
 # HOME
-# =========================
+# ====================================
 
 @app.route("/")
 def index():
-
-    conn = conectar()
-
-    productos = conn.execute("""
-        SELECT * FROM productos
-        ORDER BY id DESC
-    """).fetchall()
-
-    conn.close()
 
     return render_template(
         "index.html",
         productos=productos
     )
 
-# =========================
+# ====================================
 # CARRITO
-# =========================
+# ====================================
 
 @app.route("/agregar/<int:id>")
 def agregar(id):
@@ -92,8 +64,6 @@ def agregar(id):
 
     session["carrito"] = carrito
 
-    flash("Producto agregado")
-
     return redirect("/")
 
 @app.route("/carrito")
@@ -101,27 +71,21 @@ def carrito():
 
     carrito_ids = session.get("carrito", [])
 
-    productos = []
+    productos_carrito = []
 
-    conn = conectar()
+    for producto in productos:
 
-    for producto_id in carrito_ids:
+        if producto["id"] in carrito_ids:
+            productos_carrito.append(producto)
 
-        producto = conn.execute(
-            "SELECT * FROM productos WHERE id = ?",
-            (producto_id,)
-        ).fetchone()
-
-        if producto:
-            productos.append(producto)
-
-    conn.close()
-
-    total = sum(p["precio"] for p in productos)
+    total = sum(
+        p["precio"]
+        for p in productos_carrito
+    )
 
     return render_template(
         "carrito.html",
-        productos=productos,
+        productos=productos_carrito,
         total=total
     )
 
@@ -137,9 +101,9 @@ def quitar(index):
 
     return redirect("/carrito")
 
-# =========================
-# LOGIN ADMIN
-# =========================
+# ====================================
+# LOGIN
+# ====================================
 
 @app.route("/panel-privado", methods=["GET", "POST"])
 def login():
@@ -158,13 +122,11 @@ def login():
 
             return redirect("/admin")
 
-        flash("Datos incorrectos")
-
     return render_template("login.html")
 
-# =========================
+# ====================================
 # PANEL ADMIN
-# =========================
+# ====================================
 
 @app.route("/admin")
 def admin():
@@ -172,23 +134,14 @@ def admin():
     if not session.get("admin"):
         return redirect("/panel-privado")
 
-    conn = conectar()
-
-    productos = conn.execute("""
-        SELECT * FROM productos
-        ORDER BY id DESC
-    """).fetchall()
-
-    conn.close()
-
     return render_template(
         "admin.html",
         productos=productos
     )
 
-# =========================
-# CREAR PRODUCTO
-# =========================
+# ====================================
+# CREAR
+# ====================================
 
 @app.route("/crear", methods=["POST"])
 def crear():
@@ -196,95 +149,21 @@ def crear():
     if not session.get("admin"):
         return redirect("/")
 
-    nombre = request.form["nombre"]
-    precio = request.form["precio"]
-    coleccion = request.form["coleccion"]
-    imagen = request.form["imagen"]
+    nuevo = {
+        "id": len(productos) + 1,
+        "nombre": request.form["nombre"],
+        "precio": float(request.form["precio"]),
+        "coleccion": request.form["coleccion"],
+        "imagen": request.form["imagen"]
+    }
 
-    conn = conectar()
-
-    conn.execute("""
-        INSERT INTO productos
-        (nombre, precio, coleccion, imagen)
-        VALUES (?, ?, ?, ?)
-    """, (
-        nombre,
-        precio,
-        coleccion,
-        imagen
-    ))
-
-    conn.commit()
-
-    conn.close()
-
-    flash("Producto creado")
+    productos.append(nuevo)
 
     return redirect("/admin")
 
-# =========================
-# EDITAR
-# =========================
-
-@app.route("/editar/<int:id>", methods=["GET", "POST"])
-def editar(id):
-
-    if not session.get("admin"):
-        return redirect("/")
-
-    conn = conectar()
-
-    producto = conn.execute(
-        "SELECT * FROM productos WHERE id = ?",
-        (id,)
-    ).fetchone()
-
-    if not producto:
-
-        conn.close()
-
-        return redirect("/admin")
-
-    if request.method == "POST":
-
-        nombre = request.form["nombre"]
-        precio = request.form["precio"]
-        coleccion = request.form["coleccion"]
-        imagen = request.form["imagen"]
-
-        conn.execute("""
-            UPDATE productos
-            SET nombre = ?,
-                precio = ?,
-                coleccion = ?,
-                imagen = ?
-            WHERE id = ?
-        """, (
-            nombre,
-            precio,
-            coleccion,
-            imagen,
-            id
-        ))
-
-        conn.commit()
-
-        conn.close()
-
-        flash("Producto actualizado")
-
-        return redirect("/admin")
-
-    conn.close()
-
-    return render_template(
-        "editar.html",
-        producto=producto
-    )
-
-# =========================
+# ====================================
 # ELIMINAR
-# =========================
+# ====================================
 
 @app.route("/eliminar/<int:id>")
 def eliminar(id):
@@ -292,24 +171,55 @@ def eliminar(id):
     if not session.get("admin"):
         return redirect("/")
 
-    conn = conectar()
+    global productos
 
-    conn.execute(
-        "DELETE FROM productos WHERE id = ?",
-        (id,)
-    )
-
-    conn.commit()
-
-    conn.close()
-
-    flash("Producto eliminado")
+    productos = [
+        p for p in productos
+        if p["id"] != id
+    ]
 
     return redirect("/admin")
 
-# =========================
+# ====================================
+# EDITAR
+# ====================================
+
+@app.route("/editar/<int:id>", methods=["GET", "POST"])
+def editar(id):
+
+    if not session.get("admin"):
+        return redirect("/")
+
+    producto = next(
+        (
+            p for p in productos
+            if p["id"] == id
+        ),
+        None
+    )
+
+    if not producto:
+        return redirect("/admin")
+
+    if request.method == "POST":
+
+        producto["nombre"] = request.form["nombre"]
+        producto["precio"] = float(
+            request.form["precio"]
+        )
+        producto["coleccion"] = request.form["coleccion"]
+        producto["imagen"] = request.form["imagen"]
+
+        return redirect("/admin")
+
+    return render_template(
+        "editar.html",
+        producto=producto
+    )
+
+# ====================================
 # LOGOUT
-# =========================
+# ====================================
 
 @app.route("/logout")
 def logout():
@@ -318,7 +228,7 @@ def logout():
 
     return redirect("/")
 
-# =========================
+# ====================================
 
 if __name__ == "__main__":
     app.run(debug=True)

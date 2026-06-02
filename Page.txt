@@ -1,32 +1,4 @@
 
-# IMPORTANTE
-
-Ahora las imágenes se cargan por URL.
-
-Ejemplo:
-
-```text id="w9srru"
-https://images.unsplash.com/photo-1521572163474-6864f9cf17ab
-```
-
-o:
-
-```text id="jup6gx"
-https://i.imgur.com/xxxxx.jpg
-```
-
----
-
-# ESTO YA FUNCIONA EN VERCEL
-
-Porque:
-
-* no escribe archivos
-* no crea carpetas
-* no usa filesystem persistente
-* no sube imágenes locales
-* todo es compatible serverless
-
 
 
 
