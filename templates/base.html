@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        {% block titulo %}{% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="/static/css/global.css">
+
+</head>
+<body>
+
+{% include 'components/menu.html' %}
+
+{% block contenido %}
+{% endblock %}
+
+</body>
+</html>
