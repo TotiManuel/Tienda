@@ -1,9 +1,5 @@
 
 
-
-
----------------------------------------------------------------
-
 # IMPORTANTE SOBRE VERCEL
 
 Vercel NO guarda archivos subidos permanentemente.
