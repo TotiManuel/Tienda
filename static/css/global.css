@@ -679,3 +679,199 @@ hr {
     }
 
 }
+/* =========================
+   SOPORTE
+========================= */
+
+.soporte-container{
+    max-width:1100px;
+    margin:40px auto;
+    padding:0 20px;
+}
+
+/* =========================
+   TOPO
+========================= */
+
+.soporte-topo{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.soporte-topo h1{
+    margin:0;
+    font-size:42px;
+    font-weight:700;
+}
+
+.soporte-topo p{
+    color:#777;
+    font-size:15px;
+    margin-top:12px;
+    line-height:1.7;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.soporte-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:22px;
+    margin-bottom:50px;
+}
+
+/* Card */
+
+.soporte-card{
+    background:black;
+    color:white;
+    border-radius:14px;
+    padding:28px 24px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    transition:transform .4s ease,
+               box-shadow .4s ease;
+}
+
+/* Hover */
+
+.soporte-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.18);
+}
+
+/* Luz */
+
+.soporte-card::before{
+    content:"";
+    position:absolute;
+    top:-100%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.15),
+        transparent
+    );
+    transform:rotate(25deg);
+    transition:.6s;
+}
+
+.soporte-card:hover::before{
+    top:100%;
+}
+
+/* Icono */
+
+.icono{
+    font-size:34px;
+    margin-bottom:18px;
+}
+
+/* Textos */
+
+.soporte-card h2{
+    margin:0 0 12px;
+    font-size:20px;
+}
+
+.soporte-card p{
+    color:#bdbdbd;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.contacto-box{
+    max-width:700px;
+    margin:auto;
+    background:#fafafa;
+    border:1px solid #e5e5e5;
+    border-radius:16px;
+    padding:35px;
+}
+
+.contacto-box h2{
+    margin-top:0;
+    margin-bottom:25px;
+    text-align:center;
+    font-size:30px;
+}
+
+/* Form */
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+/* Inputs */
+
+input,
+textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:14px;
+    font-family:inherit;
+    outline:none;
+    transition:.3s;
+}
+
+input:focus,
+textarea:focus{
+    border-color:black;
+}
+
+/* Textarea */
+
+textarea{
+    min-height:140px;
+    resize:vertical;
+}
+
+/* Botón */
+
+button{
+    background:black;
+    color:white;
+    border:none;
+    padding:14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1d1d1d;
+    transform:translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:700px){
+
+    .soporte-topo h1{
+        font-size:32px;
+    }
+
+    .contacto-box{
+        padding:25px;
+    }
+
+}

@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Atención al Cliente
+{% endblock %}
+
+{% block contenido %}
+
+<div class="soporte-container">
+
+    <!-- TOPO -->
+
+    <div class="soporte-topo">
+
+        <h1>Atención al cliente</h1>
+
+        <p>
+            Estamos para ayudarte con pedidos,
+            cambios, envíos o cualquier consulta.
+        </p>
+
+    </div>
+
+    <!-- CARDS -->
+
+    <div class="soporte-cards">
+
+        <div class="soporte-card">
+
+            <div class="icono">
+                📦
+            </div>
+
+            <h2>Estado de pedido</h2>
+
+            <p>
+                Consultá el estado y seguimiento
+                de tu compra.
+            </p>
+
+        </div>
+
+        <div class="soporte-card">
+
+            <div class="icono">
+                🔄
+            </div>
+
+            <h2>Cambios y devoluciones</h2>
+
+            <p>
+                Gestioná cambios de talle o devoluciones.
+            </p>
+
+        </div>
+
+        <div class="soporte-card">
+
+            <div class="icono">
+                🚚
+            </div>
+
+            <h2>Envíos</h2>
+
+            <p>
+                Información sobre tiempos y costos
+                de entrega.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- FORMULARIO -->
+
+    <div class="contacto-box">
+
+        <h2>Contactanos</h2>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="nombre"
+                placeholder="Nombre"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+            >
+
+            <input
+                type="text"
+                name="asunto"
+                placeholder="Asunto"
+                required
+            >
+
+            <textarea
+                name="mensaje"
+                placeholder="Escribí tu mensaje..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                Enviar mensaje
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

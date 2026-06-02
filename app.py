@@ -50,6 +50,13 @@ def index():
         "index.html",
         productos=productos
     )
+    
+@app.route("/atencion_cliente")
+def atencion_cliente():
+
+    return render_template(
+        "atencion_cliente.html"
+    )
 
 @app.route("/catalogo")
 def catalogo():
