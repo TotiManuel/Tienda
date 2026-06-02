@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+
+<h1>Panel Admin</h1>
+
+<a href="/logout">Cerrar sesión</a>
+
+<hr>
+
+<form
+    method="POST"
+    action="/crear"
+    enctype="multipart/form-data"
+>
+
+    <input
+        type="text"
+        name="nombre"
+        placeholder="Nombre"
+        required
+    >
+
+    <input
+        type="number"
+        step="0.01"
+        name="precio"
+        placeholder="Precio"
+        required
+    >
+
+    <input
+        type="text"
+        name="coleccion"
+        placeholder="Colección"
+        required
+    >
+
+    <input
+        type="file"
+        name="imagen"
+    >
+
+    <button type="submit">
+        Crear producto
+    </button>
+
+</form>
+
+<hr>
+
+{% for p in productos %}
+
+<div>
+
+    <h2>{{ p.nombre }}</h2>
+
+    <p>$ {{ p.precio }}</p>
+
+    <p>{{ p.coleccion }}</p>
+
+    <a href="/editar/{{ p.id }}">
+        Editar
+    </a>
+
+    <a href="/eliminar/{{ p.id }}">
+        Eliminar
+    </a>
+
+</div>
+
+<hr>
+
+{% endfor %}
+
+</body>
+</html>

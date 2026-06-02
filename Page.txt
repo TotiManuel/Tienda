@@ -1,0 +1,17 @@
+# IMPORTANTE SOBRE VERCEL
+
+Vercel NO guarda archivos subidos permanentemente.
+
+Entonces:
+
+* las imágenes subidas pueden perderse
+* SQLite puede reiniciarse
+
+Para producción real conviene:
+
+* Cloudinary (imágenes)
+* PostgreSQL o Supabase
+* Neon DB
+* Firebase Storage
+
+Pero para probar y mostrar funciona bien.

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito</title>
+</head>
+<body>
+
+<h1>Carrito</h1>
+
+{% for p in productos %}
+
+<div>
+
+    <h2>{{ p.nombre }}</h2>
+
+    <p>$ {{ p.precio }}</p>
+
+    <a href="/quitar/{{ loop.index0 }}">
+        Quitar
+    </a>
+
+</div>
+
+{% endfor %}
+
+<h2>Total: $ {{ total }}</h2>
+
+<a href="/">Volver</a>
+
+</body>
+</html>

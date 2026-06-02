@@ -1,111 +1,48 @@
-{% extends "base.html" %}
-{% block title %}Inicio - Mortal{% endblock %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tienda</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
 
-{% block content %}
+<header>
 
-<style>
+    <h1>Tienda de Ropa</h1>
 
-/* HERO */
-.hero {
-    text-align: center;
-    padding: 80px 20px;
-}
+    <nav>
+        <a href="/carrito">Carrito</a>
+        <a href="/panel-privado">Admin</a>
+    </nav>
 
-.hero h2 {
-    font-size: 38px;
-    margin-bottom: 10px;
-}
+</header>
 
-.hero p {
-    max-width: 600px;
-    margin: auto;
-    color: #555;
-}
+<div class="productos">
 
-/* CARDS */
-.features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    padding: 40px;
-}
+{% for p in productos %}
 
-/* CARD */
-.feature-card {
-    background: #000;
-    color: #fff;
-    padding: 30px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-}
+<div class="card">
 
-/* HOVER */
-.feature-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-}
+    {% if p.imagen %}
+        <img src="/static/uploads/{{ p.imagen }}">
+    {% endif %}
 
-/* TITULO */
-.feature-card h3 {
-    margin-bottom: 10px;
-}
+    <h2>{{ p.nombre }}</h2>
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-    .features {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+    <p>{{ p.coleccion }}</p>
 
-@media (max-width: 600px) {
-    .features {
-        grid-template-columns: 1fr;
-    }
-}
+    <h3>$ {{ p.precio }}</h3>
 
-</style>
+    <a href="/agregar/{{ p.id }}">
+        Agregar al carrito
+    </a>
 
-<section class="hero">
-    <div class="hero-content">
-        <h2>Panel de control</h2>
-        <p>Gestioná tu tienda de forma simple y rápida.</p>
-    </div>
-</section>
+</div>
 
-<section class="features">
+{% endfor %}
 
-    <div class="feature-card" onclick="window.location.href='{{ url_for('main.home') }}'">
-        <h3>Dashboard</h3>
-        <p>Visualizá estadísticas y control general de tu negocio.</p>
-    </div>
+</div>
 
-    <div class="feature-card" onclick="window.location.href='{{ url_for('colecciones.home') }}'">
-        <h3>Colecciones</h3>
-        <p>Organizá tus prendas en colecciones atractivas.</p>
-    </div>
-
-    <div class="feature-card" onclick="window.location.href='{{ url_for('prendas.home') }}'">
-        <h3>Prendas</h3>
-        <p>Gestioná productos, stock y detalles de cada prenda.</p>
-    </div>
-
-    <div class="feature-card" onclick="window.location.href='#'">
-        <h3>Ventas</h3>
-        <p>Controlá las ventas realizadas y su historial.</p>
-    </div>
-
-    <div class="feature-card" onclick="window.location.href='#'">
-        <h3>Clientes</h3>
-        <p>Administrá tus clientes y su información.</p>
-    </div>
-
-    <div class="feature-card" onclick="window.location.href='#'">
-        <h3>Reportes</h3>
-        <p>Obtené análisis y estadísticas de tu negocio.</p>
-    </div>
-
-</section>
-
-{% endblock %}
+</body>
+</html>
