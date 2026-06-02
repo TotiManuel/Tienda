@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Carrito</title>
-</head>
-<body>
-
-<h1>Carrito</h1>
-
+{% extends 'base.html' %}
+{% block titulo %}
+MORTAL
+{% endblock %}
+{% block contenido %}
 {% for p in productos %}
 
 <div>
@@ -27,6 +22,4 @@
 <h2>Total: $ {{ total }}</h2>
 
 <a href="/">Volver</a>
-
-</body>
-</html>
+{% endblock %}

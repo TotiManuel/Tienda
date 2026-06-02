@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Editar</title>
-</head>
-<body>
-
+{% extends 'base.html' %}
+{% block titulo %}
+MORTAL
+{% endblock %}
+{% block contenido %}
 <h1>Editar producto</h1>
 
 <form method="POST">
@@ -44,5 +41,4 @@
 
 </form>
 
-</body>
-</html>
+{% endblock %}
