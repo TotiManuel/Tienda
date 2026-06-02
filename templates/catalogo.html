@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Colección</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:white;
+    color:black;
+}
+
+/* HEADER */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 35px;
+    border-bottom:1px solid #e5e5e5;
+}
+
+header h1{
+    margin:0;
+    font-size:22px;
+    letter-spacing:2px;
+}
+
+nav a{
+    margin-left:18px;
+    text-decoration:none;
+    color:black;
+    font-size:14px;
+    font-weight:500;
+}
+
+/* FILTROS */
+
+.topo{
+    padding:30px 40px 10px;
+}
+
+.topo h2{
+    margin:0;
+    font-size:28px;
+}
+
+.topo p{
+    color:#777;
+    margin-top:8px;
+}
+
+.filtros{
+    display:flex;
+    gap:12px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+.filtros a{
+    text-decoration:none;
+    color:black;
+    border:1px solid #ddd;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    transition:0.3s;
+}
+
+.filtros a:hover{
+    background:black;
+    color:white;
+}
+
+/* PRODUCTOS */
+
+.productos{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    padding:25px 40px 50px;
+}
+
+.card{
+    background:black;
+    color:white;
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+    transition:transform .4s ease, box-shadow .4s ease;
+}
+
+.card:hover{
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:0 20px 40px rgba(0,0,0,.2);
+}
+
+/* LUZ */
+
+.card::before{
+    content:"";
+    position:absolute;
+    top:-100%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.2),
+        transparent
+    );
+    transform:rotate(25deg);
+    transition:.6s;
+}
+
+.card:hover::before{
+    top:100%;
+}
+
+/* IMG */
+
+.card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+/* INFO */
+
+.info{
+    padding:15px;
+}
+
+.info h3{
+    margin:0;
+    font-size:17px;
+}
+
+.info p{
+    color:#bdbdbd;
+    font-size:13px;
+    margin:8px 0;
+}
+
+.precio{
+    font-size:20px;
+    margin:10px 0 15px;
+}
+
+/* BOTONES */
+
+.acciones{
+    display:flex;
+    gap:10px;
+}
+
+.acciones a{
+    flex:1;
+    text-align:center;
+    text-decoration:none;
+    padding:10px;
+    border-radius:6px;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.detalles{
+    background:#1b1b1b;
+    color:white;
+}
+
+.detalles:hover{
+    background:#2d2d2d;
+}
+
+.carrito{
+    background:white;
+    color:black;
+}
+
+.carrito:hover{
+    background:#ddd;
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+
+    <h1>TIENDA</h1>
+
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/carrito">Carrito</a>
+    </nav>
+
+</header>
+
+<div class="topo">
+
+    <h2>{{ titulo }}</h2>
+    <p>Explorá la colección disponible</p>
+
+    <div class="filtros">
+        <a href="/categoria/hombre">Hombre</a>
+        <a href="/categoria/mujer">Mujer</a>
+        <a href="/categoria/oversize">Oversize</a>
+        <a href="/categoria/verano">Verano</a>
+        <a href="/categoria/urbano">Urbano</a>
+    </div>
+
+</div>
+
+<div class="productos">
+
+{% for p in productos %}
+
+<div class="card">
+
+    <img src="{{ p.imagen }}">
+
+    <div class="info">
+
+        <h3>{{ p.nombre }}</h3>
+
+        <p>{{ p.coleccion }}</p>
+
+        <div class="precio">
+            $ {{ p.precio }}
+        </div>
+
+        <div class="acciones">
+
+            <a class="detalles" href="/producto/{{ p.id }}">
+                Ver
+            </a>
+
+            <a class="carrito" href="/agregar/{{ p.id }}">
+                Agregar
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

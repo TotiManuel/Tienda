@@ -51,6 +51,14 @@ def index():
         productos=productos
     )
 
+@app.route("/catalogo")
+def catalogo():
+
+    return render_template(
+        "catalogo.html",
+        productos=productos
+    )
+
 # ====================================
 # CARRITO
 # ====================================

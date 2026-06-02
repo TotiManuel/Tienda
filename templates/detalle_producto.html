@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>{{ producto.nombre }}</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:white;
+    color:black;
+}
+
+/* HEADER */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 35px;
+    border-bottom:1px solid #e5e5e5;
+}
+
+header h1{
+    margin:0;
+    font-size:22px;
+    letter-spacing:2px;
+}
+
+nav a{
+    margin-left:18px;
+    text-decoration:none;
+    color:black;
+    font-size:14px;
+    font-weight:500;
+}
+
+/* CONTENEDOR */
+
+.producto{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    padding:40px;
+    max-width:1200px;
+    margin:auto;
+}
+
+/* GALERIA */
+
+.galeria{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.principal img{
+    width:100%;
+    height:650px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.miniaturas{
+    display:flex;
+    gap:12px;
+}
+
+.miniaturas img{
+    width:90px;
+    height:110px;
+    object-fit:cover;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+    border:2px solid transparent;
+}
+
+.miniaturas img:hover{
+    transform:scale(1.05);
+    border-color:black;
+}
+
+/* INFO */
+
+.info{
+    padding-top:20px;
+}
+
+.coleccion{
+    color:#777;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.info h2{
+    margin:0;
+    font-size:42px;
+}
+
+.precio{
+    margin:20px 0;
+    font-size:34px;
+}
+
+.descripcion{
+    color:#555;
+    line-height:1.7;
+    margin-bottom:30px;
+}
+
+/* TALLE */
+
+.talles{
+    display:flex;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.talles button{
+    border:1px solid #ddd;
+    background:white;
+    padding:10px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.talles button:hover{
+    background:black;
+    color:white;
+}
+
+/* BOTON */
+
+.btn{
+    display:inline-block;
+    background:black;
+    color:white;
+    text-decoration:none;
+    padding:14px 28px;
+    border-radius:8px;
+    transition:.3s;
+    font-weight:600;
+}
+
+.btn:hover{
+    background:#222;
+}
+
+/* DETALLES */
+
+.extra{
+    margin-top:40px;
+    border-top:1px solid #eee;
+    padding-top:20px;
+}
+
+.extra p{
+    margin:8px 0;
+    color:#555;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .producto{
+        grid-template-columns:1fr;
+        padding:20px;
+    }
+
+    .principal img{
+        height:450px;
+    }
+
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+
+    <h1>TIENDA</h1>
+
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/carrito">Carrito</a>
+    </nav>
+
+</header>
+
+<div class="producto">
+
+    <!-- GALERIA -->
+
+    <div class="galeria">
+
+        <div class="principal">
+            <img id="imagenPrincipal" src="{{ producto.imagen }}">
+        </div>
+
+        <div class="miniaturas">
+
+            <img src="{{ producto.imagen }}" onclick="cambiarImagen(this.src)">
+
+            {% for img in producto.imagenes_extra %}
+
+                <img src="{{ img }}" onclick="cambiarImagen(this.src)">
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- INFO -->
+
+    <div class="info">
+
+        <div class="coleccion">
+            {{ producto.coleccion }}
+        </div>
+
+        <h2>{{ producto.nombre }}</h2>
+
+        <div class="precio">
+            $ {{ producto.precio }}
+        </div>
+
+        <div class="descripcion">
+            {{ producto.descripcion }}
+        </div>
+
+        <div class="talles">
+
+            <button>S</button>
+            <button>M</button>
+            <button>L</button>
+            <button>XL</button>
+
+        </div>
+
+        <a class="btn" href="/agregar/{{ producto.id }}">
+            Agregar al carrito
+        </a>
+
+        <div class="extra">
+
+            <p>• Envíos a todo el país</p>
+            <p>• Cambios dentro de los 30 días</p>
+            <p>• Calidad premium</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function cambiarImagen(src){
+    document.getElementById("imagenPrincipal").src = src;
+}
+
+</script>
+
+</body>
+</html>
