@@ -36,6 +36,27 @@ productos = [
         "precio": 28000,
         "coleccion": "Urban",
         "imagen": "https://images.unsplash.com/photo-1503341504253-dff4815485f1"
+    },
+    {
+        "id": 3,
+        "nombre": "Buzo Negro",
+        "precio": 28000,
+        "coleccion": "Urban",
+        "imagen": "https://images.unsplash.com/photo-1503341504253-dff4815485f1"
+    },
+    {
+        "id": 4,
+        "nombre": "Buzo Negro",
+        "precio": 28000,
+        "coleccion": "Urban",
+        "imagen": "https://images.unsplash.com/photo-1503341504253-dff4815485f1"
+    },
+    {
+        "id": 5,
+        "nombre": "Buzo Negro",
+        "precio": 28000,
+        "coleccion": "Urban",
+        "imagen": "https://images.unsplash.com/photo-1503341504253-dff4815485f1"
     }
 ]
 
