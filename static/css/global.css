@@ -875,3 +875,159 @@ button:hover{
     }
 
 }
+.admin-container{
+    width: 90%;
+    margin: auto;
+    padding: 30px 0;
+}
+
+.admin-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.admin-title{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.logout-btn{
+    background: black;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.logout-btn:hover{
+    opacity: 0.8;
+}
+
+.admin-form-container{
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 50px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.form-title{
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.admin-form{
+    display: grid;
+    gap: 20px;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-label{
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.admin-input{
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.admin-input:focus{
+    outline: none;
+    border-color: black;
+}
+
+.crear-btn{
+    background: black;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.crear-btn:hover{
+    opacity: 0.8;
+}
+
+.productos-admin{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    gap: 25px;
+}
+
+.producto-card{
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.producto-img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.producto-info{
+    padding: 20px;
+}
+
+.producto-nombre{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.producto-precio{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.producto-coleccion{
+    color: #666;
+}
+
+.producto-botones{
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+}
+
+.editar-btn{
+    flex: 1;
+    text-align: center;
+    background: #111;
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.eliminar-btn{
+    flex: 1;
+    text-align: center;
+    background: crimson;
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.editar-btn:hover,
+.eliminar-btn:hover{
+    opacity: 0.8;
+}

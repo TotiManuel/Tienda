@@ -1,76 +1,167 @@
 {% extends 'base.html' %}
+
 {% block titulo %}
 MORTAL
 {% endblock %}
+
 {% block contenido %}
 
-<h1>Panel Admin</h1>
+<section class="admin-container">
 
-<a href="/logout">Cerrar sesión</a>
+    <div class="admin-header">
 
-<hr>
+        <h1 class="admin-title">
+            Panel Admin
+        </h1>
 
-<form method="POST" action="/crear">
+        <a
+            href="/logout"
+            class="logout-btn"
+        >
+            Cerrar sesión
+        </a>
 
-    <input
-        type="text"
-        name="nombre"
-        placeholder="Nombre"
-        required
-    >
+    </div>
 
-    <input
-        type="number"
-        step="0.01"
-        name="precio"
-        placeholder="Precio"
-        required
-    >
+    <div class="admin-form-container">
 
-    <input
-        type="text"
-        name="coleccion"
-        placeholder="Colección"
-        required
-    >
+        <h2 class="form-title">
+            Crear producto
+        </h2>
 
-    <input
-        type="text"
-        name="imagen"
-        placeholder="URL imagen"
-        required
-    >
+        <form
+            method="POST"
+            action="/crear"
+            class="admin-form"
+        >
 
-    <button type="submit">
-        Crear producto
-    </button>
+            <div class="input-group">
 
-</form>
+                <label class="input-label">
+                    Nombre del producto
+                </label>
 
-<hr>
+                <input
+                    type="text"
+                    name="nombre"
+                    placeholder="Nombre"
+                    class="admin-input"
+                    required
+                >
 
-{% for p in productos %}
+            </div>
 
-<div>
+            <div class="input-group">
 
-    <h2>{{ p.nombre }}</h2>
+                <label class="input-label">
+                    Precio
+                </label>
 
-    <p>$ {{ p.precio }}</p>
+                <input
+                    type="number"
+                    step="0.01"
+                    name="precio"
+                    placeholder="Precio"
+                    class="admin-input"
+                    required
+                >
 
-    <p>{{ p.coleccion }}</p>
+            </div>
 
-    <a href="/editar/{{ p.id }}">
-        Editar
-    </a>
+            <div class="input-group">
 
-    <a href="/eliminar/{{ p.id }}">
-        Eliminar
-    </a>
+                <label class="input-label">
+                    Colección
+                </label>
 
-</div>
+                <input
+                    type="text"
+                    name="coleccion"
+                    placeholder="Colección"
+                    class="admin-input"
+                    required
+                >
 
-<hr>
+            </div>
 
-{% endfor %}
+            <div class="input-group">
+
+                <label class="input-label">
+                    URL imagen
+                </label>
+
+                <input
+                    type="text"
+                    name="imagen"
+                    placeholder="URL imagen"
+                    class="admin-input"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="crear-btn"
+            >
+                Crear producto
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="productos-admin">
+
+        {% for p in productos %}
+
+        <div class="producto-card">
+
+            <img
+                src="{{ p.imagen }}"
+                class="producto-img"
+            >
+
+            <div class="producto-info">
+
+                <h2 class="producto-nombre">
+                    {{ p.nombre }}
+                </h2>
+
+                <p class="producto-precio">
+                    $ {{ p.precio }}
+                </p>
+
+                <p class="producto-coleccion">
+                    {{ p.coleccion }}
+                </p>
+
+            </div>
+
+            <div class="producto-botones">
+
+                <a
+                    href="/editar/{{ p.id }}"
+                    class="editar-btn"
+                >
+                    Editar
+                </a>
+
+                <a
+                    href="/eliminar/{{ p.id }}"
+                    class="eliminar-btn"
+                >
+                    Eliminar
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
 
 {% endblock %}
