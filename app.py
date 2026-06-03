@@ -271,7 +271,7 @@ def editar(id):
     if request.method == "POST":
 
         producto["nombre"] = request.form["nombre"]
-        producto["precio"] = float(
+        producto["precio"] = int(
             request.form["precio"]
         )
         producto["coleccion"] = request.form["coleccion"]

@@ -1,5 +1,32 @@
+Implementar:
+Pie de pagina(con Redes)
+rectangulo con info y oferta(Compra online, retira en tienda - 3 y 6 cuotas sin interes - envios gratis a partir de $ - Devolucion)
+rectangulo con descuento para algun banco.
+Descuentos (hasta 40% OFF)
+Carrito con numero al lado
+En carrito mostrar cantidad que va a comprar
+En carrito cuanta plata falta para envio gratis
+En pagina de pago poder poner codigo de descuento
+En pagina de pago Datos de la persona, datos del envio y la forma de pago.
+En prendas si hay oferta ver (precio de compra -13% $precio con descuento)
+En prendas ver disponibilidad
+En prendas ver cuanto sale en cuotas sin interes
+En prendas ver color
+En Catalogo filtrar por
+En catalogo ver fotos en cuadrillas de diferentes tamaños
+Apartado para ventas mayoristas
+En prendas ver talle
+En prendas tantas cuotas sin interes superando tanta plata
+Mostrar locales para comprar
+En prendas boton para que se vea guia de talles(y explicacion de como medirse)
+En prendas que se vea una foto y cuando el mouse esta arriba muestre otra foto
+Anuncio de salida de nueva coleccion si hay.
+Definir alto y ancho de foto soportada para que se vea bien en la pagina
+En carrito poner un Quizas te podria interesar o ¿Te gustaria agregar algo mas a tu carrito?
+Tener un total looks(Conjunto de ropa ya elegido)
 
-
+Anotacion!!
+Para poner videos usar youtube
 # IMPORTANTE SOBRE VERCEL
 
 Vercel NO guarda archivos subidos permanentemente.
