@@ -1,291 +1,598 @@
-/* Reset */
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #ffffff;
-    color: #000;
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* Header */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 45px;
-    border-bottom: 1px solid #e5e5e5;
-    background: white;
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#fff;
+    color:#111;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 22px;
-    letter-spacing: 2px;
-    font-weight: 600;
+/* =========================
+   HEADER
+========================= */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 45px;
+
+    border-bottom:1px solid #e5e5e5;
+
+    background:white;
+
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-nav a {
-    margin-left: 18px;
-    text-decoration: none;
-    color: black;
-    font-size: 14px;
-    font-weight: 500;
-    transition: 0.3s;
+header h1{
+    font-size:22px;
+    letter-spacing:2px;
+    font-weight:700;
 }
 
-nav a:hover {
-    opacity: 0.7;
+nav{
+    display:flex;
+    gap:18px;
 }
 
-/* Contenedor */
-.container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 35px 20px;
+nav a{
+    text-decoration:none;
+    color:black;
+
+    font-size:14px;
+    font-weight:500;
+
+    transition:.3s;
 }
 
-/* Topo */
-.topo {
-    text-align: center;
-    margin-bottom: 35px;
+nav a:hover{
+    opacity:.6;
 }
 
-.topo h2 {
-    font-size: 34px;
-    margin-bottom: 10px;
-    font-weight: 600;
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    max-width:1300px;
+    margin:auto;
+    padding:40px 20px;
 }
 
-.topo p {
-    color: #777;
-    margin-bottom: 22px;
-    font-size: 14px;
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    height:550px;
+
+    background-image:url("https://images.unsplash.com/photo-1523398002811-999ca8dec234");
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    align-items:center;
+
+    padding:60px;
+
+    color:white;
+
+    position:relative;
 }
 
-/* Filtros */
-.filtros {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.35);
 }
 
-.filtros a {
-    text-decoration: none;
-    color: black;
-    border: 1px solid #ddd;
-    padding: 9px 15px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 500;
-    transition: 0.3s;
+.hero-texto{
+    position:relative;
+    z-index:2;
+    max-width:550px;
 }
 
-.filtros a:hover {
-    background: black;
-    color: white;
+.hero h1{
+    font-size:64px;
+    margin-bottom:20px;
+    line-height:1;
 }
 
-/* Productos */
-.productos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 190px));
-    justify-content: center;
-    gap: 22px;
-    padding: 10px 20px 40px;
+.hero p{
+    font-size:18px;
+    line-height:1.7;
+    margin-bottom:30px;
 }
 
-/* Card */
-.card {
-    background: black;
-    color: white;
-    padding: 12px;
-    border-radius: 10px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+/* =========================
+   BOTONES
+========================= */
+
+.btn,
+button,
+.card a,
+.info a,
+.btn-hero{
+    display:inline-block;
+
+    background:black;
+    color:white;
+
+    padding:14px 22px;
+
+    border:none;
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
 }
 
-/* Hover */
-.card:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+.btn:hover,
+button:hover,
+.card a:hover,
+.info a:hover,
+.btn-hero:hover{
+    background:#1d1d1d;
+    transform:translateY(-2px);
 }
 
-/* Luz animada */
-.card::before {
-    content: "";
-    position: absolute;
-    top: -100%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
+/* =========================
+   BENEFICIOS
+========================= */
+
+.beneficios{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+    padding:40px;
+
+    background:#f7f7f7;
+}
+
+.beneficio{
+    background:white;
+    padding:30px;
+    border-radius:14px;
+
+    text-align:center;
+
+    border:1px solid #eee;
+}
+
+.beneficio h3{
+    margin-bottom:10px;
+    font-size:22px;
+}
+
+.beneficio p{
+    color:#666;
+}
+
+/* =========================
+   TITULOS
+========================= */
+
+.titulo-productos,
+.topo,
+.carrito-topo,
+.soporte-topo,
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.titulo-productos h2,
+.topo h2,
+.carrito-topo h1,
+.soporte-topo h1,
+.section-title h2{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.titulo-productos p,
+.topo p,
+.carrito-topo p,
+.soporte-topo p,
+.section-title p{
+    color:#777;
+    font-size:15px;
+    line-height:1.7;
+}
+
+/* =========================
+   FILTROS
+========================= */
+
+.filtros{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-top:25px;
+}
+
+.filtros a{
+    text-decoration:none;
+
+    color:black;
+
+    border:1px solid #ddd;
+
+    padding:10px 16px;
+
+    border-radius:30px;
+
+    font-size:13px;
+    font-weight:500;
+
+    transition:.3s;
+}
+
+.filtros a:hover{
+    background:black;
+    color:white;
+}
+
+/* =========================
+   PRODUCTOS
+========================= */
+
+.productos{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:30px;
+
+    padding:40px 0;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.08);
+
+    transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+
+    position:relative;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,.14);
+}
+
+/* Luz */
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    top:-100%;
+    left:-50%;
+
+    width:200%;
+    height:200%;
+
+    background:linear-gradient(
         120deg,
         transparent,
-        rgba(255,255,255,0.2),
+        rgba(255,255,255,.18),
         transparent
     );
-    transform: rotate(25deg);
-    transition: 0.6s;
+
+    transform:rotate(25deg);
+
+    transition:.7s;
+
+    pointer-events:none;
 }
 
-.card:hover::before {
-    top: 100%;
+.card:hover::before{
+    top:100%;
 }
 
-/* Imagen */
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 6px;
-    margin-bottom: 10px;
+/* =========================
+   IMAGEN
+========================= */
+
+.imagen-container{
+    position:relative;
 }
 
-/* Textos */
-.card h2 {
-    margin: 6px 0;
-    font-size: 15px;
-    font-weight: 600;
+.card img{
+    width:100%;
+    height:360px;
+
+    object-fit:cover;
+
+    display:block;
 }
 
-.card p {
-    margin: 4px 0 8px;
-    color: #bdbdbd;
-    font-size: 12px;
+/* =========================
+   BADGE
+========================= */
+
+.coleccion{
+    position:absolute;
+
+    top:15px;
+    left:15px;
+
+    background:black;
+    color:white;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:12px;
+    font-weight:600;
+
+    letter-spacing:.5px;
 }
 
-.card h3 {
-    margin: 0 0 12px;
-    font-size: 17px;
-    font-weight: 500;
+/* =========================
+   INFO
+========================= */
+
+.info{
+    padding:22px;
 }
 
-/* Botón */
-.card a,
-button,
-.btn {
-    display: inline-block;
-    padding: 8px 14px;
-    background: white;
-    color: black;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: 600;
-    transition: 0.3s;
-    border: none;
-    cursor: pointer;
+.nombre-producto{
+    font-size:24px;
+    font-weight:700;
+
+    color:#111;
+
+    margin-bottom:10px;
 }
 
-.card a:hover,
-button:hover,
-.btn:hover {
-    background: #dddddd;
+.genero{
+    color:#666;
+
+    font-size:15px;
+    font-weight:500;
+
+    margin-bottom:16px;
 }
 
-/* Formularios */
-form {
-    max-width: 420px;
-    margin: auto;
+/* =========================
+   TALLAS
+========================= */
+
+.tallas{
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-bottom:22px;
+}
+
+.talla{
+    background:#f3f3f3;
+
+    border:1px solid #ddd;
+
+    color:#111;
+
+    padding:7px 12px;
+
+    border-radius:8px;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+/* =========================
+   PRECIO
+========================= */
+
+.info h3,
+.precio{
+    font-size:28px;
+    font-weight:700;
+
+    margin-bottom:20px;
+}
+
+/* =========================
+   FORMULARIOS
+========================= */
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
 }
 
 input,
 textarea,
-select {
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 14px;
-    padding: 13px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    outline: none;
-    transition: 0.3s;
-    font-family: inherit;
+select{
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    outline:none;
+
+    transition:.3s;
+
+    font-family:inherit;
 }
 
 input:focus,
 textarea:focus,
-select:focus {
-    border-color: black;
+select:focus{
+    border-color:black;
 }
 
-/* Login */
-.login-box {
-    max-width: 380px;
-    margin: 80px auto;
-    padding: 35px;
-    border: 1px solid #e5e5e5;
-    border-radius: 12px;
+textarea{
+    resize:vertical;
+    min-height:140px;
 }
 
-/* Admin */
-.admin-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
+/* =========================
+   LOGIN / BOX
+========================= */
+
+.login-box,
+.contacto-box,
+.admin-form-container,
+.editar-card{
+    background:white;
+
+    border-radius:18px;
+
+    padding:35px;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.08);
 }
 
-/* Total */
-.total {
-    text-align: center;
-    margin-top: 35px;
-    font-size: 28px;
-    font-weight: 600;
+/* =========================
+   ADMIN
+========================= */
+
+.admin-container{
+    width:90%;
+    margin:auto;
+    padding:40px 0;
 }
 
-/* Separador */
-hr {
-    border: none;
-    border-top: 1px solid #e5e5e5;
-    margin: 30px 0;
+.admin-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:40px;
 }
 
-/* Responsive */
-@media (max-width: 700px) {
-
-    header {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-        padding: 18px 20px;
-    }
-
-    .productos {
-        grid-template-columns: repeat(2, 160px);
-        gap: 14px;
-        padding: 15px;
-    }
-
-    .card img {
-        height: 170px;
-    }
-
-    .container {
-        padding: 15px;
-    }
-
+.admin-title{
+    font-size:40px;
+    font-weight:700;
 }
+
+.productos-admin{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+}
+
+/* =========================
+   CARRITO
+========================= */
+
+.carrito-container{
+    max-width:900px;
+    margin:40px auto;
+    padding:0 20px;
+}
+
+.carrito-productos{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.carrito-card{
+    background:black;
+    color:white;
+
+    border-radius:14px;
+
+    padding:20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    transition:.3s;
+}
+
+.carrito-card:hover{
+    transform:translateY(-5px);
+}
+
+.btn-quitar{
+    background:white;
+    color:black;
+
+    text-decoration:none;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    font-size:13px;
+    font-weight:600;
+}
+
 /* =========================
    PRODUCTO DETALLE
 ========================= */
 
 .producto{
-    max-width:1100px;
-    margin:40px auto;
-    padding:0 25px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
-    align-items:start;
-}
+    max-width:1200px;
 
-/* =========================
-   GALERIA
-========================= */
+    margin:40px auto;
+
+    padding:0 20px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:50px;
+}
 
 .galeria{
     position:sticky;
@@ -293,62 +600,38 @@ hr {
 }
 
 .principal{
-    background:black;
-    border-radius:14px;
     overflow:hidden;
-    position:relative;
+    border-radius:16px;
 }
-
-/* Luz animada */
-
-.principal::before{
-    content:"";
-    position:absolute;
-    top:-100%;
-    left:-50%;
-    width:200%;
-    height:200%;
-    background:linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.15),
-        transparent
-    );
-    transform:rotate(25deg);
-    transition:.6s;
-    pointer-events:none;
-}
-
-.principal:hover::before{
-    top:100%;
-}
-
-/* Imagen principal */
 
 .principal img{
     width:100%;
-    height:620px;
+    height:650px;
     object-fit:cover;
-    display:block;
 }
-
-/* Miniaturas */
 
 .miniaturas{
     display:flex;
-    gap:12px;
-    margin-top:15px;
     flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-top:15px;
 }
 
 .miniaturas img{
-    width:82px;
+    width:80px;
     height:100px;
+
     object-fit:cover;
-    border-radius:8px;
+
+    border-radius:10px;
+
     cursor:pointer;
+
     transition:.3s;
-    border:1px solid #e5e5e5;
+
+    border:1px solid #ddd;
 }
 
 .miniaturas img:hover{
@@ -357,109 +640,30 @@ hr {
 }
 
 /* =========================
-   INFO
-========================= */
-
-.info{
-    padding-top:10px;
-}
-
-.coleccion{
-    font-size:13px;
-    color:#777;
-    letter-spacing:1px;
-    margin-bottom:10px;
-    text-transform:uppercase;
-}
-
-.info h2{
-    margin:0;
-    font-size:42px;
-    font-weight:700;
-    line-height:1.1;
-}
-
-/* Precio */
-
-.precio{
-    font-size:34px;
-    font-weight:600;
-    margin:20px 0;
-}
-
-/* Descripción */
-
-.descripcion{
-    color:#555;
-    line-height:1.8;
-    font-size:15px;
-    margin-bottom:35px;
-}
-
-/* =========================
-   TALLES
-========================= */
-
-.talles{
-    display:flex;
-    gap:10px;
-    margin-bottom:30px;
-    flex-wrap:wrap;
-}
-
-.talles button{
-    width:48px;
-    height:48px;
-    border:none;
-    background:black;
-    color:white;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:14px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.talles button:hover{
-    transform:translateY(-3px);
-    background:#1d1d1d;
-}
-
-/* =========================
-   BOTON
-========================= */
-
-.btn{
-    display:inline-block;
-    padding:14px 24px;
-    background:black;
-    color:white;
-    text-decoration:none;
-    border-radius:10px;
-    font-size:14px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.btn:hover{
-    background:#1d1d1d;
-    transform:translateY(-2px);
-}
-
-/* =========================
    EXTRA
 ========================= */
 
 .extra{
     margin-top:40px;
+
     padding-top:25px;
-    border-top:1px solid #e5e5e5;
+
+    border-top:1px solid #eee;
 }
 
 .extra p{
     color:#666;
-    font-size:14px;
     margin-bottom:10px;
+}
+
+/* =========================
+   HR
+========================= */
+
+hr{
+    border:none;
+    border-top:1px solid #eee;
+    margin:30px 0;
 }
 
 /* =========================
@@ -470,8 +674,6 @@ hr {
 
     .producto{
         grid-template-columns:1fr;
-        gap:30px;
-        padding:20px;
     }
 
     .galeria{
@@ -483,902 +685,63 @@ hr {
         height:450px;
     }
 
-    .info h2{
-        font-size:34px;
+    .hero h1{
+        font-size:48px;
     }
-
-    .precio{
-        font-size:28px;
-    }
-
 }
 
-@media(max-width:600px){
+@media(max-width:700px){
 
-    .principal img{
-        height:360px;
+    header{
+        flex-direction:column;
+        gap:14px;
+
+        text-align:center;
+
+        padding:20px;
     }
 
-    .miniaturas{
+    nav{
+        flex-wrap:wrap;
         justify-content:center;
     }
 
-    .miniaturas img{
-        width:70px;
-        height:85px;
+    .hero{
+        height:420px;
+        padding:30px;
     }
 
-    .info h2{
-        font-size:28px;
+    .hero h1{
+        font-size:38px;
     }
 
-}
-/* =========================
-   CARRITO
-========================= */
-
-.carrito-container{
-    max-width:900px;
-    margin:40px auto;
-    padding:0 20px;
-}
-
-/* Topo */
-
-.carrito-topo{
-    text-align:center;
-    margin-bottom:35px;
-}
-
-.carrito-topo h1{
-    margin:0;
-    font-size:38px;
-    font-weight:700;
-}
-
-.carrito-topo p{
-    color:#777;
-    margin-top:10px;
-    font-size:14px;
-}
-
-/* Lista */
-
-.carrito-productos{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-}
-
-/* Card */
-
-.carrito-card{
-    background:black;
-    color:white;
-    border-radius:12px;
-    padding:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:relative;
-    overflow:hidden;
-    transition:transform .4s ease,
-               box-shadow .4s ease;
-}
-
-/* Hover */
-
-.carrito-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 20px 40px rgba(0,0,0,.18);
-}
-
-/* Luz */
-
-.carrito-card::before{
-    content:"";
-    position:absolute;
-    top:-100%;
-    left:-50%;
-    width:200%;
-    height:200%;
-    background:linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,.15),
-        transparent
-    );
-    transform:rotate(25deg);
-    transition:.6s;
-}
-
-.carrito-card:hover::before{
-    top:100%;
-}
-
-/* Info */
-
-.carrito-info h2{
-    margin:0 0 8px;
-    font-size:20px;
-}
-
-.precio{
-    margin:0;
-    color:#bdbdbd;
-    font-size:15px;
-}
-
-/* Botón quitar */
-
-.btn-quitar{
-    background:white;
-    color:black;
-    text-decoration:none;
-    padding:10px 16px;
-    border-radius:8px;
-    font-size:13px;
-    font-weight:600;
-    transition:.3s;
-    z-index:2;
-}
-
-.btn-quitar:hover{
-    background:#ddd;
-}
-
-/* Footer */
-
-.carrito-footer{
-    margin-top:35px;
-    text-align:center;
-}
-
-/* Total */
-
-.total{
-    font-size:34px;
-    margin-bottom:20px;
-}
-
-/* Volver */
-
-.btn-volver{
-    display:inline-block;
-    background:black;
-    color:white;
-    text-decoration:none;
-    padding:13px 22px;
-    border-radius:10px;
-    font-size:14px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.btn-volver:hover{
-    background:#1d1d1d;
-    transform:translateY(-2px);
-}
-
-/* Responsive */
-
-@media(max-width:700px){
-
-    .carrito-card{
-        flex-direction:column;
-        gap:18px;
-        text-align:center;
+    .productos{
+        grid-template-columns:1fr;
     }
 
-    .carrito-topo h1{
-        font-size:30px;
+    .card img{
+        height:300px;
     }
 
-    .total{
-        font-size:28px;
+    .beneficios{
+        padding:20px;
     }
 
-}
-/* =========================
-   SOPORTE
-========================= */
-
-.soporte-container{
-    max-width:1100px;
-    margin:40px auto;
-    padding:0 20px;
-}
-
-/* =========================
-   TOPO
-========================= */
-
-.soporte-topo{
-    text-align:center;
-    margin-bottom:45px;
-}
-
-.soporte-topo h1{
-    margin:0;
-    font-size:42px;
-    font-weight:700;
-}
-
-.soporte-topo p{
-    color:#777;
-    font-size:15px;
-    margin-top:12px;
-    line-height:1.7;
-}
-
-/* =========================
-   CARDS
-========================= */
-
-.soporte-cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
-    gap:22px;
-    margin-bottom:50px;
-}
-
-/* Card */
-
-.soporte-card{
-    background:black;
-    color:white;
-    border-radius:14px;
-    padding:28px 24px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-    transition:transform .4s ease,
-               box-shadow .4s ease;
-}
-
-/* Hover */
-
-.soporte-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 20px 40px rgba(0,0,0,.18);
-}
-
-/* Luz */
-
-.soporte-card::before{
-    content:"";
-    position:absolute;
-    top:-100%;
-    left:-50%;
-    width:200%;
-    height:200%;
-    background:linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,.15),
-        transparent
-    );
-    transform:rotate(25deg);
-    transition:.6s;
-}
-
-.soporte-card:hover::before{
-    top:100%;
-}
-
-/* Icono */
-
-.icono{
-    font-size:34px;
-    margin-bottom:18px;
-}
-
-/* Textos */
-
-.soporte-card h2{
-    margin:0 0 12px;
-    font-size:20px;
-}
-
-.soporte-card p{
-    color:#bdbdbd;
-    font-size:14px;
-    line-height:1.7;
-}
-
-/* =========================
-   FORMULARIO
-========================= */
-
-.contacto-box{
-    max-width:700px;
-    margin:auto;
-    background:#fafafa;
-    border:1px solid #e5e5e5;
-    border-radius:16px;
-    padding:35px;
-}
-
-.contacto-box h2{
-    margin-top:0;
-    margin-bottom:25px;
-    text-align:center;
-    font-size:30px;
-}
-
-/* Form */
-
-form{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
-
-/* Inputs */
-
-input,
-textarea{
-    width:100%;
-    box-sizing:border-box;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-size:14px;
-    font-family:inherit;
-    outline:none;
-    transition:.3s;
-}
-
-input:focus,
-textarea:focus{
-    border-color:black;
-}
-
-/* Textarea */
-
-textarea{
-    min-height:140px;
-    resize:vertical;
-}
-
-/* Botón */
-
-button{
-    background:black;
-    color:white;
-    border:none;
-    padding:14px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:14px;
-    font-weight:600;
-    transition:.3s;
-}
-
-button:hover{
-    background:#1d1d1d;
-    transform:translateY(-2px);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:700px){
-
+    .titulo-productos h2,
+    .topo h2,
+    .carrito-topo h1,
     .soporte-topo h1{
         font-size:32px;
     }
 
-    .contacto-box{
-        padding:25px;
+    .carrito-card{
+        flex-direction:column;
+        gap:15px;
+
+        text-align:center;
     }
 
-}
-.admin-container{
-    width: 90%;
-    margin: auto;
-    padding: 30px 0;
-}
-
-.admin-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.admin-title{
-    font-size: 40px;
-    font-weight: bold;
-}
-
-.logout-btn{
-    background: black;
-    color: white;
-    padding: 12px 20px;
-    text-decoration: none;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-.logout-btn:hover{
-    opacity: 0.8;
-}
-
-.admin-form-container{
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    margin-bottom: 50px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.form-title{
-    margin-bottom: 20px;
-    font-size: 28px;
-}
-
-.admin-form{
-    display: grid;
-    gap: 20px;
-}
-
-.input-group{
-    display: flex;
-    flex-direction: column;
-}
-
-.input-label{
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-.admin-input{
-    padding: 14px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-}
-
-.admin-input:focus{
-    outline: none;
-    border-color: black;
-}
-
-.crear-btn{
-    background: black;
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.crear-btn:hover{
-    opacity: 0.8;
-}
-
-.productos-admin{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-    gap: 25px;
-}
-
-.producto-card{
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.producto-img{
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-}
-
-.producto-info{
-    padding: 20px;
-}
-
-.producto-nombre{
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.producto-precio{
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.producto-coleccion{
-    color: #666;
-}
-
-.producto-botones{
-    display: flex;
-    gap: 10px;
-    padding: 20px;
-}
-
-.editar-btn{
-    flex: 1;
-    text-align: center;
-    background: #111;
-    color: white;
-    text-decoration: none;
-    padding: 12px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-.eliminar-btn{
-    flex: 1;
-    text-align: center;
-    background: crimson;
-    color: white;
-    text-decoration: none;
-    padding: 12px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-.editar-btn:hover,
-.eliminar-btn:hover{
-    opacity: 0.8;
-}
-.editar-container{
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-}
-
-.editar-card{
-    width: 100%;
-    max-width: 700px;
-    background: white;
-    border-radius: 20px;
-    padding: 35px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.editar-header{
-    margin-bottom: 30px;
-}
-
-.editar-title{
-    font-size: 40px;
-    margin-bottom: 10px;
-}
-
-.editar-subtitle{
-    color: #666;
-    font-size: 16px;
-}
-
-.editar-form{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.input-group{
-    display: flex;
-    flex-direction: column;
-}
-
-.input-label{
-    margin-bottom: 8px;
-    font-weight: bold;
-    font-size: 15px;
-}
-
-.editar-input{
-    padding: 14px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.editar-input:focus{
-    outline: none;
-    border-color: black;
-}
-
-.preview-container{
-    margin-top: 10px;
-}
-
-.preview-text{
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.preview-img{
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 15px;
-}
-
-.editar-actions{
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.guardar-btn{
-    flex: 1;
-    background: black;
-    color: white;
-    border: none;
-    padding: 16px;
-    border-radius: 12px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.guardar-btn:hover{
-    opacity: 0.85;
-}
-
-.volver-btn{
-    flex: 1;
-    background: #e5e5e5;
-    color: black;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.volver-btn:hover{
-    background: #d5d5d5;
-}
-/* HERO */
-
-.hero{
-    height: 500px;
-    background-image: url("https://images.unsplash.com/photo-1523398002811-999ca8dec234");
-    background-size: cover;
-    background-position: center;
-
-    display: flex;
-    align-items: center;
-
-    padding: 60px;
-    color: white;
-}
-
-.hero-texto{
-    max-width: 500px;
-}
-
-.hero h1{
-    font-size: 60px;
-    margin-bottom: 20px;
-}
-
-.hero p{
-    font-size: 20px;
-    margin-bottom: 30px;
-}
-
-.btn-hero{
-    background: black;
-    color: white;
-    padding: 14px 30px;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: bold;
-}
-
-/* BENEFICIOS */
-
-.beneficios{
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-
-    padding: 40px;
-    background: #f5f5f5;
-}
-
-.beneficio{
-    text-align: center;
-}
-
-/* TITULO */
-
-.titulo-productos{
-    text-align: center;
-    padding: 50px 20px 20px;
-}
-
-.titulo-productos h2{
-    font-size: 40px;
-    margin-bottom: 10px;
-}
-
-/* PRODUCTOS */
-
-.productos{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-
-    gap: 30px;
-
-    padding: 40px;
-}
-
-/* CARD */
-
-.card{
-    background: white;
-
-    border-radius: 15px;
-
-    overflow: hidden;
-
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-
-    transition: 0.3s;
-}
-
-.card:hover{
-    transform: translateY(-8px);
-}
-
-.imagen-container{
-    position: relative;
-}
-
-.card img{
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-}
-
-.coleccion{
-    position: absolute;
-
-    top: 15px;
-    left: 15px;
-
-    background: black;
-    color: white;
-
-    padding: 6px 12px;
-
-    border-radius: 20px;
-
-    font-size: 14px;
-}
-
-.info{
-    padding: 20px;
-}
-
-.info h2{
-    margin-bottom: 10px;
-}
-
-.genero{
-    color: gray;
-    margin-bottom: 15px;
-}
-
-/* TALLAS */
-
-.tallas{
-    display: flex;
-    gap: 10px;
-
-    margin-bottom: 20px;
-}
-
-.tallas span{
-    border: 1px solid #ccc;
-
-    padding: 5px 10px;
-
-    border-radius: 5px;
-
-    font-size: 14px;
-}
-
-/* PRECIO */
-
-.info h3{
-    margin-bottom: 20px;
-    font-size: 28px;
-}
-
-/* BOTON */
-
-.info a{
-    display: block;
-
-    text-align: center;
-
-    background: black;
-    color: white;
-
-    padding: 14px;
-
-    border-radius: 10px;
-
-    text-decoration: none;
-
-    transition: 0.3s;
-}
-
-.info a:hover{
-    background: #333;
-}
-
-.info{
-    padding: 20px;
-}
-
-/* NOMBRE */
-
-.nombre-producto{
-    font-size: 24px;
-    font-weight: bold;
-
-    color: #111;
-
-    margin-bottom: 10px;
-}
-
-/* GENERO */
-
-.genero{
-    font-size: 16px;
-
-    color: #666;
-
-    margin-bottom: 15px;
-
-    font-weight: 500;
-}
-
-/* TALLAS */
-
-.tallas{
-    display: flex;
-    gap: 10px;
-
-    flex-wrap: wrap;
-
-    margin-bottom: 20px;
-}
-
-.talla{
-    background: #f1f1f1;
-
-    color: black;
-
-    border: 1px solid #ccc;
-
-    padding: 6px 12px;
-
-    border-radius: 8px;
-
-    font-size: 14px;
-
-    font-weight: bold;
+    .principal img{
+        height:360px;
+    }
 }
