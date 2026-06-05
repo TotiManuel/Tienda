@@ -1,6 +1,11 @@
 import sqlite3
 
-DB = "database/base.db"
+import os
+
+DB = os.path.join(
+    os.path.dirname(__file__),
+    "base.db"
+)
 
 # ==========================================
 # CONEXION
