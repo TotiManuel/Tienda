@@ -1,31 +1,48 @@
 {% extends 'base.html' %}
+
 {% block titulo %}
 MORTAL
 {% endblock %}
+
 {% block contenido %}
 
-<h1>Acceso administrador</h1>
+<section class="login-admin">
 
-<form method="POST">
+    <div class="login-box">
 
-    <input
-        type="text"
-        name="usuario"
-        placeholder="Usuario"
-        required
-    >
+        <h1>Panel Admin</h1>
 
-    <input
-        type="password"
-        name="password"
-        placeholder="Contraseña"
-        required
-    >
+        <p>
+            Accedé para administrar productos y catálogo
+        </p>
 
-    <button type="submit">
-        Entrar
-    </button>
+        <form
+            method="POST"
+            class="login-form"
+        >
 
-</form>
+            <input
+                type="text"
+                name="usuario"
+                placeholder="Usuario"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Contraseña"
+                required
+            >
+
+            <button type="submit">
+                Entrar
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
 
 {% endblock %}
