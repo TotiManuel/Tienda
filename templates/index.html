@@ -1,8 +1,64 @@
 {% extends 'base.html' %}
+
 {% block titulo %}
 MORTAL
 {% endblock %}
+
 {% block contenido %}
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-texto">
+        <h1>MORTAL STREETWEAR</h1>
+
+        <p>
+            Nueva colección urbana 2026.
+            Oversize, minimalismo y estilo moderno.
+        </p>
+
+        <a href="#productos" class="btn-hero">
+            Ver colección
+        </a>
+    </div>
+
+</section>
+
+<!-- BENEFICIOS -->
+
+<section class="beneficios">
+
+    <div class="beneficio">
+        <h3>🚚 Envíos</h3>
+        <p>A todo el país</p>
+    </div>
+
+    <div class="beneficio">
+        <h3>💳 Cuotas</h3>
+        <p>Hasta 6 sin interés</p>
+    </div>
+
+    <div class="beneficio">
+        <h3>🔥 Tendencia</h3>
+        <p>Moda urbana actual</p>
+    </div>
+
+</section>
+
+<!-- TITULO -->
+
+<section class="titulo-productos" id="productos">
+
+    <h2>Productos destacados</h2>
+
+    <p>
+        Lo más vendido de nuestra colección.
+    </p>
+
+</section>
+
+<!-- PRODUCTOS -->
 
 <div class="productos">
 
@@ -10,19 +66,41 @@ MORTAL
 
 <div class="card">
 
-    {% if p.imagen %}
-        <img src="{{ p.imagen }}">
-    {% endif %}
+    <div class="imagen-container">
 
-    <h2>{{ p.nombre }}</h2>
+        {% if p.imagen %}
+            <img src="{{ p.imagen }}">
+        {% endif %}
 
-    <p>{{ p.coleccion }}</p>
+        <span class="coleccion">
+            {{ p.coleccion }}
+        </span>
 
-    <h3>$ {{ p.precio }}</h3>
+    </div>
 
-    <a href="/agregar/{{ p.id }}">
-        Agregar
-    </a>
+    <div class="info">
+
+        <h2>{{ p.nombre }}</h2>
+
+        <p class="genero">
+            {{ p.genero }}
+        </p>
+
+        <div class="tallas">
+
+            {% for t in p.tallas %}
+                <span>{{ t }}</span>
+            {% endfor %}
+
+        </div>
+
+        <h3>$ {{ p.precio }}</h3>
+
+        <a href="/agregar/{{ p.id }}">
+            Agregar al carrito
+        </a>
+
+    </div>
 
 </div>
 

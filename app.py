@@ -28,6 +28,8 @@ productos = [
         "nombre": "Remera Oversize",
         "precio": 15000,
         "coleccion": "Invierno",
+        "tallas": ["S", "M", "L", "XL"],
+        "genero": "Unisex",
         "imagen": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"
     },
     {
@@ -35,6 +37,8 @@ productos = [
         "nombre": "Buzo Negro",
         "precio": 28000,
         "coleccion": "Urban",
+        "tallas": ["M", "L", "XL"],
+        "genero": "Hombre",
         "imagen": "https://images.unsplash.com/photo-1503341504253-dff4815485f1"
     },
     {
@@ -42,6 +46,8 @@ productos = [
         "nombre": "Campera Denim",
         "precio": 42000,
         "coleccion": "Classic",
+        "tallas": ["S", "M", "L"],
+        "genero": "Unisex",
         "imagen": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f"
     },
     {
@@ -49,6 +55,8 @@ productos = [
         "nombre": "Pantalón Cargo",
         "precio": 31000,
         "coleccion": "Streetwear",
+        "tallas": ["M", "L", "XL"],
+        "genero": "Hombre",
         "imagen": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f"
     },
     {
@@ -56,6 +64,8 @@ productos = [
         "nombre": "Zapatillas Urban",
         "precio": 55000,
         "coleccion": "Urban",
+        "tallas": [38, 39, 40, 41, 42],
+        "genero": "Unisex",
         "imagen": "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
     },
     {
@@ -63,6 +73,8 @@ productos = [
         "nombre": "Camisa Blanca",
         "precio": 22000,
         "coleccion": "Elegance",
+        "tallas": ["S", "M", "L"],
+        "genero": "Hombre",
         "imagen": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b"
     },
     {
@@ -70,6 +82,8 @@ productos = [
         "nombre": "Jogger Gris",
         "precio": 27000,
         "coleccion": "Sport",
+        "tallas": ["M", "L", "XL"],
+        "genero": "Unisex",
         "imagen": "https://images.unsplash.com/photo-1506629905607-d9b1c9f9c5d1"
     },
     {
@@ -77,6 +91,8 @@ productos = [
         "nombre": "Bermuda Beige",
         "precio": 18000,
         "coleccion": "Summer",
+        "tallas": ["S", "M", "L"],
+        "genero": "Hombre",
         "imagen": "https://images.unsplash.com/photo-1509631179647-0177331693ae"
     },
     {
@@ -84,6 +100,8 @@ productos = [
         "nombre": "Campera Puffer",
         "precio": 65000,
         "coleccion": "Invierno",
+        "tallas": ["M", "L", "XL"],
+        "genero": "Unisex",
         "imagen": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b"
     },
     {
@@ -91,6 +109,8 @@ productos = [
         "nombre": "Remera Estampada",
         "precio": 17000,
         "coleccion": "Streetwear",
+        "tallas": ["S", "M", "L", "XL"],
+        "genero": "Unisex",
         "imagen": "https://images.unsplash.com/photo-1483985988355-763728e1935b"
     },
     {
@@ -98,6 +118,8 @@ productos = [
         "nombre": "Sweater Lana",
         "precio": 34000,
         "coleccion": "Winter",
+        "tallas": ["S", "M", "L"],
+        "genero": "Mujer",
         "imagen": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1"
     },
     {
@@ -105,6 +127,8 @@ productos = [
         "nombre": "Top Deportivo",
         "precio": 14000,
         "coleccion": "Sport",
+        "tallas": ["XS", "S", "M"],
+        "genero": "Mujer",
         "imagen": "https://images.unsplash.com/photo-1517841905240-472988babdf9"
     },
     {
@@ -112,6 +136,8 @@ productos = [
         "nombre": "Jean Slim Fit",
         "precio": 36000,
         "coleccion": "Classic",
+        "tallas": [38, 40, 42, 44],
+        "genero": "Hombre",
         "imagen": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246"
     },
     {
@@ -119,6 +145,8 @@ productos = [
         "nombre": "Hoodie Oversize",
         "precio": 39000,
         "coleccion": "Urban",
+        "tallas": ["M", "L", "XL"],
+        "genero": "Unisex",
         "imagen": "https://images.unsplash.com/photo-1523398002811-999ca8dec234"
     },
     {
@@ -126,6 +154,8 @@ productos = [
         "nombre": "Vestido Casual",
         "precio": 33000,
         "coleccion": "Summer",
+        "tallas": ["S", "M", "L"],
+        "genero": "Mujer",
         "imagen": "https://images.unsplash.com/photo-1496747611176-843222e1e57c"
     },
     {
@@ -133,6 +163,8 @@ productos = [
         "nombre": "Blazer Negro",
         "precio": 58000,
         "coleccion": "Elegance",
+        "tallas": ["S", "M", "L"],
+        "genero": "Hombre",
         "imagen": "https://images.unsplash.com/photo-1507679799987-c73779587ccf"
     },
     {
@@ -140,6 +172,8 @@ productos = [
         "nombre": "Pollera Tableada",
         "precio": 24000,
         "coleccion": "Classic",
+        "tallas": ["XS", "S", "M"],
+        "genero": "Mujer",
         "imagen": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f"
     },
     {
@@ -147,6 +181,8 @@ productos = [
         "nombre": "Chaleco Puff",
         "precio": 37000,
         "coleccion": "Winter",
+        "tallas": ["M", "L"],
+        "genero": "Unisex",
         "imagen": "https://images.unsplash.com/photo-1495121605193-b116b5b9c5fe"
     },
     {
@@ -154,6 +190,8 @@ productos = [
         "nombre": "Conjunto Deportivo",
         "precio": 49000,
         "coleccion": "Sport",
+        "tallas": ["S", "M", "L", "XL"],
+        "genero": "Unisex",
         "imagen": "https://images.unsplash.com/photo-1514996937319-344454492b37"
     },
     {
@@ -161,6 +199,8 @@ productos = [
         "nombre": "Campera Cuero",
         "precio": 72000,
         "coleccion": "Luxury",
+        "tallas": ["M", "L", "XL"],
+        "genero": "Hombre",
         "imagen": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b"
     }
 ]
