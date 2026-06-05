@@ -7,7 +7,6 @@ from flask import (
 )
 from database.database import *
 import os
-
 app = Flask(__name__)
 
 app.secret_key = os.environ.get(
