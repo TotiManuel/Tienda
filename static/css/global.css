@@ -264,7 +264,7 @@ button:hover,
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fit, minmax(280px, 320px));
+    repeat(4, 280px);
 
     justify-content:center;
 
@@ -293,7 +293,6 @@ button:hover,
 
     position:relative;
     width:100%;
-    max-width:320px;
 }
 .card:hover{
     transform:translateY(-8px);
