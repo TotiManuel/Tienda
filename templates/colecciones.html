@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Colecciones
+{% endblock %}
+
+{% block contenido %}
+
+<div class="colecciones-container">
+
+    <!-- TOPO -->
+
+    <div class="colecciones-topo">
+
+        <h1>Colecciones</h1>
+
+        <p>
+            Explorá los distintos estilos de MORTAL
+        </p>
+
+    </div>
+
+    <!-- GRID -->
+
+    <div class="colecciones-grid">
+
+        {% for c in colecciones %}
+
+        <a
+            href="/categoria/{{ c.nombre.lower() }}"
+            class="coleccion-card"
+        >
+
+            <img src="{{ c.imagen }}">
+
+            <div class="overlay"></div>
+
+            <div class="coleccion-info">
+
+                <h2>{{ c.nombre }}</h2>
+
+                <span>
+                    Ver colección
+                </span>
+
+            </div>
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

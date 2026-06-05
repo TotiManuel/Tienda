@@ -259,6 +259,52 @@ def categoria(filtro):
         titulo=filtro.capitalize(),
         filtro_activo=filtro
     )
+
+@app.route("/colecciones")
+def colecciones():
+
+    colecciones = [
+        {
+            "nombre": "Urban",
+            "imagen":
+            "https://images.unsplash.com/photo-1523398002811-999ca8dec234"
+        },
+
+        {
+            "nombre": "Invierno",
+            "imagen":
+            "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f"
+        },
+
+        {
+            "nombre": "Oversize",
+            "imagen":
+            "https://images.unsplash.com/photo-1496747611176-843222e1e57c"
+        },
+
+        {
+            "nombre": "Minimal",
+            "imagen":
+            "https://images.unsplash.com/photo-1483985988355-763728e1935b"
+        },
+
+        {
+            "nombre": "Verano",
+            "imagen":
+            "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c"
+        },
+
+        {
+            "nombre": "Streetwear",
+            "imagen":
+            "https://images.unsplash.com/photo-1507679799987-c73779587ccf"
+        }
+    ]
+
+    return render_template(
+        "colecciones.html",
+        colecciones=colecciones
+    )
     
 @app.route("/producto/<int:id>")
 def detalle_producto(id):
