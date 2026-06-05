@@ -316,8 +316,9 @@ def carrito():
     return render_template(
         "carrito.html",
         productos=productos_carrito,
-        total=total
-    )
+        total=total,
+        productos_tienda=productos
+)
 
 @app.route("/quitar/<int:index>")
 def quitar(index):

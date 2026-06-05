@@ -530,13 +530,40 @@ textarea{
 }
 
 /* =========================
-   CARRITO ESTILO ECOMMERCE
+   PAGE
 ========================= */
 
-.carrito-container{
-    max-width:1100px;
+.carrito-page{
+    max-width:1400px;
+
     margin:40px auto;
+
     padding:0 20px;
+
+    display:grid;
+
+    grid-template-columns:700px 1fr;
+
+    gap:40px;
+
+    align-items:start;
+}
+
+/* =========================
+   BOX IZQUIERDA
+========================= */
+
+.carrito-box{
+    background:white;
+
+    border:1px solid #eee;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.05);
 }
 
 /* =========================
@@ -549,23 +576,11 @@ textarea{
 
 .carrito-topo h1{
     font-size:38px;
-    margin-bottom:6px;
+    margin-bottom:8px;
 }
 
 .carrito-topo p{
     color:#777;
-    font-size:15px;
-}
-
-/* =========================
-   LAYOUT
-========================= */
-
-.carrito-layout{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:25px;
-    align-items:start;
 }
 
 /* =========================
@@ -575,7 +590,7 @@ textarea{
 .carrito-productos{
     display:flex;
     flex-direction:column;
-    gap:16px;
+    gap:14px;
 }
 
 /* =========================
@@ -583,40 +598,31 @@ textarea{
 ========================= */
 
 .carrito-card{
-    background:white;
+    display:grid;
 
-    border:1px solid #ececec;
+    grid-template-columns:
+    90px 1fr auto;
+
+    gap:16px;
+
+    align-items:center;
+
+    background:#fafafa;
 
     border-radius:18px;
 
-    padding:18px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    padding:14px;
 
     transition:.3s;
-
-    box-shadow:
-    0 4px 12px rgba(0,0,0,.04);
 }
 
 .carrito-card:hover{
-    box-shadow:
-    0 10px 25px rgba(0,0,0,.08);
+    background:#f3f3f3;
 }
 
 /* =========================
-   IZQUIERDA
+   IMG
 ========================= */
-
-.carrito-left{
-    display:flex;
-    gap:18px;
-    align-items:center;
-}
-
-/* IMAGEN */
 
 .carrito-img{
     width:90px;
@@ -624,151 +630,99 @@ textarea{
 
     object-fit:cover;
 
-    border-radius:12px;
-
-    border:1px solid #eee;
+    border-radius:14px;
 }
 
 /* =========================
    INFO
 ========================= */
 
-.carrito-info{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
 .carrito-info h2{
-    font-size:20px;
-    font-weight:700;
-    color:#111;
+    font-size:18px;
+    margin-bottom:8px;
 }
-
-/* TALLE */
 
 .carrito-talle{
-    width:max-content;
+    display:inline-block;
 
-    background:#f5f5f5;
+    background:white;
 
-    padding:5px 10px;
+    border:1px solid #ddd;
 
     border-radius:30px;
 
-    font-size:12px;
-    font-weight:600;
+    padding:5px 10px;
 
-    color:#444;
+    font-size:12px;
+
+    margin-bottom:10px;
 }
 
-/* PRECIO */
-
 .carrito-precio{
-    font-size:24px;
+    font-size:22px;
     font-weight:700;
-    color:black;
 }
 
 /* =========================
-   DERECHA
+   QUITAR
 ========================= */
 
-.carrito-right{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
-    gap:12px;
-}
-
-/* BOTON */
-
 .btn-quitar{
-    background:#f3f3f3;
-    color:black;
+    width:38px;
+    height:38px;
 
-    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    padding:10px 14px;
+    background:white;
 
     border-radius:10px;
 
-    font-size:13px;
-    font-weight:600;
+    text-decoration:none;
+
+    color:black;
+
+    font-size:18px;
 
     transition:.3s;
 }
 
 .btn-quitar:hover{
-    background:#e5e5e5;
+    background:black;
+    color:white;
 }
 
 /* =========================
-   RESUMEN
+   FOOTER
 ========================= */
 
 .carrito-footer{
-    background:white;
+    margin-top:30px;
 
-    border:1px solid #ececec;
+    padding-top:25px;
 
-    border-radius:18px;
-
-    padding:25px;
-
-    position:sticky;
-    top:100px;
-
-    box-shadow:
-    0 4px 12px rgba(0,0,0,.04);
+    border-top:1px solid #eee;
 }
-
-/* TITULO */
-
-.resumen-titulo{
-    font-size:22px;
-    font-weight:700;
-
-    margin-bottom:25px;
-}
-
-/* FILAS */
-
-.resumen-linea{
-    display:flex;
-    justify-content:space-between;
-
-    margin-bottom:14px;
-
-    color:#555;
-}
-
-/* TOTAL */
 
 .total-box{
-    border-top:1px solid #eee;
-
-    margin-top:20px;
-    padding-top:20px;
-}
-
-.total{
     display:flex;
     justify-content:space-between;
     align-items:center;
 
-    font-size:30px;
-    font-weight:700;
-
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
-/* BOTON FINAL */
+.total-box h2{
+    font-size:36px;
+}
 
-.btn-volver{
+/* =========================
+   COMPRAR
+========================= */
+
+.btn-comprar{
     display:block;
-
-    width:100%;
 
     background:black;
     color:white;
@@ -777,69 +731,108 @@ textarea{
 
     text-decoration:none;
 
-    padding:16px;
+    padding:18px;
 
-    border-radius:14px;
+    border-radius:16px;
 
-    font-size:15px;
     font-weight:700;
 
     transition:.3s;
 }
 
-.btn-volver:hover{
-    background:#1d1d1d;
+.btn-comprar:hover{
     transform:translateY(-2px);
 }
 
-/* ENVIO */
+/* =========================
+   RECOMENDADOS
+========================= */
 
-.envio{
-    margin-top:18px;
+.recomendados h2{
+    margin-bottom:20px;
+    font-size:28px;
+}
 
-    font-size:13px;
+/* GRID */
 
-    color:#666;
+.recomendados-grid{
+    display:grid;
 
-    text-align:center;
+    grid-template-columns:
+    repeat(2, 1fr);
+
+    gap:18px;
+}
+
+/* CARD */
+
+.recomendado-card{
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    text-decoration:none;
+
+    color:black;
+
+    border:1px solid #eee;
+
+    transition:.3s;
+}
+
+.recomendado-card:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+}
+
+.recomendado-card img{
+    width:100%;
+    height:240px;
+
+    object-fit:cover;
+}
+
+.recomendado-card h3{
+    font-size:16px;
+
+    padding:14px 14px 6px;
+}
+
+.recomendado-card p{
+    padding:0 14px 16px;
+
+    font-weight:700;
 }
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media(max-width:900px){
+@media(max-width:1200px){
 
-    .carrito-layout{
+    .carrito-page{
         grid-template-columns:1fr;
-    }
-
-    .carrito-footer{
-        position:relative;
-        top:0;
     }
 
 }
 
 @media(max-width:700px){
 
+    .recomendados-grid{
+        grid-template-columns:1fr;
+    }
+
     .carrito-card{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:18px;
+        grid-template-columns:1fr;
     }
 
-    .carrito-right{
+    .carrito-img{
         width:100%;
-        align-items:stretch;
-    }
-
-    .btn-quitar{
-        text-align:center;
-    }
-
-    .carrito-left{
-        align-items:flex-start;
+        height:260px;
     }
 
 }
