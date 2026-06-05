@@ -672,6 +672,19 @@ hr{
    RESPONSIVE
 ========================= */
 
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1200px){
+
+    .productos{
+        grid-template-columns:
+        repeat(3, 280px);
+    }
+
+}
+
 @media(max-width:900px){
 
     .producto{
@@ -690,6 +703,12 @@ hr{
     .hero h1{
         font-size:48px;
     }
+
+    .productos{
+        grid-template-columns:
+        repeat(2, 280px);
+    }
+
 }
 
 @media(max-width:700px){
@@ -718,7 +737,10 @@ hr{
     }
 
     .productos{
-        grid-template-columns:1fr;
+        grid-template-columns:
+        repeat(1, 280px);
+
+        justify-content:center;
     }
 
     .card img{
