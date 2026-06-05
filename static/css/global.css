@@ -1089,3 +1089,217 @@ hr{
     box-shadow:
     0 6px 15px rgba(0,0,0,.15);
 }
+/* =========================
+   SOPORTE
+========================= */
+
+.soporte-container{
+    max-width:1300px;
+    margin:auto;
+    padding:50px 20px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.soporte-cards{
+    display:grid;
+
+    grid-template-columns:
+    repeat(3, 1fr);
+
+    gap:25px;
+
+    margin-bottom:50px;
+}
+
+/* CARD */
+
+.soporte-card{
+    background:white;
+
+    border:1px solid #eee;
+
+    border-radius:24px;
+
+    padding:35px;
+
+    text-align:center;
+
+    transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.05);
+}
+
+.soporte-card:hover{
+    transform:translateY(-6px);
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.10);
+}
+
+/* ICONO */
+
+.icono{
+    width:80px;
+    height:80px;
+
+    margin:auto auto 20px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#f5f5f5;
+
+    font-size:34px;
+}
+
+/* TITULO */
+
+.soporte-card h2{
+    font-size:24px;
+
+    margin-bottom:14px;
+}
+
+/* TEXTO */
+
+.soporte-card p{
+    color:#666;
+
+    line-height:1.7;
+
+    font-size:15px;
+}
+
+/* =========================
+   CONTACTO
+========================= */
+
+.contacto-box{
+    max-width:850px;
+
+    margin:auto;
+
+    border:1px solid #eee;
+}
+
+/* TITULO */
+
+.contacto-box h2{
+    font-size:34px;
+
+    margin-bottom:30px;
+
+    text-align:center;
+}
+
+/* FORM */
+
+.contacto-box form{
+    gap:18px;
+}
+
+/* INPUTS */
+
+.contacto-box input,
+.contacto-box textarea{
+    background:#fafafa;
+
+    border:1px solid #e5e5e5;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    font-size:15px;
+}
+
+/* FOCUS */
+
+.contacto-box input:focus,
+.contacto-box textarea:focus{
+    background:white;
+
+    border-color:black;
+
+    box-shadow:
+    0 0 0 4px rgba(0,0,0,.06);
+}
+
+/* BOTON */
+
+.contacto-box button{
+    width:100%;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    font-size:15px;
+
+    font-weight:700;
+}
+
+/* =========================
+   INFO EXTRA
+========================= */
+
+.soporte-extra{
+    display:flex;
+    justify-content:center;
+
+    gap:40px;
+
+    margin-top:50px;
+
+    flex-wrap:wrap;
+}
+
+.soporte-extra div{
+    text-align:center;
+}
+
+.soporte-extra h3{
+    margin-bottom:8px;
+    font-size:18px;
+}
+
+.soporte-extra p{
+    color:#666;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .soporte-cards{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .contacto-box{
+        padding:25px;
+    }
+
+    .soporte-topo h1{
+        font-size:34px;
+    }
+
+    .contacto-box h2{
+        font-size:28px;
+    }
+
+}
