@@ -267,28 +267,46 @@ def detalle_producto(id):
 # CARRITO
 # ====================================
 
-@app.route("/agregar/<int:id>")
+@app.route("/agregar/<int:id>", methods=["POST"])
 def agregar(id):
+
+    talle = request.form.get("talle")
 
     carrito = session.get("carrito", [])
 
-    carrito.append(id)
+    carrito.append({
+        "id": id,
+        "talle": talle
+    })
 
     session["carrito"] = carrito
 
-    return redirect("/")
+    return redirect("/carrito")
 
 @app.route("/carrito")
 def carrito():
 
-    carrito_ids = session.get("carrito", [])
+    carrito = session.get("carrito", [])
 
     productos_carrito = []
 
-    for producto in productos:
+    for item in carrito:
 
-        if producto["id"] in carrito_ids:
-            productos_carrito.append(producto)
+        producto = next(
+            (
+                p for p in productos
+                if p["id"] == item["id"]
+            ),
+            None
+        )
+
+        if producto:
+
+            producto_copia = producto.copy()
+
+            producto_copia["talle"] = item["talle"]
+
+            productos_carrito.append(producto_copia)
 
     total = sum(
         p["precio"]

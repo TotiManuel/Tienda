@@ -102,9 +102,41 @@ MORTAL
 
         <h3>$ {{ p.precio }}</h3>
 
-        <a href="/agregar/{{ p.id }}">
-            Agregar al carrito
-        </a>
+        <form
+            action="/agregar/{{ p.id }}"
+            method="POST"
+        >
+
+            <select name="talle" required>
+
+                <option value="">
+                    Seleccionar talle
+                </option>
+
+                {% for t in p.tallas %}
+                    <option value="{{ t }}">
+                        {{ t }}
+                    </option>
+                {% endfor %}
+
+            </select>
+
+            <div class="acciones-producto">
+
+                <button type="submit">
+                    Agregar
+                </button>
+
+                <a
+                    href="/producto/{{ p.id }}"
+                    class="btn-detalle"
+                >
+                    Ver detalle
+                </a>
+
+            </div>
+
+        </form>
 
     </div>
 </div>
