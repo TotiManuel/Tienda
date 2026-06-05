@@ -59,7 +59,7 @@ def categoria(filtro):
 
     productos_filtrados = []
 
-    for p in productos:
+    for p in obtener_productos():
 
         genero = p["genero"].lower()
         coleccion = p["coleccion"].lower()
@@ -180,7 +180,7 @@ def carrito():
 
         producto = next(
             (
-                p for p in productos
+                p for p in obtener_productos()
                 if p["id"] == item["id"]
             ),
             None
@@ -253,7 +253,7 @@ def admin():
 
     return render_template(
         "admin.html",
-        productos=productos
+        productos=obtener_productos()
     )
 
 # ====================================
