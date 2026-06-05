@@ -1045,3 +1045,38 @@ hr{
         height:360px;
     }
 }
+.filtros{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-top:25px;
+}
+
+.filtros a{
+    text-decoration:none;
+
+    background:#f5f5f5;
+
+    color:black;
+
+    padding:12px 18px;
+
+    border-radius:30px;
+
+    font-size:14px;
+    font-weight:600;
+
+    transition:.3s;
+
+    border:1px solid transparent;
+}
+
+.filtros a:hover{
+    background:black;
+    color:white;
+
+    transform:translateY(-2px);
+}

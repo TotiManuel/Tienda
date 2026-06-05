@@ -229,7 +229,33 @@ def catalogo():
 
     return render_template(
         "catalogo.html",
-        productos=productos
+        productos=productos,
+        titulo="Catálogo"
+    )
+
+@app.route("/categoria/<filtro>")
+def categoria(filtro):
+
+    filtro = filtro.lower()
+
+    productos_filtrados = []
+
+    for p in productos:
+
+        genero = p["genero"].lower()
+        coleccion = p["coleccion"].lower()
+
+        if (
+            filtro in genero or
+            filtro in coleccion
+        ):
+
+            productos_filtrados.append(p)
+
+    return render_template(
+        "catalogo.html",
+        productos=productos_filtrados,
+        titulo=filtro.capitalize()
     )
     
 @app.route("/producto/<int:id>")
