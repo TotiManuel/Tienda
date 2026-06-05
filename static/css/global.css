@@ -1328,3 +1328,57 @@ button:hover{
 .info a:hover{
     background: #333;
 }
+
+.info{
+    padding: 20px;
+}
+
+/* NOMBRE */
+
+.nombre-producto{
+    font-size: 24px;
+    font-weight: bold;
+
+    color: #111;
+
+    margin-bottom: 10px;
+}
+
+/* GENERO */
+
+.genero{
+    font-size: 16px;
+
+    color: #666;
+
+    margin-bottom: 15px;
+
+    font-weight: 500;
+}
+
+/* TALLAS */
+
+.tallas{
+    display: flex;
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 20px;
+}
+
+.talla{
+    background: #f1f1f1;
+
+    color: black;
+
+    border: 1px solid #ccc;
+
+    padding: 6px 12px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
