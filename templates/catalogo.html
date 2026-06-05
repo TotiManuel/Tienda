@@ -11,31 +11,80 @@ MORTAL
 
     <div class="filtros">
 
-        <a href="/catalogo">
+        <a
+            href="/catalogo"
+            class="
+            {% if filtro_activo == 'todo' %}
+                activo
+            {% endif %}
+            "
+        >
             Todo
         </a>
 
-        <a href="/categoria/hombre">
+        <a
+            href="/categoria/hombre"
+            class="
+            {% if filtro_activo == 'hombre' %}
+                activo
+            {% endif %}
+            "
+        >
             Hombre
         </a>
 
-        <a href="/categoria/mujer">
+        <a
+            href="/categoria/mujer"
+            class="
+            {% if filtro_activo == 'mujer' %}
+                activo
+            {% endif %}
+            "
+        >
             Mujer
         </a>
 
-        <a href="/categoria/unisex">
+        <a
+            href="/categoria/unisex"
+            class="
+            {% if filtro_activo == 'unisex' %}
+                activo
+            {% endif %}
+            "
+        >
             Unisex
         </a>
 
-        <a href="/categoria/urban">
+        <a
+            href="/categoria/urban"
+            class="
+            {% if filtro_activo == 'urban' %}
+                activo
+            {% endif %}
+            "
+        >
             Urban
         </a>
 
-        <a href="/categoria/verano">
+        <a
+            href="/categoria/verano"
+            class="
+            {% if filtro_activo == 'verano' %}
+                activo
+            {% endif %}
+            "
+        >
             Verano
         </a>
 
-        <a href="/categoria/invierno">
+        <a
+            href="/categoria/invierno"
+            class="
+            {% if filtro_activo == 'invierno' %}
+                activo
+            {% endif %}
+            "
+        >
             Invierno
         </a>
 

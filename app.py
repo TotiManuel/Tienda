@@ -230,7 +230,8 @@ def catalogo():
     return render_template(
         "catalogo.html",
         productos=productos,
-        titulo="Catálogo"
+        titulo="Catálogo",
+        filtro_activo="todo"
     )
 
 @app.route("/categoria/<filtro>")
@@ -255,7 +256,8 @@ def categoria(filtro):
     return render_template(
         "catalogo.html",
         productos=productos_filtrados,
-        titulo=filtro.capitalize()
+        titulo=filtro.capitalize(),
+        filtro_activo=filtro
     )
     
 @app.route("/producto/<int:id>")

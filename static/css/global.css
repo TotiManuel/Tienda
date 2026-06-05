@@ -1080,3 +1080,12 @@ hr{
 
     transform:translateY(-2px);
 }
+.filtros a.activo{
+    background:black;
+    color:white;
+
+    border-color:black;
+
+    box-shadow:
+    0 6px 15px rgba(0,0,0,.15);
+}
