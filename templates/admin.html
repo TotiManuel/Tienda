@@ -29,82 +29,52 @@ MORTAL
             Crear producto
         </h2>
 
-        <form
-            method="POST"
-            action="/crear"
-            class="admin-form"
-        >
+        <form method="POST" action="/crear">
 
-            <div class="input-group">
-
-                <label class="input-label">
-                    Nombre del producto
-                </label>
-
-                <input
-                    type="text"
-                    name="nombre"
-                    placeholder="Nombre"
-                    class="admin-input"
-                    required
-                >
-
-            </div>
-
-            <div class="input-group">
-
-                <label class="input-label">
-                    Precio
-                </label>
-
-                <input
-                    type="number"
-                    step="0.01"
-                    name="precio"
-                    placeholder="Precio"
-                    class="admin-input"
-                    required
-                >
-
-            </div>
-
-            <div class="input-group">
-
-                <label class="input-label">
-                    Colección
-                </label>
-
-                <input
-                    type="text"
-                    name="coleccion"
-                    placeholder="Colección"
-                    class="admin-input"
-                    required
-                >
-
-            </div>
-
-            <div class="input-group">
-
-                <label class="input-label">
-                    URL imagen
-                </label>
-
-                <input
-                    type="text"
-                    name="imagen"
-                    placeholder="URL imagen"
-                    class="admin-input"
-                    required
-                >
-
-            </div>
-
-            <button
-                type="submit"
-                class="crear-btn"
+            <input
+                type="text"
+                name="nombre"
+                placeholder="Nombre"
+                required
             >
-                Crear producto
+
+            <input
+                type="number"
+                step="0.01"
+                name="precio"
+                placeholder="Precio"
+                required
+            >
+
+            <input
+                type="text"
+                name="coleccion"
+                placeholder="Coleccion"
+            >
+
+            <input
+                type="text"
+                name="genero"
+                placeholder="Genero"
+                required
+            >
+
+            <input
+                type="text"
+                name="tallas"
+                placeholder="S,M,L,XL"
+                required
+            >
+
+            <input
+                type="text"
+                name="imagen"
+                placeholder="URL Imagen"
+                required
+            >
+
+            <button type="submit">
+                Crear
             </button>
 
         </form>
