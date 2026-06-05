@@ -1,11 +1,8 @@
-import sqlite3
-
+import psycopg2
+import psycopg2.extras
 import os
 
-DB = os.path.join(
-    os.path.dirname(__file__),
-    "base.db"
-)
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 # ==========================================
 # CONEXION
@@ -13,9 +10,7 @@ DB = os.path.join(
 
 def conectar():
 
-    conn = sqlite3.connect(DB)
-
-    conn.row_factory = sqlite3.Row
+    conn = psycopg2.connect(DATABASE_URL)
 
     return conn
 
@@ -33,7 +28,7 @@ def crear_tablas():
 
     CREATE TABLE IF NOT EXISTS productos (
 
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id SERIAL PRIMARY KEY,
 
         nombre TEXT NOT NULL,
 
@@ -53,14 +48,11 @@ def crear_tablas():
 
     CREATE TABLE IF NOT EXISTS tallas (
 
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id SERIAL PRIMARY KEY,
 
-        producto_id INTEGER,
+        producto_id INTEGER REFERENCES productos(id),
 
-        talla TEXT,
-
-        FOREIGN KEY(producto_id)
-        REFERENCES productos(id)
+        talla TEXT
 
     )
 
@@ -78,26 +70,33 @@ def obtener_productos():
 
     conn = conectar()
 
-    cursor = conn.cursor()
+    cursor = conn.cursor(
+        cursor_factory=
+        psycopg2.extras.RealDictCursor
+    )
 
-    productos = cursor.execute("""
+    cursor.execute("""
 
     SELECT *
     FROM productos
 
-    """).fetchall()
+    """)
+
+    productos = cursor.fetchall()
 
     lista = []
 
     for p in productos:
 
-        tallas = cursor.execute("""
+        cursor.execute("""
 
         SELECT talla
         FROM tallas
-        WHERE producto_id = ?
+        WHERE producto_id = %s
 
-        """, (p["id"],)).fetchall()
+        """, (p["id"],))
+
+        tallas = cursor.fetchall()
 
         lista.append({
 
@@ -131,27 +130,34 @@ def obtener_producto(id):
 
     conn = conectar()
 
-    cursor = conn.cursor()
+    cursor = conn.cursor(
+        cursor_factory=
+        psycopg2.extras.RealDictCursor
+    )
 
-    p = cursor.execute("""
+    cursor.execute("""
 
     SELECT *
     FROM productos
-    WHERE id = ?
+    WHERE id = %s
 
-    """, (id,)).fetchone()
+    """, (id,))
+
+    p = cursor.fetchone()
 
     if not p:
 
         return None
 
-    tallas = cursor.execute("""
+    cursor.execute("""
 
     SELECT talla
     FROM tallas
-    WHERE producto_id = ?
+    WHERE producto_id = %s
 
-    """, (id,)).fetchall()
+    """, (id,))
+
+    tallas = cursor.fetchall()
 
     producto = {
 
@@ -208,7 +214,9 @@ def crear_producto(
 
     )
 
-    VALUES (?, ?, ?, ?, ?)
+    VALUES (%s, %s, %s, %s, %s)
+
+    RETURNING id
 
     """, (
 
@@ -220,7 +228,7 @@ def crear_producto(
 
     ))
 
-    producto_id = cursor.lastrowid
+    producto_id = cursor.fetchone()[0]
 
     for t in tallas:
 
@@ -233,12 +241,12 @@ def crear_producto(
 
         )
 
-        VALUES (?, ?)
+        VALUES (%s, %s)
 
         """, (
 
             producto_id,
-            t
+            t.strip()
 
         ))
 
@@ -259,14 +267,14 @@ def eliminar_producto(id):
     cursor.execute("""
 
     DELETE FROM tallas
-    WHERE producto_id = ?
+    WHERE producto_id = %s
 
     """, (id,))
 
     cursor.execute("""
 
     DELETE FROM productos
-    WHERE id = ?
+    WHERE id = %s
 
     """, (id,))
 
@@ -300,13 +308,13 @@ def editar_producto(
 
     SET
 
-        nombre = ?,
-        precio = ?,
-        coleccion = ?,
-        genero = ?,
-        imagen = ?
+        nombre = %s,
+        precio = %s,
+        coleccion = %s,
+        genero = %s,
+        imagen = %s
 
-    WHERE id = ?
+    WHERE id = %s
 
     """, (
 
@@ -322,7 +330,7 @@ def editar_producto(
     cursor.execute("""
 
     DELETE FROM tallas
-    WHERE producto_id = ?
+    WHERE producto_id = %s
 
     """, (id,))
 
@@ -337,12 +345,12 @@ def editar_producto(
 
         )
 
-        VALUES (?, ?)
+        VALUES (%s, %s)
 
         """, (
 
             id,
-            t
+            t.strip()
 
         ))
 
