@@ -1,6 +1,6 @@
 import sqlite3
 
-DB = "base.db"
+DB = "database/base.db"
 
 # ==========================================
 # CONEXION
