@@ -25,7 +25,9 @@ def crear_tablas():
 
         id SERIAL PRIMARY KEY,
 
-        nombre TEXT NOT NULL
+        nombre TEXT NOT NULL,
+
+        imagen TEXT
 
     )
 
@@ -69,10 +71,6 @@ def crear_tablas():
 
     """)
 
-    # ======================================
-    # PRODUCTOS
-    # ======================================
-
     cursor.execute("""
 
     CREATE TABLE IF NOT EXISTS productos (
@@ -98,10 +96,6 @@ def crear_tablas():
     )
 
     """)
-
-    # ======================================
-    # TALLAS
-    # ======================================
 
     cursor.execute("""
 
@@ -180,7 +174,12 @@ def obtener_descuentos():
     conn.close()
 
     return datos
-def crear_coleccion(nombre):
+def crear_coleccion(
+
+    nombre,
+    imagen
+
+):
 
     conn = conectar()
 
@@ -188,10 +187,21 @@ def crear_coleccion(nombre):
 
     cursor.execute("""
 
-    INSERT INTO colecciones (nombre)
-    VALUES (%s)
+    INSERT INTO colecciones (
 
-    """, (nombre,))
+        nombre,
+        imagen
+
+    )
+
+    VALUES (%s, %s)
+
+    """, (
+
+        nombre,
+        imagen
+
+    ))
 
     conn.commit()
 
