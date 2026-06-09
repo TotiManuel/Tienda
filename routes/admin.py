@@ -117,3 +117,96 @@ def eliminar(id):
     eliminar_producto(id)
 
     return redirect("/admin")
+
+# ======================================
+# CREAR OFERTA
+# ======================================
+
+@admin_bp.route(
+    "/crear_oferta",
+    methods=["POST"]
+)
+def ruta_crear_oferta():
+
+    if not session.get("admin"):
+
+        return redirect("/")
+
+    crear_oferta(
+
+        request.form["nombre"]
+
+    )
+
+    return redirect("/admin")
+
+# ======================================
+# CREAR COLECCION
+# ======================================
+
+@admin_bp.route(
+    "/crear_coleccion",
+    methods=["POST"]
+)
+def ruta_crear_coleccion():
+
+    if not session.get("admin"):
+
+        return redirect("/")
+
+    crear_coleccion(
+
+        request.form["nombre"],
+
+        request.form["imagen"]
+
+    )
+
+    return redirect("/admin")
+
+# ======================================
+# CREAR PROMOCION
+# ======================================
+
+@admin_bp.route(
+    "/crear_promocion",
+    methods=["POST"]
+)
+def ruta_crear_promocion():
+
+    if not session.get("admin"):
+
+        return redirect("/")
+
+    crear_promocion(
+
+        request.form["nombre"]
+
+    )
+
+    return redirect("/admin")
+
+# ======================================
+# CREAR DESCUENTO
+# ======================================
+
+@admin_bp.route(
+    "/crear_descuento",
+    methods=["POST"]
+)
+def ruta_crear_descuento():
+
+    if not session.get("admin"):
+
+        return redirect("/")
+
+    crear_descuento(
+
+        request.form["nombre"],
+
+        request.form["porcentaje"]
+
+    )
+
+    return redirect("/admin")
+
