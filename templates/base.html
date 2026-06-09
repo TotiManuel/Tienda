@@ -4,19 +4,127 @@
 
     <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>
         {% block titulo %}{% endblock %}
     </title>
 
-    <link rel="stylesheet" href="/static/css/global.css">
+    <link
+        rel="stylesheet"
+        href="/static/css/global.css"
+    >
 
 </head>
+
 <body>
 
 {% include 'components/menu.html' %}
 
 {% block contenido %}
 {% endblock %}
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <!-- MARCA -->
+
+        <div class="footer-brand">
+
+            <h2>MORTAL</h2>
+
+            <p>
+                Streetwear minimalista.
+                Diseño urbano.
+                Estilo sin límites.
+            </p>
+
+        </div>
+
+        <!-- LINKS -->
+
+        <div class="footer-links">
+
+            <h3>Navegación</h3>
+
+            <a href="/">
+                Inicio
+            </a>
+
+            <a href="/catalogo">
+                Catálogo
+            </a>
+
+            <a href="/colecciones">
+                Colecciones
+            </a>
+
+            <a href="/carrito">
+                Carrito
+            </a>
+
+        </div>
+
+        <!-- CONTACTO -->
+
+        <div class="footer-contacto">
+
+            <h3>Contacto</h3>
+
+            <p>
+                mortalstore@email.com
+            </p>
+
+            <p>
+                Villa María, Córdoba
+            </p>
+
+            <p>
+                +54 9 353 XXXX XXX
+            </p>
+
+        </div>
+
+        <!-- REDES -->
+
+        <div class="footer-redes">
+
+            <h3>Redes</h3>
+
+            <a href="#">
+                Instagram
+            </a>
+
+            <a href="#">
+                TikTok
+            </a>
+
+            <a href="#">
+                Facebook
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- COPYRIGHT -->
+
+    <div class="footer-copy">
+
+        <p>
+            © 2026 MORTAL.
+            Todos los derechos reservados.
+        </p>
+
+    </div>
+
+</footer>
 
 </body>
 </html>
