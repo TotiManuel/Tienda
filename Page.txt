@@ -1,5 +1,4 @@
 BUGS
-permitir elegir talle y permitir añadir diferenter fotos
 
 WEB
 rectangulo con info y oferta(Compra online, retira en tienda - 3 y 6 cuotas sin interes - envios gratis a partir de $ - Devolucion)
