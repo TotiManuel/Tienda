@@ -11,82 +11,86 @@ MORTAL
 
     <div class="filtros">
 
+        <!-- TODO -->
+
         <a
             href="/catalogo"
+
             class="
             {% if filtro_activo == 'todo' %}
                 activo
             {% endif %}
             "
         >
+
             Todo
+
         </a>
+
+        <!-- GENEROS -->
 
         <a
             href="/categoria/hombre"
+
             class="
             {% if filtro_activo == 'hombre' %}
                 activo
             {% endif %}
             "
         >
+
             Hombre
+
         </a>
 
         <a
             href="/categoria/mujer"
+
             class="
             {% if filtro_activo == 'mujer' %}
                 activo
             {% endif %}
             "
         >
+
             Mujer
+
         </a>
 
         <a
             href="/categoria/unisex"
+
             class="
             {% if filtro_activo == 'unisex' %}
                 activo
             {% endif %}
             "
         >
+
             Unisex
+
         </a>
 
+        <!-- COLECCIONES DB -->
+
+        {% for c in colecciones %}
+
         <a
-            href="/categoria/urban"
+
+            href="/categoria/{{ c.nombre.lower() }}"
+
             class="
-            {% if filtro_activo == 'urban' %}
+            {% if filtro_activo == c.nombre.lower() %}
                 activo
             {% endif %}
             "
         >
-            Urban
+
+            {{ c.nombre }}
+
         </a>
 
-        <a
-            href="/categoria/verano"
-            class="
-            {% if filtro_activo == 'verano' %}
-                activo
-            {% endif %}
-            "
-        >
-            Verano
-        </a>
-
-        <a
-            href="/categoria/invierno"
-            class="
-            {% if filtro_activo == 'invierno' %}
-                activo
-            {% endif %}
-            "
-        >
-            Invierno
-        </a>
+        {% endfor %}
 
     </div>
 
@@ -116,9 +120,27 @@ MORTAL
                 Ver
             </a>
 
-            <a class="carrito" href="/agregar/{{ p.id }}">
-                Agregar
-            </a>
+            <form
+                method="POST"
+                action="/agregar/{{ p.id }}"
+            >
+
+                <input
+                    type="hidden"
+                    name="talle"
+                    value="M"
+                >
+
+                <button
+                    type="submit"
+                    class="carrito"
+                >
+
+                    Agregar
+
+                </button>
+
+            </form>
 
         </div>
 

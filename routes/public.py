@@ -42,10 +42,17 @@ def atencion_cliente():
 def catalogo():
 
     return render_template(
+
         "catalogo.html",
+
         productos=obtener_productos(),
+
+        colecciones=obtener_colecciones(),
+
         titulo="Catálogo",
+
         filtro_activo="todo"
+
     )
 
 # ======================================
@@ -61,7 +68,9 @@ def categoria(filtro):
 
     for p in obtener_productos():
 
-        genero = (p["genero"] or "").lower()
+        genero = (
+            p["genero"] or ""
+        ).lower()
 
         coleccion = (
             p["coleccion"] or ""
@@ -81,6 +90,8 @@ def categoria(filtro):
         "catalogo.html",
 
         productos=productos_filtrados,
+
+        colecciones=obtener_colecciones(),
 
         titulo=filtro.capitalize(),
 
