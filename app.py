@@ -53,8 +53,8 @@ def categoria(filtro):
 
     for p in obtener_productos():
 
-        genero = p["genero"].lower()
-        coleccion = p["coleccion"].lower()
+        genero = (p["genero"] or "").lower()
+        coleccion = (p["coleccion"] or "").lower()
 
         if (
             filtro in genero or
