@@ -15,7 +15,6 @@ En pagina de pago poder poner codigo de descuento
 En pagina de pago Datos de la persona, datos del envio y la forma de pago.
 
 CATALOGO
-En Catalogo filtrar por
 En catalogo ver fotos en cuadrillas de diferentes tamaños
 
 CARRITO

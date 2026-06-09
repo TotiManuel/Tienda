@@ -8,19 +8,38 @@ MORTAL
 
 <!-- HERO -->
 
-<section class="hero">
+<section
+    class="hero"
+
+    style="
+    background-image:
+    url('{{ hero.imagen }}');
+    "
+>
 
     <div class="hero-texto">
-        <h1>MORTAL STREETWEAR</h1>
+
+        <h1>
+
+            {{ hero.titulo }}
+
+        </h1>
 
         <p>
-            Nueva colección urbana 2026.
-            Oversize, minimalismo y estilo moderno.
+
+            {{ hero.subtitulo }}
+
         </p>
 
-        <a href="#productos" class="btn-hero">
-            Ver colección
+        <a
+            href="#productos"
+            class="btn-hero"
+        >
+
+            {{ hero.boton_texto }}
+
         </a>
+
     </div>
 
 </section>
@@ -29,20 +48,26 @@ MORTAL
 
 <section class="beneficios">
 
-    <div class="beneficio">
-        <h3>🚚 Envíos</h3>
-        <p>A todo el país</p>
-    </div>
+    {% for b in beneficios %}
 
     <div class="beneficio">
-        <h3>💳 Cuotas</h3>
-        <p>Hasta 6 sin interés</p>
+
+        <h3>
+
+            {{ b.icono }}
+            {{ b.titulo }}
+
+        </h3>
+
+        <p>
+
+            {{ b.descripcion }}
+
+        </p>
+
     </div>
 
-    <div class="beneficio">
-        <h3>🔥 Tendencia</h3>
-        <p>Moda urbana actual</p>
-    </div>
+    {% endfor %}
 
 </section>
 

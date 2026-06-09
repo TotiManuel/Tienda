@@ -19,8 +19,15 @@ public_bp = Blueprint(
 def index():
 
     return render_template(
+
         "index.html",
-        productos=obtener_productos()
+
+        productos=obtener_productos(),
+
+        hero=obtener_hero(),
+
+        beneficios=obtener_beneficios()
+
     )
 
 # ======================================

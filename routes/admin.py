@@ -210,3 +210,51 @@ def ruta_crear_descuento():
 
     return redirect("/admin")
 
+# ======================================
+# GUARDAR HERO
+# ======================================
+
+@admin_bp.route(
+    "/guardar_hero",
+    methods=["POST"]
+)
+def ruta_guardar_hero():
+
+    guardar_hero(
+
+        request.form["titulo"],
+
+        request.form["subtitulo"],
+
+        request.form["boton_texto"],
+
+        request.form["imagen"]
+
+    )
+
+    return redirect("/admin")
+
+# ======================================
+# CREAR BENEFICIO
+# ======================================
+
+@admin_bp.route(
+    "/crear_beneficio",
+    methods=["POST"]
+)
+def ruta_crear_beneficio():
+
+    crear_beneficio(
+
+        request.form["icono"],
+
+        request.form["titulo"],
+
+        request.form["descripcion"]
+
+    )
+
+    return redirect("/admin")
+
+
+

@@ -124,6 +124,49 @@ def crear_tablas():
     )
 
     """)
+
+    # ======================================
+    # HERO
+    # ======================================
+
+    cursor.execute("""
+
+    CREATE TABLE IF NOT EXISTS hero (
+
+        id SERIAL PRIMARY KEY,
+
+        titulo TEXT,
+
+        subtitulo TEXT,
+
+        boton_texto TEXT,
+
+        imagen TEXT
+
+    )
+
+    """)
+
+    # ======================================
+    # BENEFICIOS
+    # ======================================
+
+    cursor.execute("""
+
+    CREATE TABLE IF NOT EXISTS beneficios (
+
+        id SERIAL PRIMARY KEY,
+
+        icono TEXT,
+
+        titulo TEXT,
+
+        descripcion TEXT
+
+    )
+
+    """)
+
     conn.commit()
 
     conn.close()
@@ -784,3 +827,129 @@ def eliminar_producto(id):
     conn.commit()
 
     conn.close()
+def obtener_hero():
+
+    conn = conectar()
+
+    cursor = conn.cursor(
+        cursor_factory=
+        psycopg2.extras.RealDictCursor
+    )
+
+    cursor.execute("""
+
+    SELECT *
+    FROM hero
+    ORDER BY id DESC
+    LIMIT 1
+
+    """)
+
+    hero = cursor.fetchone()
+
+    conn.close()
+
+    return hero
+def guardar_hero(
+
+    titulo,
+    subtitulo,
+    boton_texto,
+    imagen
+
+):
+
+    conn = conectar()
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+
+    DELETE FROM hero
+
+    """)
+
+    cursor.execute("""
+
+    INSERT INTO hero (
+
+        titulo,
+        subtitulo,
+        boton_texto,
+        imagen
+
+    )
+
+    VALUES (%s,%s,%s,%s)
+
+    """, (
+
+        titulo,
+        subtitulo,
+        boton_texto,
+        imagen
+
+    ))
+
+    conn.commit()
+
+    conn.close()
+def obtener_beneficios():
+
+    conn = conectar()
+
+    cursor = conn.cursor(
+        cursor_factory=
+        psycopg2.extras.RealDictCursor
+    )
+
+    cursor.execute("""
+
+    SELECT *
+    FROM beneficios
+
+    """)
+
+    beneficios = cursor.fetchall()
+
+    conn.close()
+
+    return beneficios
+def crear_beneficio(
+
+    icono,
+    titulo,
+    descripcion
+
+):
+
+    conn = conectar()
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+
+    INSERT INTO beneficios (
+
+        icono,
+        titulo,
+        descripcion
+
+    )
+
+    VALUES (%s,%s,%s)
+
+    """, (
+
+        icono,
+        titulo,
+        descripcion
+
+    ))
+
+    conn.commit()
+
+    conn.close()
+
+
+
