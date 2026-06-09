@@ -8,6 +8,8 @@ MORTAL
 
 <!-- HERO -->
 
+{% if hero %}
+
 <section
     class="hero"
 
@@ -19,18 +21,23 @@ MORTAL
 
     <div class="hero-texto">
 
+        {% if hero.titulo %}
         <h1>
 
             {{ hero.titulo }}
 
         </h1>
+        {% endif %}
 
+        {% if hero.subtitulo %}
         <p>
 
             {{ hero.subtitulo }}
 
         </p>
+        {% endif %}
 
+        {% if hero.boton_texto %}
         <a
             href="#productos"
             class="btn-hero"
@@ -39,38 +46,56 @@ MORTAL
             {{ hero.boton_texto }}
 
         </a>
+        {% endif %}
 
     </div>
 
 </section>
 
+{% endif %}
+
 <!-- BENEFICIOS -->
+
+{% if beneficios %}
 
 <section class="beneficios">
 
     {% for b in beneficios %}
 
-    <div class="beneficio">
+        {% if
+            b.titulo or
+            b.descripcion
+        %}
 
-        <h3>
+        <div class="beneficio">
 
-            {{ b.icono }}
-            {{ b.titulo }}
+            <h3>
 
-        </h3>
+                {% if b.icono %}
+                    {{ b.icono }}
+                {% endif %}
 
-        <p>
+                {{ b.titulo }}
 
-            {{ b.descripcion }}
+            </h3>
 
-        </p>
+            {% if b.descripcion %}
+            <p>
 
-    </div>
+                {{ b.descripcion }}
+
+            </p>
+            {% endif %}
+
+        </div>
+
+        {% endif %}
 
     {% endfor %}
 
 </section>
 
+{% endif %}
 <!-- TITULO -->
 
 <section class="titulo-productos" id="productos">
