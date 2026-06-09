@@ -24,6 +24,64 @@ def crear_tablas():
 
     cursor = conn.cursor()
 
+    # ======================================
+    # TABLAS AUXILIARES
+    # ======================================
+
+    cursor.execute("""
+
+    CREATE TABLE IF NOT EXISTS colecciones (
+
+        id SERIAL PRIMARY KEY,
+
+        nombre TEXT NOT NULL
+
+    )
+
+    """)
+
+    cursor.execute("""
+
+    CREATE TABLE IF NOT EXISTS ofertas (
+
+        id SERIAL PRIMARY KEY,
+
+        nombre TEXT NOT NULL
+
+    )
+
+    """)
+
+    cursor.execute("""
+
+    CREATE TABLE IF NOT EXISTS promociones (
+
+        id SERIAL PRIMARY KEY,
+
+        nombre TEXT NOT NULL
+
+    )
+
+    """)
+
+    cursor.execute("""
+
+    CREATE TABLE IF NOT EXISTS descuentos (
+
+        id SERIAL PRIMARY KEY,
+
+        nombre TEXT NOT NULL,
+
+        porcentaje REAL NOT NULL
+
+    )
+
+    """)
+
+    # ======================================
+    # PRODUCTOS
+    # ======================================
+
     cursor.execute("""
 
     CREATE TABLE IF NOT EXISTS productos (
@@ -34,15 +92,25 @@ def crear_tablas():
 
         precio REAL NOT NULL,
 
-        coleccion TEXT,
-
         genero TEXT,
 
-        imagen TEXT
+        imagen TEXT,
+
+        coleccion_id INTEGER REFERENCES colecciones(id),
+
+        oferta_id INTEGER REFERENCES ofertas(id),
+
+        promocion_id INTEGER REFERENCES promociones(id),
+
+        descuento_id INTEGER REFERENCES descuentos(id)
 
     )
 
     """)
+
+    # ======================================
+    # TALLAS
+    # ======================================
 
     cursor.execute("""
 
@@ -63,6 +131,235 @@ def crear_tablas():
     conn.close()
 
 # ==========================================
+# OBTENER LISTAS
+# ==========================================
+
+def obtener_colecciones():
+
+    conn = conectar()
+
+    cursor = conn.cursor(
+        cursor_factory=psycopg2.extras.RealDictCursor
+    )
+
+    cursor.execute("SELECT * FROM colecciones")
+
+    datos = cursor.fetchall()
+
+    conn.close()
+
+    return datos
+
+def obtener_ofertas():
+
+    conn = conectar()
+
+    cursor = conn.cursor(
+        cursor_factory=psycopg2.extras.RealDictCursor
+    )
+
+    cursor.execute("SELECT * FROM ofertas")
+
+    datos = cursor.fetchall()
+
+    conn.close()
+
+    return datos
+
+def obtener_promociones():
+
+    conn = conectar()
+
+    cursor = conn.cursor(
+        cursor_factory=psycopg2.extras.RealDictCursor
+    )
+
+    cursor.execute("SELECT * FROM promociones")
+
+    datos = cursor.fetchall()
+
+    conn.close()
+
+    return datos
+
+def obtener_descuentos():
+
+    conn = conectar()
+
+    cursor = conn.cursor(
+        cursor_factory=psycopg2.extras.RealDictCursor
+    )
+
+    cursor.execute("SELECT * FROM descuentos")
+
+    datos = cursor.fetchall()
+
+    conn.close()
+
+    return datos
+
+# ==========================================
+# CRUD COLECCIONES
+# ==========================================
+
+def crear_coleccion(nombre):
+
+    conn = conectar()
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+
+    INSERT INTO colecciones (nombre)
+    VALUES (%s)
+
+    """, (nombre,))
+
+    conn.commit()
+
+    conn.close()
+
+def eliminar_coleccion(id):
+
+    conn = conectar()
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+
+    DELETE FROM colecciones
+    WHERE id = %s
+
+    """, (id,))
+
+    conn.commit()
+
+    conn.close()
+
+# ==========================================
+# CRUD OFERTAS
+# ==========================================
+
+def crear_oferta(nombre):
+
+    conn = conectar()
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+
+    INSERT INTO ofertas (nombre)
+    VALUES (%s)
+
+    """, (nombre,))
+
+    conn.commit()
+
+    conn.close()
+
+def eliminar_oferta(id):
+
+    conn = conectar()
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+
+    DELETE FROM ofertas
+    WHERE id = %s
+
+    """, (id,))
+
+    conn.commit()
+
+    conn.close()
+
+# ==========================================
+# CRUD PROMOCIONES
+# ==========================================
+
+def crear_promocion(nombre):
+
+    conn = conectar()
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+
+    INSERT INTO promociones (nombre)
+    VALUES (%s)
+
+    """, (nombre,))
+
+    conn.commit()
+
+    conn.close()
+
+def eliminar_promocion(id):
+
+    conn = conectar()
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+
+    DELETE FROM promociones
+    WHERE id = %s
+
+    """, (id,))
+
+    conn.commit()
+
+    conn.close()
+
+# ==========================================
+# CRUD DESCUENTOS
+# ==========================================
+
+def crear_descuento(nombre, porcentaje):
+
+    conn = conectar()
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+
+    INSERT INTO descuentos (
+        nombre,
+        porcentaje
+    )
+
+    VALUES (%s, %s)
+
+    """, (
+
+        nombre,
+        porcentaje
+
+    ))
+
+    conn.commit()
+
+    conn.close()
+
+def eliminar_descuento(id):
+
+    conn = conectar()
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+
+    DELETE FROM descuentos
+    WHERE id = %s
+
+    """, (id,))
+
+    conn.commit()
+
+    conn.close()
+
+# ==========================================
 # OBTENER PRODUCTOS
 # ==========================================
 
@@ -71,14 +368,38 @@ def obtener_productos():
     conn = conectar()
 
     cursor = conn.cursor(
-        cursor_factory=
-        psycopg2.extras.RealDictCursor
+        cursor_factory=psycopg2.extras.RealDictCursor
     )
 
     cursor.execute("""
 
-    SELECT *
+    SELECT
+
+        productos.*,
+
+        colecciones.nombre AS coleccion,
+
+        ofertas.nombre AS oferta,
+
+        promociones.nombre AS promocion,
+
+        descuentos.nombre AS descuento,
+
+        descuentos.porcentaje AS porcentaje
+
     FROM productos
+
+    LEFT JOIN colecciones
+    ON productos.coleccion_id = colecciones.id
+
+    LEFT JOIN ofertas
+    ON productos.oferta_id = ofertas.id
+
+    LEFT JOIN promociones
+    ON productos.promocion_id = promociones.id
+
+    LEFT JOIN descuentos
+    ON productos.descuento_id = descuentos.id
 
     """)
 
@@ -106,11 +427,19 @@ def obtener_productos():
 
             "precio": p["precio"],
 
-            "coleccion": p["coleccion"],
-
             "genero": p["genero"],
 
             "imagen": p["imagen"],
+
+            "coleccion": p["coleccion"],
+
+            "oferta": p["oferta"],
+
+            "promocion": p["promocion"],
+
+            "descuento": p["descuento"],
+
+            "porcentaje": p["porcentaje"],
 
             "tallas": [
                 t["talla"]
@@ -123,67 +452,6 @@ def obtener_productos():
     return lista
 
 # ==========================================
-# OBTENER PRODUCTO
-# ==========================================
-
-def obtener_producto(id):
-
-    conn = conectar()
-
-    cursor = conn.cursor(
-        cursor_factory=
-        psycopg2.extras.RealDictCursor
-    )
-
-    cursor.execute("""
-
-    SELECT *
-    FROM productos
-    WHERE id = %s
-
-    """, (id,))
-
-    p = cursor.fetchone()
-
-    if not p:
-
-        return None
-
-    cursor.execute("""
-
-    SELECT talla
-    FROM tallas
-    WHERE producto_id = %s
-
-    """, (id,))
-
-    tallas = cursor.fetchall()
-
-    producto = {
-
-        "id": p["id"],
-
-        "nombre": p["nombre"],
-
-        "precio": p["precio"],
-
-        "coleccion": p["coleccion"],
-
-        "genero": p["genero"],
-
-        "imagen": p["imagen"],
-
-        "tallas": [
-            t["talla"]
-            for t in tallas
-        ]
-    }
-
-    conn.close()
-
-    return producto
-
-# ==========================================
 # CREAR PRODUCTO
 # ==========================================
 
@@ -191,10 +459,13 @@ def crear_producto(
 
     nombre,
     precio,
-    coleccion,
     genero,
     imagen,
-    tallas
+    tallas,
+    coleccion_id,
+    oferta_id,
+    promocion_id,
+    descuento_id
 
 ):
 
@@ -208,13 +479,16 @@ def crear_producto(
 
         nombre,
         precio,
-        coleccion,
         genero,
-        imagen
+        imagen,
+        coleccion_id,
+        oferta_id,
+        promocion_id,
+        descuento_id
 
     )
 
-    VALUES (%s, %s, %s, %s, %s)
+    VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
 
     RETURNING id
 
@@ -222,9 +496,12 @@ def crear_producto(
 
         nombre,
         precio,
-        coleccion,
         genero,
-        imagen
+        imagen,
+        coleccion_id,
+        oferta_id,
+        promocion_id,
+        descuento_id
 
     ))
 
@@ -253,35 +530,7 @@ def crear_producto(
     conn.commit()
 
     conn.close()
-
-# ==========================================
-# ELIMINAR PRODUCTO
-# ==========================================
-
-def eliminar_producto(id):
-
-    conn = conectar()
-
-    cursor = conn.cursor()
-
-    cursor.execute("""
-
-    DELETE FROM tallas
-    WHERE producto_id = %s
-
-    """, (id,))
-
-    cursor.execute("""
-
-    DELETE FROM productos
-    WHERE id = %s
-
-    """, (id,))
-
-    conn.commit()
-
-    conn.close()
-
+    
 # ==========================================
 # EDITAR PRODUCTO
 # ==========================================
@@ -291,10 +540,13 @@ def editar_producto(
     id,
     nombre,
     precio,
-    coleccion,
     genero,
     imagen,
-    tallas
+    tallas,
+    coleccion_id,
+    oferta_id,
+    promocion_id,
+    descuento_id
 
 ):
 
@@ -310,9 +562,12 @@ def editar_producto(
 
         nombre = %s,
         precio = %s,
-        coleccion = %s,
         genero = %s,
-        imagen = %s
+        imagen = %s,
+        coleccion_id = %s,
+        oferta_id = %s,
+        promocion_id = %s,
+        descuento_id = %s
 
     WHERE id = %s
 
@@ -320,12 +575,19 @@ def editar_producto(
 
         nombre,
         precio,
-        coleccion,
         genero,
         imagen,
+        coleccion_id,
+        oferta_id,
+        promocion_id,
+        descuento_id,
         id
 
     ))
+
+    # ======================================
+    # BORRAR TALLAS VIEJAS
+    # ======================================
 
     cursor.execute("""
 
@@ -333,6 +595,10 @@ def editar_producto(
     WHERE producto_id = %s
 
     """, (id,))
+
+    # ======================================
+    # CREAR NUEVAS TALLAS
+    # ======================================
 
     for t in tallas:
 
@@ -353,6 +619,42 @@ def editar_producto(
             t.strip()
 
         ))
+
+    conn.commit()
+
+    conn.close()
+    
+# ==========================================
+# ELIMINAR PRODUCTO
+# ==========================================
+
+def eliminar_producto(id):
+
+    conn = conectar()
+
+    cursor = conn.cursor()
+
+    # ======================================
+    # ELIMINAR TALLAS
+    # ======================================
+
+    cursor.execute("""
+
+    DELETE FROM tallas
+    WHERE producto_id = %s
+
+    """, (id,))
+
+    # ======================================
+    # ELIMINAR PRODUCTO
+    # ======================================
+
+    cursor.execute("""
+
+    DELETE FROM productos
+    WHERE id = %s
+
+    """, (id,))
 
     conn.commit()
 

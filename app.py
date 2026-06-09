@@ -256,42 +256,14 @@ def admin():
     )
 
 # ====================================
-# CREAR
-# ====================================
-
-@app.route("/crear", methods=["POST"])
-def crear():
-
-    if not session.get("admin"):
-        return redirect("/")
-
-    tallas = request.form["tallas"].split(",")
-
-    crear_producto(
-
-        request.form["nombre"],
-
-        float(request.form["precio"]),
-
-        request.form["coleccion"],
-
-        request.form["genero"],
-
-        request.form["imagen"],
-
-        tallas
-    )
-
-    return redirect("/admin")
-
-# ====================================
-# ELIMINAR
+# ELIMINAR PRODUCTO
 # ====================================
 
 @app.route("/eliminar/<int:id>")
 def eliminar(id):
 
     if not session.get("admin"):
+
         return redirect("/")
 
     eliminar_producto(id)
@@ -299,38 +271,211 @@ def eliminar(id):
     return redirect("/admin")
 
 # ====================================
-# EDITAR
+# EDITAR PRODUCTO
 # ====================================
 
-@app.route("/editar/<int:id>", methods=["GET", "POST"])
+@app.route(
+
+    "/editar/<int:id>",
+
+    methods=["GET", "POST"]
+
+)
 def editar(id):
 
     if not session.get("admin"):
+
         return redirect("/")
 
-    editar_producto(
+    # =================================
+    # GUARDAR CAMBIOS
+    # =================================
 
-        id,
+    if request.method == "POST":
 
-        request.form["nombre"],
+        editar_producto(
 
-        float(request.form["precio"]),
+            id,
 
-        request.form["coleccion"],
+            request.form["nombre"],
 
-        request.form["genero"],
+            float(
+                request.form["precio"]
+            ),
 
-        request.form["imagen"],
+            request.form["genero"],
 
-        request.form["tallas"].split(",")
+            request.form["imagen"],
 
-    )
+            request.form["tallas"].split(","),
+
+            request.form["coleccion_id"] or None,
+
+            request.form["oferta_id"] or None,
+
+            request.form["promocion_id"] or None,
+
+            request.form["descuento_id"] or None
+
+        )
+
+        return redirect("/admin")
+
+    # =================================
+    # MOSTRAR FORMULARIO
+    # =================================
+
+    producto = obtener_productos(id)
+
+    colecciones = obtener_colecciones()
+
+    ofertas = obtener_ofertas()
+
+    promociones = obtener_promociones()
+
+    descuentos = obtener_descuentos()
 
     return render_template(
+
         "editar.html",
-        producto=obtener_productos()
+
+        producto=producto,
+
+        colecciones=colecciones,
+
+        ofertas=ofertas,
+
+        promociones=promociones,
+
+        descuentos=descuentos
+
     )
 
+
+@app.route("/admin")
+def admin():
+
+    productos = obtener_productos()
+
+    colecciones = obtener_colecciones()
+
+    ofertas = obtener_ofertas()
+
+    promociones = obtener_promociones()
+
+    descuentos = obtener_descuentos()
+
+    return render_template(
+
+        "admin.html",
+
+        productos=productos,
+
+        colecciones=colecciones,
+
+        ofertas=ofertas,
+
+        promociones=promociones,
+
+        descuentos=descuentos
+
+    )
+
+# ==========================================
+# CREAR PRODUCTO
+# ==========================================
+
+@app.route("/crear", methods=["POST"])
+def crear():
+
+    nombre = request.form["nombre"]
+
+    precio = request.form["precio"]
+
+    genero = request.form["genero"]
+
+    imagen = request.form["imagen"]
+
+    tallas = request.form["tallas"].split(",")
+
+    coleccion_id = request.form["coleccion_id"] or None
+
+    oferta_id = request.form["oferta_id"] or None
+
+    promocion_id = request.form["promocion_id"] or None
+
+    descuento_id = request.form["descuento_id"] or None
+
+    crear_producto(
+
+        nombre,
+        precio,
+        genero,
+        imagen,
+        tallas,
+        coleccion_id,
+        oferta_id,
+        promocion_id,
+        descuento_id
+
+    )
+
+    return redirect("/admin")
+
+# ==========================================
+# CREAR COLECCION
+# ==========================================
+
+@app.route("/crear_coleccion", methods=["POST"])
+def ruta_crear_coleccion():
+
+    crear_coleccion(
+        request.form["nombre"]
+    )
+
+    return redirect("/admin")
+
+# ==========================================
+# CREAR OFERTA
+# ==========================================
+
+@app.route("/crear_oferta", methods=["POST"])
+def ruta_crear_oferta():
+
+    crear_oferta(
+        request.form["nombre"]
+    )
+
+    return redirect("/admin")
+
+# ==========================================
+# CREAR PROMOCION
+# ==========================================
+
+@app.route("/crear_promocion", methods=["POST"])
+def ruta_crear_promocion():
+
+    crear_promocion(
+        request.form["nombre"]
+    )
+
+    return redirect("/admin")
+
+# ==========================================
+# CREAR DESCUENTO
+# ==========================================
+
+@app.route("/crear_descuento", methods=["POST"])
+def ruta_crear_descuento():
+
+    crear_descuento(
+
+        request.form["nombre"],
+        request.form["porcentaje"]
+
+    )
+
+    return redirect("/admin")
 # ====================================
 # LOGOUT
 # ====================================

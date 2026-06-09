@@ -8,129 +8,204 @@ MORTAL
 
 <section class="admin-container">
 
-    <div class="admin-header">
+    <h1>Panel Admin</h1>
 
-        <h1 class="admin-title">
-            Panel Admin
-        </h1>
+    <!-- CREAR PRODUCTO -->
 
-        <a
-            href="/logout"
-            class="logout-btn"
+    <form method="POST" action="/crear">
+
+        <input
+            type="text"
+            name="nombre"
+            placeholder="Nombre"
+            required
         >
-            Cerrar sesión
-        </a>
 
-    </div>
+        <input
+            type="number"
+            step="0.01"
+            name="precio"
+            placeholder="Precio"
+            required
+        >
 
-    <div class="admin-form-container">
+        <input
+            type="text"
+            name="genero"
+            placeholder="Genero"
+            required
+        >
 
-        <h2 class="form-title">
-            Crear producto
-        </h2>
+        <input
+            type="text"
+            name="tallas"
+            placeholder="S,M,L,XL"
+            required
+        >
 
-        <form method="POST" action="/crear">
+        <input
+            type="text"
+            name="imagen"
+            placeholder="URL Imagen"
+            required
+        >
 
-            <input
-                type="text"
-                name="nombre"
-                placeholder="Nombre"
-                required
-            >
+        <!-- COLECCION -->
 
-            <input
-                type="number"
-                step="0.01"
-                name="precio"
-                placeholder="Precio"
-                required
-            >
+        <select name="coleccion_id">
 
-            <input
-                type="text"
-                name="coleccion"
-                placeholder="Coleccion"
-            >
+            <option value="">
+                Sin coleccion
+            </option>
 
-            <input
-                type="text"
-                name="genero"
-                placeholder="Genero"
-                required
-            >
+            {% for c in colecciones %}
 
-            <input
-                type="text"
-                name="tallas"
-                placeholder="S,M,L,XL"
-                required
-            >
+            <option value="{{ c.id }}">
+                {{ c.nombre }}
+            </option>
 
-            <input
-                type="text"
-                name="imagen"
-                placeholder="URL Imagen"
-                required
-            >
+            {% endfor %}
 
-            <button type="submit">
-                Crear
-            </button>
+        </select>
 
-        </form>
+        <!-- OFERTA -->
 
-    </div>
+        <select name="oferta_id">
 
-    <div class="productos-admin">
+            <option value="">
+                Sin oferta
+            </option>
 
-        {% for p in productos %}
+            {% for o in ofertas %}
 
-        <div class="producto-card">
+            <option value="{{ o.id }}">
+                {{ o.nombre }}
+            </option>
 
-            <img
-                src="{{ p.imagen }}"
-                class="producto-img"
-            >
+            {% endfor %}
 
-            <div class="producto-info">
+        </select>
 
-                <h2 class="producto-nombre">
-                    {{ p.nombre }}
-                </h2>
+        <!-- PROMOCION -->
 
-                <p class="producto-precio">
-                    $ {{ p.precio }}
-                </p>
+        <select name="promocion_id">
 
-                <p class="producto-coleccion">
-                    {{ p.coleccion }}
-                </p>
+            <option value="">
+                Sin promocion
+            </option>
 
-            </div>
+            {% for p in promociones %}
 
-            <div class="producto-botones">
+            <option value="{{ p.id }}">
+                {{ p.nombre }}
+            </option>
 
-                <a
-                    href="/editar/{{ p.id }}"
-                    class="editar-btn"
-                >
-                    Editar
-                </a>
+            {% endfor %}
 
-                <a
-                    href="/eliminar/{{ p.id }}"
-                    class="eliminar-btn"
-                >
-                    Eliminar
-                </a>
+        </select>
 
-            </div>
+        <!-- DESCUENTO -->
 
-        </div>
+        <select name="descuento_id">
 
-        {% endfor %}
+            <option value="">
+                Sin descuento
+            </option>
 
-    </div>
+            {% for d in descuentos %}
+
+            <option value="{{ d.id }}">
+                {{ d.nombre }}
+                - {{ d.porcentaje }}%
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+        <button type="submit">
+            Crear Producto
+        </button>
+
+    </form>
+
+    <hr>
+
+    <!-- CREAR COLECCION -->
+
+    <form method="POST" action="/crear_coleccion">
+
+        <input
+            type="text"
+            name="nombre"
+            placeholder="Nueva coleccion"
+            required
+        >
+
+        <button type="submit">
+            Crear Coleccion
+        </button>
+
+    </form>
+
+    <!-- CREAR OFERTA -->
+
+    <form method="POST" action="/crear_oferta">
+
+        <input
+            type="text"
+            name="nombre"
+            placeholder="Nueva oferta"
+            required
+        >
+
+        <button type="submit">
+            Crear Oferta
+        </button>
+
+    </form>
+
+    <!-- CREAR PROMOCION -->
+
+    <form method="POST" action="/crear_promocion">
+
+        <input
+            type="text"
+            name="nombre"
+            placeholder="Nueva promocion"
+            required
+        >
+
+        <button type="submit">
+            Crear Promocion
+        </button>
+
+    </form>
+
+    <!-- CREAR DESCUENTO -->
+
+    <form method="POST" action="/crear_descuento">
+
+        <input
+            type="text"
+            name="nombre"
+            placeholder="Nombre descuento"
+            required
+        >
+
+        <input
+            type="number"
+            step="0.01"
+            name="porcentaje"
+            placeholder="%"
+            required
+        >
+
+        <button type="submit">
+            Crear Descuento
+        </button>
+
+    </form>
 
 </section>
 
