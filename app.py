@@ -84,7 +84,7 @@ def colecciones():
 @app.route("/producto/<int:id>")
 def detalle_producto(id):
 
-    producto = obtener_productos(id)
+    producto = obtener_producto(id)
 
     if not producto:
         return redirect("/")
