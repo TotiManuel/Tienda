@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
+
 {% block titulo %}
-MORTAL
+{{ producto.nombre }}
 {% endblock %}
+
 {% block contenido %}
+
 <div class="producto">
 
     <!-- GALERIA -->
@@ -10,16 +13,31 @@ MORTAL
     <div class="galeria">
 
         <div class="principal">
-            <img id="imagenPrincipal" src="{{ producto.imagen }}">
+
+            <img
+                id="imagenPrincipal"
+                src="{{ producto.imagen }}"
+            >
+
         </div>
 
         <div class="miniaturas">
 
-            <img src="{{ producto.imagen }}" onclick="cambiarImagen(this.src)">
+            <!-- PRINCIPAL -->
+
+            <img
+                src="{{ producto.imagen }}"
+                onclick="cambiarImagen(this.src)"
+            >
+
+            <!-- EXTRAS -->
 
             {% for img in producto.imagenes_extra %}
 
-                <img src="{{ img }}" onclick="cambiarImagen(this.src)">
+            <img
+                src="{{ img }}"
+                onclick="cambiarImagen(this.src)"
+            >
 
             {% endfor %}
 
@@ -32,37 +50,89 @@ MORTAL
     <div class="info">
 
         <div class="coleccion">
+
             {{ producto.coleccion }}
+
         </div>
 
-        <h2>{{ producto.nombre }}</h2>
+        <h2>
+
+            {{ producto.nombre }}
+
+        </h2>
 
         <div class="precio">
+
             $ {{ producto.precio }}
+
         </div>
 
         <div class="descripcion">
+
             {{ producto.descripcion }}
-        </div>
-
-        <div class="talles">
-
-            <button>S</button>
-            <button>M</button>
-            <button>L</button>
-            <button>XL</button>
 
         </div>
 
-        <a class="btn" href="/agregar/{{ producto.id }}">
-            Agregar al carrito
-        </a>
+        <!-- FORMULARIO -->
+
+        <form
+            method="POST"
+            action="/agregar/{{ producto.id }}"
+        >
+
+            <!-- TALLES -->
+
+            <div class="talles">
+
+                {% for t in producto.tallas %}
+
+                <label class="talle-opcion">
+
+                    <input
+                        type="radio"
+                        name="talle"
+                        value="{{ t }}"
+                        required
+                    >
+
+                    <span>
+
+                        {{ t }}
+
+                    </span>
+
+                </label>
+
+                {% endfor %}
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn"
+            >
+
+                Agregar al carrito
+
+            </button>
+
+        </form>
+
+        <!-- EXTRA -->
 
         <div class="extra">
 
-            <p>• Envíos a todo el país</p>
-            <p>• Cambios dentro de los 30 días</p>
-            <p>• Calidad premium</p>
+            <p>
+                • Envíos a todo el país
+            </p>
+
+            <p>
+                • Cambios dentro de los 30 días
+            </p>
+
+            <p>
+                • Calidad premium
+            </p>
 
         </div>
 
@@ -73,7 +143,12 @@ MORTAL
 <script>
 
 function cambiarImagen(src){
-    document.getElementById("imagenPrincipal").src = src;
+
+    document
+    .getElementById(
+        "imagenPrincipal"
+    ).src = src;
+
 }
 
 </script>

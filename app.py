@@ -80,7 +80,7 @@ def colecciones():
         colecciones=obtener_colecciones()
 
     )
-    
+
 @app.route("/producto/<int:id>")
 def detalle_producto(id):
 
@@ -88,13 +88,6 @@ def detalle_producto(id):
 
     if not producto:
         return redirect("/")
-
-    # imágenes extra temporales
-    producto["imagenes_extra"] = [
-        producto["imagen"],
-        producto["imagen"],
-        producto["imagen"]
-    ]
 
     producto["descripcion"] = (
         "Prenda premium minimalista "
@@ -331,6 +324,10 @@ def crear():
     promocion_id = request.form["promocion_id"] or None
 
     descuento_id = request.form["descuento_id"] or None
+    
+    imagenes_extra = request.form[
+        "imagenes_extra"
+    ].split(",")
 
     crear_producto(
 
@@ -342,7 +339,8 @@ def crear():
         coleccion_id,
         oferta_id,
         promocion_id,
-        descuento_id
+        descuento_id,
+        imagenes_extra
 
     )
 

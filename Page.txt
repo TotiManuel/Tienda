@@ -1,9 +1,7 @@
 BUGS
-En detalle de prenda permitir elegir talle
-En detalle de prenda permitir añadir diferenter fotos
+permitir elegir talle y permitir añadir diferenter fotos
 
 WEB
-Pie de pagina(con Redes)
 rectangulo con info y oferta(Compra online, retira en tienda - 3 y 6 cuotas sin interes - envios gratis a partir de $ - Devolucion)
 rectangulo con descuento para algun banco.
 Descuentos (hasta 40% OFF)

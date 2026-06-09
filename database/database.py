@@ -111,6 +111,19 @@ def crear_tablas():
 
     """)
 
+    cursor.execute("""
+
+    CREATE TABLE IF NOT EXISTS imagenes_producto (
+
+        id SERIAL PRIMARY KEY,
+
+        producto_id INTEGER REFERENCES productos(id),
+
+        imagen TEXT
+
+    )
+
+    """)
     conn.commit()
 
     conn.close()
@@ -424,7 +437,8 @@ def crear_producto(
     coleccion_id,
     oferta_id,
     promocion_id,
-    descuento_id
+    descuento_id,
+    imagenes_extra
 
 ):
 
@@ -443,7 +457,8 @@ def crear_producto(
         coleccion_id,
         oferta_id,
         promocion_id,
-        descuento_id
+        descuento_id,
+        imagenes_extra
 
     )
 
@@ -460,7 +475,8 @@ def crear_producto(
         coleccion_id,
         oferta_id,
         promocion_id,
-        descuento_id
+        descuento_id,
+        imagenes_extra
 
     ))
 
@@ -486,6 +502,31 @@ def crear_producto(
 
         ))
 
+    # ======================================
+    # IMAGENES EXTRA
+    # ======================================
+
+    for img in imagenes_extra:
+
+        if img.strip():
+
+            cursor.execute("""
+
+            INSERT INTO imagenes_producto (
+
+                producto_id,
+                imagen
+
+            )
+
+            VALUES (%s, %s)
+
+            """, (
+
+                producto_id,
+                img.strip()
+
+            ))
     conn.commit()
 
     conn.close()
@@ -552,6 +593,15 @@ def obtener_producto(id):
 
     """, (id,))
 
+    cursor.execute("""
+
+    SELECT imagen
+    FROM imagenes_producto
+    WHERE producto_id = %s
+
+    """, (id,))
+
+    imagenes = cursor.fetchall()
     tallas = cursor.fetchall()
 
     producto = {
@@ -589,6 +639,13 @@ def obtener_producto(id):
             t["talla"]
 
             for t in tallas
+
+        ],
+        "imagenes_extra": [
+
+            i["imagen"]
+
+            for i in imagenes
 
         ]
     }
