@@ -17,14 +17,7 @@ app.secret_key = os.environ.get(
 ADMIN_USER = "admin"
 ADMIN_PASSWORD = "admin123"
 
-# ====================================
-# BASE TEMPORAL EN MEMORIA
-# ====================================
 crear_tablas()
-
-# ====================================
-# HOME
-# ====================================
 
 @app.route("/")
 def index():
@@ -148,10 +141,6 @@ def detalle_producto(id):
         producto=producto
     )
 
-# ====================================
-# CARRITO
-# ====================================
-
 @app.route("/agregar/<int:id>", methods=["POST"])
 def agregar(id):
 
@@ -217,10 +206,6 @@ def quitar(index):
 
     return redirect("/carrito")
 
-# ====================================
-# LOGIN
-# ====================================
-
 @app.route("/panel-privado", methods=["GET", "POST"])
 def login():
 
@@ -240,24 +225,38 @@ def login():
 
     return render_template("login.html")
 
-# ====================================
-# PANEL ADMIN
-# ====================================
-
 @app.route("/admin")
 def admin():
 
     if not session.get("admin"):
+
         return redirect("/panel-privado")
 
-    return render_template(
-        "admin.html",
-        productos=obtener_productos()
-    )
+    productos = obtener_productos()
 
-# ====================================
-# ELIMINAR PRODUCTO
-# ====================================
+    colecciones = obtener_colecciones()
+
+    ofertas = obtener_ofertas()
+
+    promociones = obtener_promociones()
+
+    descuentos = obtener_descuentos()
+
+    return render_template(
+
+        "admin.html",
+
+        productos=productos,
+
+        colecciones=colecciones,
+
+        ofertas=ofertas,
+
+        promociones=promociones,
+
+        descuentos=descuentos
+
+    )
 
 @app.route("/eliminar/<int:id>")
 def eliminar(id):
@@ -269,10 +268,6 @@ def eliminar(id):
     eliminar_producto(id)
 
     return redirect("/admin")
-
-# ====================================
-# EDITAR PRODUCTO
-# ====================================
 
 @app.route(
 
@@ -325,7 +320,7 @@ def editar(id):
     # MOSTRAR FORMULARIO
     # =================================
 
-    producto = obtener_productos(id)
+    producto = obtener_producto(id)
 
     colecciones = obtener_colecciones()
 
@@ -350,40 +345,6 @@ def editar(id):
         descuentos=descuentos
 
     )
-
-
-@app.route("/admin")
-def admin():
-
-    productos = obtener_productos()
-
-    colecciones = obtener_colecciones()
-
-    ofertas = obtener_ofertas()
-
-    promociones = obtener_promociones()
-
-    descuentos = obtener_descuentos()
-
-    return render_template(
-
-        "admin.html",
-
-        productos=productos,
-
-        colecciones=colecciones,
-
-        ofertas=ofertas,
-
-        promociones=promociones,
-
-        descuentos=descuentos
-
-    )
-
-# ==========================================
-# CREAR PRODUCTO
-# ==========================================
 
 @app.route("/crear", methods=["POST"])
 def crear():
@@ -422,10 +383,6 @@ def crear():
 
     return redirect("/admin")
 
-# ==========================================
-# CREAR COLECCION
-# ==========================================
-
 @app.route("/crear_coleccion", methods=["POST"])
 def ruta_crear_coleccion():
 
@@ -434,10 +391,6 @@ def ruta_crear_coleccion():
     )
 
     return redirect("/admin")
-
-# ==========================================
-# CREAR OFERTA
-# ==========================================
 
 @app.route("/crear_oferta", methods=["POST"])
 def ruta_crear_oferta():
@@ -448,10 +401,6 @@ def ruta_crear_oferta():
 
     return redirect("/admin")
 
-# ==========================================
-# CREAR PROMOCION
-# ==========================================
-
 @app.route("/crear_promocion", methods=["POST"])
 def ruta_crear_promocion():
 
@@ -460,10 +409,6 @@ def ruta_crear_promocion():
     )
 
     return redirect("/admin")
-
-# ==========================================
-# CREAR DESCUENTO
-# ==========================================
 
 @app.route("/crear_descuento", methods=["POST"])
 def ruta_crear_descuento():
@@ -476,9 +421,6 @@ def ruta_crear_descuento():
     )
 
     return redirect("/admin")
-# ====================================
-# LOGOUT
-# ====================================
 
 @app.route("/logout")
 def logout():
@@ -486,8 +428,6 @@ def logout():
     session.clear()
 
     return redirect("/")
-
-# ====================================
 
 if __name__ == "__main__":
     app.run(debug=True)
