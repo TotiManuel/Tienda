@@ -446,6 +446,10 @@ def crear_producto(
 
     cursor = conn.cursor()
 
+    # ======================================
+    # CREAR PRODUCTO
+    # ======================================
+
     cursor.execute("""
 
     INSERT INTO productos (
@@ -457,8 +461,7 @@ def crear_producto(
         coleccion_id,
         oferta_id,
         promocion_id,
-        descuento_id,
-        imagenes_extra
+        descuento_id
 
     )
 
@@ -475,12 +478,15 @@ def crear_producto(
         coleccion_id,
         oferta_id,
         promocion_id,
-        descuento_id,
-        imagenes_extra
+        descuento_id
 
     ))
 
     producto_id = cursor.fetchone()[0]
+
+    # ======================================
+    # TALLAS
+    # ======================================
 
     for t in tallas:
 
@@ -527,6 +533,7 @@ def crear_producto(
                 img.strip()
 
             ))
+
     conn.commit()
 
     conn.close()
@@ -593,6 +600,12 @@ def obtener_producto(id):
 
     """, (id,))
 
+    tallas = cursor.fetchall()
+
+    # ======================================
+    # IMAGENES
+    # ======================================
+
     cursor.execute("""
 
     SELECT imagen
@@ -602,7 +615,6 @@ def obtener_producto(id):
     """, (id,))
 
     imagenes = cursor.fetchall()
-    tallas = cursor.fetchall()
 
     producto = {
 
